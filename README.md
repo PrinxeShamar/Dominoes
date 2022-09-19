@@ -1,1 +1,5 @@
 # Dominoes
+
+## Members
+
+Shamar Samuels
