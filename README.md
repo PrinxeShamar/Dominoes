@@ -3,3 +3,5 @@
 ## Members
 
 Shamar Samuels
+
+Corey Quinby
