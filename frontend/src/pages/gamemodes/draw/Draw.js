@@ -1,4 +1,4 @@
-export default function Menu() {
+export default function Draw() {
  return (
    <div>Draw</div>
  );
