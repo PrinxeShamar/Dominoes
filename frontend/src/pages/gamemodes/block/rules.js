@@ -1,4 +1,4 @@
-export default function Homepage() {
+export default function Rules() {
  return (
    <div>Block Rules</div>
  );
