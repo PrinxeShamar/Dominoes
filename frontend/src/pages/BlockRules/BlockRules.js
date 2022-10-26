@@ -1,4 +1,4 @@
-export default function Rules() {
+export default function BlockRules() {
   return (
     <div>
       <h1>Block Rules</h1>
