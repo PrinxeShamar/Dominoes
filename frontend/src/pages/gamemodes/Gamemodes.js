@@ -1,6 +1,6 @@
 import Draw from "./draw/Draw";
 import Block from "./block/Block";
-import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
+import { Routes, Route, Link } from "react-router-dom";
 
 export default function Gamemodes() {
   return (
