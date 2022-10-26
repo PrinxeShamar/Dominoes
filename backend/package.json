@@ -3,7 +3,9 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "nodemon ./src/bin/www"
+    "start": "nodemon ./src/bin/www",
+    "lint": "npx eslint .",
+    "format": "npx prettier --check ."
   },
   "dependencies": {
     "cookie-parser": "~1.4.4",
@@ -15,6 +17,13 @@
     "socket.io": "^4.5.3"
   },
   "devDependencies": {
-    "nodemon": "^2.0.20"
+    "eslint": "^8.26.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-config-standard": "^17.0.0",
+    "eslint-plugin-import": "^2.26.0",
+    "eslint-plugin-n": "^15.3.0",
+    "eslint-plugin-promise": "^6.1.1",
+    "nodemon": "^2.0.20",
+    "prettier": "2.7.1"
   }
 }
