@@ -27,7 +27,7 @@ jobs:
         run: npm run format
 
   backend-format:
-    name: Backend format
+    name: Backend Format
     runs-on: ubuntu-latest
 
     steps:

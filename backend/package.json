@@ -5,7 +5,9 @@
   "scripts": {
     "start": "nodemon ./src/bin/www",
     "lint": "npx eslint .",
-    "format": "npx prettier --check ."
+    "lint-fix": "npx eslint . --fix",
+    "format": "npx prettier --check .",
+    "format-fix": "npx prettier --write ."
   },
   "dependencies": {
     "cookie-parser": "~1.4.4",
