@@ -1,8 +1,7 @@
 import io from "socket.io-client";
+import Gamemodes from "../gamemodes/Gamemodes";
 
 const socket = io("http://localhost:4500");
-
-import Gamemodes from "../gamemodes/Gamemodes";
 
 export default function Homepage() {
   return (
