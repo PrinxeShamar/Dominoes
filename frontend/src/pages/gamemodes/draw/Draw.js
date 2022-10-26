@@ -1,5 +1,7 @@
 export default function Draw() {
- return (
-   <div>Draw</div>
- );
+  return (
+    <div>
+      <h1>Draw</h1>
+    </div>
+  );
 }
