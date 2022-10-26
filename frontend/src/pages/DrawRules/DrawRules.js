@@ -1,4 +1,4 @@
-export default function Rules() {
+export default function DrawRules() {
   return (
     <div>
       <h1>Draw Rules</h1>

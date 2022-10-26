@@ -4,16 +4,31 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import "./index.css";
 import reportWebVitals from "./reportWebVitals";
 import Homepage from "./pages/Homepage/Homepage";
+import Draw from "./pages/Draw/Draw";
+import Block from "./pages/Block/Block";
+import BlockRules from "./pages/BlockRules/BlockRules";
+import DrawRules from "./pages/DrawRules/DrawRules";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <Homepage />,
-    children: [
-      {
-        path: "block",
-      },
-    ],
+  },
+  {
+    path: "/draw",
+    element: <Draw />,
+  },
+  {
+    path: "/block",
+    element: <Block />,
+  },
+  {
+    path: "/rules/draw",
+    element: <DrawRules />,
+  },
+  {
+    path: "/rules/block",
+    element: <BlockRules />,
   },
 ]);
 
