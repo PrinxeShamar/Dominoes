@@ -1,0 +1,3 @@
+class RuleSet {
+  constructor() {}
+}
