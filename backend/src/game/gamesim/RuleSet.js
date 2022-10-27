@@ -1,4 +1,6 @@
 import Board from "./Board";
+import Hand from "./player/Hand";
+import Move from "./ruleset/Move";
 
 /**
  * RuleSet is an "interface" that reads customRules
