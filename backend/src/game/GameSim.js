@@ -11,12 +11,12 @@ import BlockRuleSet from "./gamesim/ruleset/BlockRuleSet";
  * and control the game itself.
  */
 class GameSim {
-  constructor(ruleName, playerCount, customRules) {
+  constructor(ruleName, customRules) {
     this.board = new Board();
     this.dominoSet = new DominoSet(dRange);
     this.matchSim = new MatchSim();
-    this.players = Player[playerCount];
     this.ruleSet = mapRule(ruleName, customRules);
+    this.players = Player[ruleSet.getPlayerCount()];
   }
 
   mapRule(ruleStr, customRules) {
