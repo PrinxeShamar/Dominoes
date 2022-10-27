@@ -10,16 +10,16 @@ import BlockRuleSet from "./gamesim/ruleset/BlockRuleSet";
  * way the game is played and uses them to create
  * and control the game itself.
  */
-class GameSim {
+export default class GameSim {
   /**
    * @param {String} ruleName
    * @param {Map<String, Number>} customRules
    */
   constructor(ruleName, customRules) {
-    this.board = new Board();
-    this.dominoSet = new DominoSet(dRange);
-    this.matchSim = new MatchSim();
     this.ruleSet = mapRule(ruleName, customRules);
+    this.dominoSet = new DominoSet(ruleSet.getRange());
+    this.board = new Board(dominoSet);
+    this.matchSim = new MatchSim();
     this.players = Player[ruleSet.getPlayerCount()];
   }
 

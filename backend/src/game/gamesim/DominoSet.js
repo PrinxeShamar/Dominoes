@@ -1,3 +1,3 @@
-class DominoSet {
+export default class DominoSet {
   constructor() {}
 }

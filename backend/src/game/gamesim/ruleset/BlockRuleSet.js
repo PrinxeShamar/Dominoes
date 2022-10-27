@@ -1,3 +1,3 @@
-class BlockRuleSet {
+export default class BlockRuleSet {
   constructor() {}
 }

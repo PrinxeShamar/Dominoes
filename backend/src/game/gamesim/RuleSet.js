@@ -1,3 +1,3 @@
-class RuleSet {
-  constructor() {}
+export default class RuleSet {
+  constructor(customRules) {}
 }

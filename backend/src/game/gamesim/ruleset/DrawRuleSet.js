@@ -1,3 +1,3 @@
-class DrawRuleSet {
+export default class DrawRuleSet {
   constructor() {}
 }

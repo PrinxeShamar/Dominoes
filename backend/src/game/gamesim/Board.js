@@ -1,3 +1,3 @@
-class Board {
+export default class Board {
   constructor() {}
 }
