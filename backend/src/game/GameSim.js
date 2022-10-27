@@ -11,6 +11,10 @@ import BlockRuleSet from "./gamesim/ruleset/BlockRuleSet";
  * and control the game itself.
  */
 class GameSim {
+  /**
+   * @param {String} ruleName
+   * @param {Map<String, Number>} customRules
+   */
   constructor(ruleName, customRules) {
     this.board = new Board();
     this.dominoSet = new DominoSet(dRange);
@@ -19,6 +23,11 @@ class GameSim {
     this.players = Player[ruleSet.getPlayerCount()];
   }
 
+  /**
+   * @param {String} ruleStr
+   * @param {Map<String, Number>} customRules
+   * @returns {RuleSet}
+   */
   mapRule(ruleStr, customRules) {
     switch (toLowerCase(ruleStr)) {
       case "draw":
