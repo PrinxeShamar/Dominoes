@@ -1,0 +1,3 @@
+class DrawRuleSet {
+  constructor() {}
+}
