@@ -1,26 +1,7 @@
-import RuleSet from "../RuleSet";
+import TwoEdgeRuleSet from "../TwoEdgeRuleSet";
 import Move from "./Move";
 
-export default class BlockRuleSet extends RuleSet {
-  defPlayerCount() {
-    return 4;
-  }
-  defDRangeStart() {
-    return 0;
-  }
-  defDRangeEnd() {
-    return 6;
-  }
-  defStopCondition() {
-    return 100;
-  }
-  defHandSize() {
-    return 7;
-  }
-  defGoesLeft() {
-    return 1;
-  }
-
+export default class BlockRuleSet extends TwoEdgeRuleSet {
   isLegal(board, move) {
     return board.endList[move.endTag] == move.side;
   }

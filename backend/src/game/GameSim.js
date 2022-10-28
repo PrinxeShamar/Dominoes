@@ -16,24 +16,18 @@ export default class GameSim {
    * @param {Map<String, Number>} customRules
    */
   constructor(ruleName, customRules) {
-    this.ruleSet = mapRule(ruleName, customRules);
-    this.dominoSet = new DominoSet(
-      this.ruleSet.dRangeStart,
-      this.ruleSet.dRangeEnd
-    );
-    this.board = new Board(this.dominoSet);
-    this.players = Player[this.ruleSet.playerCount];
-    for (i = 0; i < this.players.length; i++) {
-      this.players[i] = new Player();
-    }
-    this.matchSim = new MatchSim(
-      this.ruleSet,
-      this.dominoSet,
-      this.board,
-      this.players
-    );
+    this.changeRules(ruleName, customRules);
     this.matchNum = 0;
     this.winnerList = [];
+  }
+
+  get matchNum() {
+    return this.matchNum;
+  }
+
+  get winnerList() {
+    let tmp = Player[this.winnerList.length];
+    for (i = 0; i < tmp.length; ) return this.winnerList;
   }
 
   /**
@@ -41,8 +35,8 @@ export default class GameSim {
    * @param {Map<String, Number>} customRules
    * @returns {RuleSet}
    */
-  static mapRule(ruleStr, customRules) {
-    switch (toLowerCase(ruleStr)) {
+  static mapRule(ruleName, customRules) {
+    switch (toLowerCase(ruleName)) {
       case "draw":
         return new DrawRuleSet(customRules);
       case "block":
@@ -54,5 +48,24 @@ export default class GameSim {
     ++this.matchNum;
     this.matchSim.start();
     this.winnerList.push(this.matchSim.winner);
+  }
+
+  changeRules(ruleName, customRules) {
+    this.ruleSet = mapRule(ruleName, customRules);
+    this.dominoSet = new DominoSet(
+      this.ruleSet.dRangeStart,
+      this.ruleSet.dRangeEnd
+    );
+    this.board = new Board(this.dominoSet);
+    this.players = Player[this.ruleSet.playerCount];
+    for (i = 0; i < this.players.length; i++) {
+      this.players[i] = new Player(i);
+    }
+    this.matchSim = new MatchSim(
+      this.ruleSet,
+      this.dominoSet,
+      this.board,
+      this.players
+    );
   }
 }

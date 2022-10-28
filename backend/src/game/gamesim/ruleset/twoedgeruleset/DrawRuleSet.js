@@ -1,26 +1,7 @@
-import RuleSet from "../RuleSet";
+import TwoEdgeRuleSet from "../TwoEdgeRuleSet";
 import Move from "./Move";
 
-export default class DrawRuleSet extends RuleSet {
-  static defPlayerCount() {
-    return 4;
-  }
-  static defDRangeStart() {
-    return 0;
-  }
-  static defDRangeEnd() {
-    return 6;
-  }
-  static defStopCondition() {
-    return 100;
-  }
-  static defHandSize() {
-    return 7;
-  }
-  static defGoesLeft() {
-    return 1;
-  }
-
+export default class DrawRuleSet extends TwoEdgeRuleSet {
   isLegal(board, move) {
     return board.endList[move.endTag] == move.side;
   }
