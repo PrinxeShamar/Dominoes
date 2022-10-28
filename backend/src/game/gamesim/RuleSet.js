@@ -50,7 +50,8 @@ export default class RuleSet {
   defGoesLeft() {}
 
   /**
-   *
+   * This returns a set of legal moves, which may
+   * be empty.
    * @param {Board} board
    * @param {Player} player
    */
