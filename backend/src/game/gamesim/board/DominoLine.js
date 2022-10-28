@@ -6,7 +6,7 @@ import DominoNode from "./dominoline/DominoNode";
  */
 export default class DominoLine {
   constructor() {
-    this.size = 0;
+    this.length = 0;
     this.heads = new Array(256).fill(null);
   }
 
@@ -17,5 +17,9 @@ export default class DominoLine {
   }
   */
 
-  play(move) {}
+  play(move) {
+    if (this.length == 0) {
+      this.heads[0] = move.domino;
+    }
+  }
 }

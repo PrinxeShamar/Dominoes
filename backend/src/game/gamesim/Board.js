@@ -13,5 +13,7 @@ export default class Board {
     this.dominoLine = new DominoLine();
   }
 
-  play(move) {}
+  play(move) {
+    this.dominoLine.play(move);
+  }
 }

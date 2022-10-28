@@ -32,12 +32,30 @@ export default class Domino {
       this.flip();
     }
   }
-
+  /**
+   * Flips the domino from one side to the other
+   * (Blank side vs Numbered Side)
+   * Numbered side is considered visible.
+   */
   flip() {
     if (this.visible) {
       this.visible = false;
     } else {
       this.visible = true;
+    }
+  }
+
+  /**
+   * Returns the other side of the domino (the one
+   * that's not passed in).
+   * @param {Number} num
+   * @returns {Number}
+   */
+  otherSide(num) {
+    if (this.x == num) {
+      return this.y;
+    } else {
+      return this.x;
     }
   }
 }

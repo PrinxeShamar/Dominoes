@@ -22,8 +22,18 @@ export default class GameSim {
       this.ruleSet.dRangeEnd
     );
     this.board = new Board(this.dominoSet);
-    this.matchSim = new MatchSim();
-    this.players = Player[this.ruleSet.getPlayerCount()];
+    this.players = Player[this.ruleSet.playerCount];
+    for (i = 0; i < this.players.length; i++) {
+      this.players[i] = new Player();
+    }
+    this.matchSim = new MatchSim(
+      this.ruleSet,
+      this.dominoSet,
+      this.board,
+      this.players
+    );
+    this.matchNum = 0;
+    this.winnerList = [];
   }
 
   /**
@@ -31,12 +41,18 @@ export default class GameSim {
    * @param {Map<String, Number>} customRules
    * @returns {RuleSet}
    */
-  mapRule(ruleStr, customRules) {
+  static mapRule(ruleStr, customRules) {
     switch (toLowerCase(ruleStr)) {
       case "draw":
         return new DrawRuleSet(customRules);
       case "block":
         return new BlockRuleSet(customRules);
     }
+  }
+
+  start() {
+    ++this.matchNum;
+    this.matchSim.start();
+    this.winnerList.push(this.matchSim.winner);
   }
 }

@@ -38,16 +38,20 @@ export default class RuleSet {
     return this.dRangeEnd;
   }
 
+  get playerCount() {
+    return this.playerCount;
+  }
+
   /**
    * These methods return a default value if the
    * custom rule isn't found.
    */
-  defPlayerCount() {}
-  defDRangeStart() {}
-  defDRangeEnd() {}
-  defStopCondition() {}
-  defHandSize() {}
-  defGoesLeft() {}
+  static defPlayerCount() {}
+  static defDRangeStart() {}
+  static defDRangeEnd() {}
+  static defStopCondition() {}
+  static defHandSize() {}
+  static defGoesLeft() {}
 
   /**
    * This returns a set of legal moves, which may
@@ -56,4 +60,12 @@ export default class RuleSet {
    * @param {Player} player
    */
   legalMoves(board, player) {}
+
+  /**
+   * The plays a move on the board, updating
+   * the board's data depending on the rules
+   * @param {Board} board
+   * @param {Move} move
+   */
+  play(board, move) {}
 }

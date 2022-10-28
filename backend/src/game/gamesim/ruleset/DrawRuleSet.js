@@ -2,22 +2,22 @@ import RuleSet from "../RuleSet";
 import Move from "./Move";
 
 export default class DrawRuleSet extends RuleSet {
-  defPlayerCount() {
+  static defPlayerCount() {
     return 4;
   }
-  defDRangeStart() {
+  static defDRangeStart() {
     return 0;
   }
-  defDRangeEnd() {
+  static defDRangeEnd() {
     return 6;
   }
-  defStopCondition() {
+  static defStopCondition() {
     return 100;
   }
-  defHandSize() {
+  static defHandSize() {
     return 7;
   }
-  defGoesLeft() {
+  static defGoesLeft() {
     return 1;
   }
 
@@ -51,5 +51,10 @@ export default class DrawRuleSet extends RuleSet {
     //This assumes a player will always need to pass
     //when there's no moves, no matter the game mode
     return moves;
+  }
+
+  play(board, move) {
+    let dominoNode = board.place(move.domino, move.end, move.connectedSide);
+    dominoNode.addEnd();
   }
 }
