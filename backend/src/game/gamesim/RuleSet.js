@@ -1,5 +1,5 @@
 import Board from "./Board";
-import Hand from "./player/Hand";
+import Player from "./Player";
 import Move from "./ruleset/Move";
 
 /**
@@ -15,21 +15,33 @@ export default class RuleSet {
     this.handSize = customRules.get("handSize");
     this.goesLeft = customRules.get("goesLeft");
     switch (undefined) {
-      case playerCount:
-        playerCount = defPlayerCount();
-      case dRangeStart:
-        dRangeStart = defDRangeStart();
-      case dRangeEnd:
-        dRangeEnd = defDRangeEnd();
-      case stopCondition:
-        stopCondition = defStopCondition();
-      case handSize:
-        handSize = defHandSize();
-      case goesLeft:
-        goesLeft = defGoesLeft();
+      case this.playerCount:
+        this.playerCount = defPlayerCount();
+      case this.dRangeStart:
+        this.dRangeStart = defDRangeStart();
+      case this.dRangeEnd:
+        this.dRangeEnd = defDRangeEnd();
+      case this.stopCondition:
+        this.stopCondition = defStopCondition();
+      case this.handSize:
+        this.handSize = defHandSize();
+      case this.goesLeft:
+        this.goesLeft = defGoesLeft();
     }
   }
 
+  get dRangeStart() {
+    return this.dRangeStart;
+  }
+
+  get dRangeEnd() {
+    return this.dRangeEnd;
+  }
+
+  /**
+   * These methods return a default value if the
+   * custom rule isn't found.
+   */
   defPlayerCount() {}
   defDRangeStart() {}
   defDRangeEnd() {}
@@ -37,11 +49,10 @@ export default class RuleSet {
   defHandSize() {}
   defGoesLeft() {}
 
-  get dRangeStart() {
-    return dRangeStart;
-  }
-
-  get dRangeEnd() {
-    return dRangeEnd;
-  }
+  /**
+   *
+   * @param {Board} board
+   * @param {Player} player
+   */
+  legalMoves(board, player) {}
 }

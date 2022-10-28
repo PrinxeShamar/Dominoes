@@ -17,10 +17,13 @@ export default class GameSim {
    */
   constructor(ruleName, customRules) {
     this.ruleSet = mapRule(ruleName, customRules);
-    this.dominoSet = new DominoSet(ruleSet.dRangeStart, ruleSet.dRangeEnd);
-    this.board = new Board(dominoSet);
+    this.dominoSet = new DominoSet(
+      this.ruleSet.dRangeStart,
+      this.ruleSet.dRangeEnd
+    );
+    this.board = new Board(this.dominoSet);
     this.matchSim = new MatchSim();
-    this.players = Player[ruleSet.getPlayerCount()];
+    this.players = Player[this.ruleSet.getPlayerCount()];
   }
 
   /**
