@@ -13,6 +13,7 @@ export default class Domino {
       this.x = x;
       this.y = y;
     }
+    this.visible = true;
   }
 
   get sides() {
@@ -21,5 +22,22 @@ export default class Domino {
 
   get isDouble() {
     return this.x == this.y;
+  }
+
+  /**
+   * @param {boolean} isVisible
+   */
+  set visible(isVisible) {
+    if (isVisible != this.visible) {
+      this.flip();
+    }
+  }
+
+  flip() {
+    if (this.visible) {
+      this.visible = false;
+    } else {
+      this.visible = true;
+    }
   }
 }

@@ -7,6 +7,10 @@ export default class DominoSet {
     this.dominoList = Domino[this.dominoCount];
   }
 
+  get length() {
+    return this.dominoCount;
+  }
+
   static triNum(x) {
     return Math.floor((x * (x + 1)) / 2);
   }
