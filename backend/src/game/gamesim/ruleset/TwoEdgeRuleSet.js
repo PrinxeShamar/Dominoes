@@ -19,4 +19,13 @@ export default class TwoEdgeRuleSet extends RuleSet {
   static defGoesLeft() {
     return 1;
   }
+
+  isLegal(board, move) {
+    return board.endList[move.endTag] == move.side;
+  }
+
+  play(board, move) {
+    let dominoNode = board.place(move.domino, move.end, move.connectedSide);
+    dominoNode.addEnd();
+  }
 }

@@ -2,10 +2,6 @@ import TwoEdgeRuleSet from "../TwoEdgeRuleSet";
 import Move from "./Move";
 
 export default class DrawRuleSet extends TwoEdgeRuleSet {
-  isLegal(board, move) {
-    return board.endList[move.endTag] == move.side;
-  }
-
   legalMoves(board, player) {
     const moves = new Set();
     const boardEnds = board.endList;
@@ -32,10 +28,5 @@ export default class DrawRuleSet extends TwoEdgeRuleSet {
     //This assumes a player will always need to pass
     //when there's no moves, no matter the game mode
     return moves;
-  }
-
-  play(board, move) {
-    let dominoNode = board.place(move.domino, move.end, move.connectedSide);
-    dominoNode.addEnd();
   }
 }

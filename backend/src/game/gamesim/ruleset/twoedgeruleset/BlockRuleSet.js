@@ -2,10 +2,6 @@ import TwoEdgeRuleSet from "../TwoEdgeRuleSet";
 import Move from "./Move";
 
 export default class BlockRuleSet extends TwoEdgeRuleSet {
-  isLegal(board, move) {
-    return board.endList[move.endTag] == move.side;
-  }
-
   legalMoves(board, player) {
     const moves = new Set();
     const boardEnds = board.endList;
