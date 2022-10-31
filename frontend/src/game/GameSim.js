@@ -45,7 +45,8 @@ export default class GameSim {
       case "block":
         return new BlockRuleSet(customRules);
       default:
-        throw new Error("Rule Not Defined");
+        console.log(`Bad Rule Name:${toString(ruleName).toLowerCase()}`);
+        throw new Error("ERROR: Rule Not Defined");
     }
   }
 
