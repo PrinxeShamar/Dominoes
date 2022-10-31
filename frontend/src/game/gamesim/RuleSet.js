@@ -25,15 +25,27 @@ export default class RuleSet {
   }
 
   get dRangeStart() {
-    return this.dRangeStart;
+    return this._dRangeStart;
   }
 
   get dRangeEnd() {
-    return this.dRangeEnd;
+    return this._dRangeEnd;
   }
 
   get playerCount() {
-    return this.playerCount;
+    return this._playerCount;
+  }
+
+  set dRangeStart(dRangeStart) {
+    this._dRangeStart = dRangeStart;
+  }
+
+  set dRangeEnd(dRangeEnd) {
+    this._dRangeEnd = dRangeEnd;
+  }
+
+  set playerCount(playerCount) {
+    this._playerCount = playerCount;
   }
 
   /**

@@ -33,6 +33,14 @@ export default class GameSim {
     return this.tmp;
   }
 
+  set matchNum(matchNum) {
+    this._matchNum = matchNum;
+  }
+
+  set winnerList(winnerList) {
+    this._winnerList = winnerList;
+  }
+
   /**
    * @param {String} ruleStr
    * @param {Map<String, Number>} customRules
@@ -62,7 +70,8 @@ export default class GameSim {
       this.ruleSet.dRangeEnd
     );
     this.board = new Board(this.dominoSet);
-    this.players = Player[this.ruleSet.playerCount];
+    this.players = new Array(this.ruleSet.playerCount);
+    console.log(this.players);
     for (let i = 0; i < this.players.length; i++) {
       this.players[i] = new Player(i);
     }

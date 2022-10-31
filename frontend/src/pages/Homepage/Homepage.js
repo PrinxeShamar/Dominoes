@@ -6,6 +6,7 @@ const socket = io("http://localhost:4500");
 console.log("Hello There!");
 console.log("tmpGame");
 let tmpGame = new GameSim("draw", new Map());
+console.log("----");
 console.log(tmpGame);
 console.log(tmpGame.start());
 
