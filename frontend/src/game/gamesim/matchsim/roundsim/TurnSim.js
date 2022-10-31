@@ -5,6 +5,7 @@ export default class TurnSim {
     this.board = board;
     this.players = players;
     this.roundNum = 0;
+    this.playing = 0;
   }
 
   get winning() {
@@ -17,7 +18,7 @@ export default class TurnSim {
     return winner;
   }
 
-  start() {
+  start(playing) {
     while (this.winning.points < this.ruleSet.stopCondition) {
       ++this.roundNum;
       this.roundSim.start();

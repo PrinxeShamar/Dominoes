@@ -90,10 +90,10 @@ export default class GameSim {
     for (let i = 0; i < strArr.length; i++) {
       switch (strArr[i].toLowerCase()) {
         case "human":
-          this.players[i] = new HumanPlayer();
+          this.players[i] = new HumanPlayer(i);
           break;
         case "cpu":
-          this.players[i] = new ComputerPlayer();
+          this.players[i] = new ComputerPlayer(i);
           break;
         default:
           throw new Error("Invalid Player Type");

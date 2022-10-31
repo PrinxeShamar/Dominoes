@@ -1,4 +1,5 @@
 import RuleSet from "../RuleSet";
+import Move from "./Move";
 
 export default class TwoEdgeRuleSet extends RuleSet {
   defPlayerCount() {
@@ -21,7 +22,7 @@ export default class TwoEdgeRuleSet extends RuleSet {
   }
 
   isLegal(board, move) {
-    return board.ends[move.endID] === move.connectedSide;
+    return board.ends[move.endId] === move.connectedSide;
   }
 
   play(board, move) {
@@ -37,6 +38,7 @@ export default class TwoEdgeRuleSet extends RuleSet {
         maxPoints = players[i].points;
       }
     }
+    console.log(`Stop?: ${maxPoints >= this.stopCondition}`);
     return maxPoints >= this.stopCondition;
   }
 
@@ -51,6 +53,26 @@ export default class TwoEdgeRuleSet extends RuleSet {
         maxPoints = winner.points;
       }
     }
-    return winner;
+    return winner.playerId;
+  }
+
+  //If this returns false, that will force a reshuffle
+  firstMove(lastWinner, players) {
+    let player = null;
+    if (lastWinner == null) {
+      this.highestDoubleHolder(players);
+    }
+    return new Move(player.highestDouble);
+  }
+
+  highestDoubleHolder(players) {
+    let domino = null;
+    let player = null;
+    for (let i = 0; i < players.length; i++) {
+      if (domino == null) {
+        domino = players[i].highestDouble;
+        player = players[i];
+      }
+    }
   }
 }

@@ -1,7 +1,7 @@
 export default class Move {
-  constructor(domino, endID, connectedSide) {
+  constructor(domino, endId, connectedSide) {
     this.domino = domino;
-    this.endID = endID;
+    this.endId = endId;
     this.connectedSide = connectedSide;
   }
 
@@ -9,8 +9,8 @@ export default class Move {
     return this.domino;
   }
 
-  get endID() {
-    return this.endID;
+  get endId() {
+    return this.endId;
   }
 
   get connectedSide() {

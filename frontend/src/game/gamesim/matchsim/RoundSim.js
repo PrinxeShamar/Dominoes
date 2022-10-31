@@ -15,10 +15,15 @@ export default class RoundSim {
   }
 
   start(lastWinner) {
+    //To start the round, we need to know
+    //who won the last round, since it determines
+    //who starts this one.
     console.log(`RoundSim.start(${lastWinner})`);
-    this.ruleSet.startRound(this.turnSim, lastWinner);
-    while (!this.ruleSet.roundOver(this)) {
-      this.ruleSet.startTurn(this.turnSim, lastWinner);
+    while (!this.ruleSet.roundStop(this.players)) {
+      ++this.turnNum;
+      console.log(`Turn ${this.turnNum}`);
+      //Using the lastWinner, we can start the turn
+      this.turnSim.start(lastWinner);
     }
   }
 }

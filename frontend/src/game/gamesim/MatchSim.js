@@ -23,8 +23,9 @@ export default class MatchSim {
 
   start() {
     console.log("MatchSim.start()");
-    while (this.ruleSet.matchStop(this.players)) {
+    while (!this.ruleSet.matchStop(this.players)) {
       ++this.roundNum;
+      console.log(`Round ${this.roundNum}`);
       this.roundSim.start(this.lastWinner);
     }
   }
