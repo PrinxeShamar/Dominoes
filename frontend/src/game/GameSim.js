@@ -39,14 +39,13 @@ export default class GameSim {
    * @returns {RuleSet}
    */
   static mapRule(ruleName, customRules) {
-    switch (toString(ruleName).toLowerCase()) {
+    switch (ruleName.toLowerCase()) {
       case "draw":
         return new DrawRuleSet(customRules);
       case "block":
         return new BlockRuleSet(customRules);
       default:
-        console.log(`Bad Rule Name:${toString(ruleName).toLowerCase()}`);
-        throw new Error("ERROR: Rule Not Defined");
+        throw new Error(`${ruleName} Rule Set Not Defined`);
     }
   }
 
