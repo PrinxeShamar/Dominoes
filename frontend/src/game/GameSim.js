@@ -1,9 +1,10 @@
 import Board from "./gamesim/Board";
 import DominoSet from "./gamesim/DominoSet";
 import MatchSim from "./gamesim/MatchSim";
-import Player from "./gamesim/Player";
 import DrawRuleSet from "./gamesim/ruleset/twoedgeruleset/DrawRuleSet";
 import BlockRuleSet from "./gamesim/ruleset/twoedgeruleset/BlockRuleSet";
+import ComputerPlayer from "./gamesim/player/ComputerPlayer";
+import HumanPlayer from "./gamesim/player/HumanPlayer";
 
 /**
  * GameSim takes raw game parameters that define the
@@ -22,13 +23,14 @@ export default class GameSim {
   }
 
   get matchNum() {
-    return this.matchNum;
+    return this._matchNum;
   }
 
   get winnerList() {
-    let tmp = Player[this.winnerList.length];
+    console.log(`GameSim.winnerList()`);
+    let tmp = new Array(this._winnerList.length);
     for (let i = 0; i < tmp.length; i++) {
-      tmp[i] = this.winnerList[i];
+      tmp[i] = this._winnerList[i];
     }
     return this.tmp;
   }
@@ -58,12 +60,14 @@ export default class GameSim {
   }
 
   start() {
+    console.log("GameSim.start()");
     ++this.matchNum;
     this.matchSim.start();
-    this.winnerList.push(this.matchSim.winner);
+    this._winnerList.push(this.matchSim.winner);
   }
 
   changeRules(ruleName, customRules) {
+    console.log(`GameSim.changeRules(${ruleName}, ${customRules})`);
     this.ruleSet = GameSim.mapRule(ruleName, customRules);
     this.dominoSet = new DominoSet(
       this.ruleSet.dRangeStart,
@@ -71,15 +75,29 @@ export default class GameSim {
     );
     this.board = new Board(this.dominoSet);
     this.players = new Array(this.ruleSet.playerCount);
-    console.log(this.players);
-    for (let i = 0; i < this.players.length; i++) {
-      this.players[i] = new Player(i);
-    }
     this.matchSim = new MatchSim(
       this.ruleSet,
       this.dominoSet,
       this.board,
       this.players
     );
+  }
+
+  fillSeats(strArr) {
+    if (strArr.length !== this.ruleSet.playerCount) {
+      throw new Error("Inconsistent Player Count");
+    }
+    for (let i = 0; i < strArr.length; i++) {
+      switch (strArr[i].toLowerCase()) {
+        case "human":
+          this.players[i] = new HumanPlayer();
+          break;
+        case "cpu":
+          this.players[i] = new ComputerPlayer();
+          break;
+        default:
+          throw new Error("Invalid Player Type");
+      }
+    }
   }
 }

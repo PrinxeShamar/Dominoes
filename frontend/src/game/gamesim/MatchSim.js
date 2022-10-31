@@ -17,11 +17,13 @@ export default class MatchSim {
   }
 
   get winning() {
+    console.log("MatchSim.winning");
     return this.ruleSet.winning(this.players);
   }
 
   start() {
-    while (this.ruleSet.matchStop(this.winning.points)) {
+    console.log("MatchSim.start()");
+    while (this.ruleSet.matchStop(this.players)) {
       ++this.roundNum;
       this.roundSim.start(this.lastWinner);
     }

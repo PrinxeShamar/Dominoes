@@ -15,6 +15,7 @@ export default class RoundSim {
   }
 
   start(lastWinner) {
+    console.log(`RoundSim.start(${lastWinner})`);
     this.ruleSet.startRound(this.turnSim, lastWinner);
     while (!this.ruleSet.roundOver(this)) {
       this.ruleSet.startTurn(this.turnSim, lastWinner);

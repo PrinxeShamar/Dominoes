@@ -90,4 +90,12 @@ export default class RuleSet {
   play(board, move) {
     throw new Error("Method Not Implemented");
   }
+
+  matchStop(players) {
+    throw new Error("Method Not Implemented");
+  }
+
+  winning(players) {
+    throw new Error("Method Not Implemented");
+  }
 }

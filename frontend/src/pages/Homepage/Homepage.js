@@ -3,12 +3,12 @@ import io from "socket.io-client";
 import GameSim from "../../game/GameSim";
 
 const socket = io("http://localhost:4500");
-console.log("Hello There!");
-console.log("tmpGame");
+console.log("START TEST");
 let tmpGame = new GameSim("draw", new Map());
 console.log("----");
 console.log(tmpGame);
-console.log(tmpGame.start());
+tmpGame.fillSeats(["human", "human", "human", "human"]);
+tmpGame.start();
 
 export default function Homepage() {
   return (
