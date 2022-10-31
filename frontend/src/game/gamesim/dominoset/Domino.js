@@ -4,8 +4,8 @@
  */
 export default class Domino {
   constructor(x, y) {
-    this.x;
-    this.y;
+    this.x = 0;
+    this.y = 0;
     if (x <= y) {
       this.x = x;
       this.y = y;
@@ -21,14 +21,14 @@ export default class Domino {
   }
 
   get isDouble() {
-    return this.x == this.y;
+    return this.x === this.y;
   }
 
   /**
    * @param {boolean} isVisible
    */
   set visible(isVisible) {
-    if (isVisible != this.visible) {
+    if (isVisible !== this.visible) {
       this.flip();
     }
   }
@@ -52,7 +52,7 @@ export default class Domino {
    * @returns {Number}
    */
   otherSide(num) {
-    if (this.x == num) {
+    if (this.x === num) {
       return this.y;
     } else {
       return this.x;

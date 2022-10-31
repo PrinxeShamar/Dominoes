@@ -1,4 +1,6 @@
-export default class TurnSim {
+import RoundSim from "./matchsim/RoundSim";
+
+export default class MatchSim {
   constructor(ruleSet, dominoSet, board, players) {
     this.ruleSet = ruleSet;
     this.dominoSet = dominoSet;
@@ -11,22 +13,17 @@ export default class TurnSim {
       this.players
     );
     this.roundNum = 0;
+    this.lastWinner = null;
   }
 
   get winning() {
-    let winner = this.players[0];
-    for (i = 1; i < this.players.length; i++) {
-      if (this.players[i].points > winner[i].points) {
-        winner = this.players[i];
-      }
-    }
-    return winner;
+    return this.ruleSet.winning(this.players);
   }
 
   start() {
-    while (this.winning.points < this.ruleSet.stopCondition) {
+    while (this.ruleSet.matchStop(this.winning.points)) {
       ++this.roundNum;
-      this.roundSim.start();
+      this.roundSim.start(this.lastWinner);
     }
   }
 }

@@ -1,7 +1,7 @@
 import Domino from "./dominoset/Domino";
 export default class DominoSet {
   constructor(dRangeStart, dRangeEnd) {
-    this.dominoCount = makeSetSize(dRangeStart, dRangeEnd);
+    this.dominoCount = DominoSet.makeSetSize(dRangeStart, dRangeEnd);
     this.dRangeStart = dRangeStart;
     this.dRangeEnd = dRangeEnd;
     this.dominoList = Domino[this.dominoCount];
@@ -16,6 +16,6 @@ export default class DominoSet {
   }
 
   static makeSetSize(start, end) {
-    return triNum(end + 1) - triNum(start);
+    return DominoSet.triNum(end + 1) - DominoSet.triNum(start);
   }
 }

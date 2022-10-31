@@ -6,6 +6,6 @@ export default class Player {
   }
 
   drawFrom(dominoes) {
-    hand.drawFrom(dominoes);
+    this.hand.drawFrom(dominoes);
   }
 }

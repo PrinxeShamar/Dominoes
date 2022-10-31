@@ -2,8 +2,8 @@ import Board from "./gamesim/Board";
 import DominoSet from "./gamesim/DominoSet";
 import MatchSim from "./gamesim/MatchSim";
 import Player from "./gamesim/Player";
-import DrawRuleSet from "./gamesim/ruleset/DrawRuleSet";
-import BlockRuleSet from "./gamesim/ruleset/BlockRuleSet";
+import DrawRuleSet from "./gamesim/ruleset/twoedgeruleset/DrawRuleSet";
+import BlockRuleSet from "./gamesim/ruleset/twoedgeruleset/BlockRuleSet";
 
 /**
  * GameSim takes raw game parameters that define the
@@ -27,7 +27,10 @@ export default class GameSim {
 
   get winnerList() {
     let tmp = Player[this.winnerList.length];
-    for (i = 0; i < tmp.length; ) return this.winnerList;
+    for (let i = 0; i < tmp.length; i++) {
+      tmp[i] = this.winnerList[i];
+    }
+    return this.tmp;
   }
 
   /**
@@ -36,11 +39,13 @@ export default class GameSim {
    * @returns {RuleSet}
    */
   static mapRule(ruleName, customRules) {
-    switch (toLowerCase(ruleName)) {
+    switch (toString(ruleName).toLowerCase()) {
       case "draw":
         return new DrawRuleSet(customRules);
       case "block":
         return new BlockRuleSet(customRules);
+      default:
+        throw new Error("Rule Not Defined");
     }
   }
 
@@ -51,14 +56,14 @@ export default class GameSim {
   }
 
   changeRules(ruleName, customRules) {
-    this.ruleSet = mapRule(ruleName, customRules);
+    this.ruleSet = GameSim.mapRule(ruleName, customRules);
     this.dominoSet = new DominoSet(
       this.ruleSet.dRangeStart,
       this.ruleSet.dRangeEnd
     );
     this.board = new Board(this.dominoSet);
     this.players = Player[this.ruleSet.playerCount];
-    for (i = 0; i < this.players.length; i++) {
+    for (let i = 0; i < this.players.length; i++) {
       this.players[i] = new Player(i);
     }
     this.matchSim = new MatchSim(

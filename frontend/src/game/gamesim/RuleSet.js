@@ -1,36 +1,27 @@
-import Board from "./Board";
-import Player from "./Player";
-import Move from "./ruleset/Move";
-
 /**
  * RuleSet is an "interface" that reads customRules
  * so subclasses won't need to.
  */
 export default class RuleSet {
   constructor(customRules) {
-    if (this.constructor == RuleSet) {
+    if (this.constructor === RuleSet)
       throw new Error("Interface can't be instantiated");
-    }
+
     this.playerCount = customRules.get("playerCount");
     this.dRangeStart = customRules.get("dRangeStart");
     this.dRangeEnd = customRules.get("dRangeEnd");
     this.stopCondition = customRules.get("stopCondition");
     this.handSize = customRules.get("handSize");
     this.goesLeft = customRules.get("goesLeft");
-    switch (undefined) {
-      case this.playerCount:
-        this.playerCount = defPlayerCount();
-      case this.dRangeStart:
-        this.dRangeStart = defDRangeStart();
-      case this.dRangeEnd:
-        this.dRangeEnd = defDRangeEnd();
-      case this.stopCondition:
-        this.stopCondition = defStopCondition();
-      case this.handSize:
-        this.handSize = defHandSize();
-      case this.goesLeft:
-        this.goesLeft = defGoesLeft();
-    }
+    if (undefined === this.playerCount)
+      this.playerCount = this.defPlayerCount();
+    if (undefined === this.dRangeStart)
+      this.dRangeStart = this.defDRangeStart();
+    if (undefined === this.dRangeEnd) this.dRangeEnd = this.defDRangeEnd();
+    if (undefined === this.stopCondition)
+      this.stopCondition = this.defStopCondition();
+    if (undefined === this.handSize) this.handSize = this.defHandSize();
+    if (undefined === this.goesLeft) this.goesLeft = this.defGoesLeft();
   }
 
   get dRangeStart() {
@@ -49,22 +40,22 @@ export default class RuleSet {
    * These methods return a default value if the
    * custom rule isn't found.
    */
-  static defPlayerCount() {
+  defPlayerCount() {
     throw new Error("Method Not Implemented");
   }
-  static defDRangeStart() {
+  defDRangeStart() {
     throw new Error("Method Not Implemented");
   }
-  static defDRangeEnd() {
+  defDRangeEnd() {
     throw new Error("Method Not Implemented");
   }
-  static defStopCondition() {
+  defStopCondition() {
     throw new Error("Method Not Implemented");
   }
-  static defHandSize() {
+  defHandSize() {
     throw new Error("Method Not Implemented");
   }
-  static defGoesLeft() {
+  defGoesLeft() {
     throw new Error("Method Not Implemented");
   }
 

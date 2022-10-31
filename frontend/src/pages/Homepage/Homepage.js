@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import io from "socket.io-client";
+import GameSim from "../../game/GameSim";
 
 const socket = io("http://localhost:4500");
 
@@ -20,3 +21,7 @@ export default function Homepage() {
     </div>
   );
 }
+
+let tmpGame = new GameSim("draw", new Map());
+console.log("tmpGame");
+console.log(tmpGame.start());

@@ -1,27 +1,27 @@
 import RuleSet from "../RuleSet";
 
 export default class TwoEdgeRuleSet extends RuleSet {
-  static defPlayerCount() {
+  defPlayerCount() {
     return 4;
   }
-  static defDRangeStart() {
+  defDRangeStart() {
     return 0;
   }
-  static defDRangeEnd() {
+  defDRangeEnd() {
     return 6;
   }
-  static defStopCondition() {
+  defStopCondition() {
     return 100;
   }
-  static defHandSize() {
+  defHandSize() {
     return 7;
   }
-  static defGoesLeft() {
+  defGoesLeft() {
     return 1;
   }
 
   isLegal(board, move) {
-    return board.endList[move.endTag] == move.side;
+    return board.ends[move.endID] === move.connectedSide;
   }
 
   play(board, move) {
