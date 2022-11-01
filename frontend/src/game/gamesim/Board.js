@@ -8,16 +8,19 @@ import Boneyard from "./board/Boneyard";
  */
 export default class Board {
   constructor(dominoSet) {
+    console.log(`Board(${dominoSet})`);
     this.dominoSet = dominoSet;
-    this.boneyard = new Boneyard();
+    this.boneyard = new Boneyard(dominoSet.dominoes);
     this.dominoLine = new DominoLine();
   }
 
   play(move) {
+    console.log(`Board.play(${move})`);
     this.dominoLine.play(move);
   }
 
   pop() {
+    console.log(`Board.pop()`);
     return this.boneyard.pop();
   }
 }

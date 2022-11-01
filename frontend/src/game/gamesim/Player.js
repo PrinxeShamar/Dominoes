@@ -31,11 +31,14 @@ export default class Player {
   }
 
   drawFrom(dominoes) {
+    console.log(`Player.drawFrom(${dominoes})`);
     this.hand.drawFrom(dominoes);
   }
 
   lighterThan(other) {
     console.log(`Player.lighterThan(${other})`);
+    console.log(other);
+    console.log(other.hand);
     return this.hand.lighterThan(other.hand);
   }
 }

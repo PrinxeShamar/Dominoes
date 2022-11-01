@@ -24,7 +24,7 @@ export default class Domino {
     return this.x === this.y;
   }
 
-  get sum() {
+  get weight() {
     return this.x + this.y;
   }
 
@@ -64,14 +64,14 @@ export default class Domino {
   }
 
   lighterThan(other) {
-    if (this.sum === other.sum) {
+    if (this.weigth === other.weight) {
       let otherSides = other.sides;
       return (
         (this.x < otherSides[0] && this.x < otherSides[1]) ||
         (this.y < otherSides[0] && this.y < otherSides[1])
       );
     } else {
-      return this.sum < other.sum;
+      return this.weight < other.weight;
     }
   }
 

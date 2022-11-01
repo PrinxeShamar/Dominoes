@@ -2,20 +2,22 @@
  * This functions as the face-down boneyard
  */
 export default class Boneyard {
-  constructor() {
-    this.size = 0;
-    this.dominoes = new Array(256).fill(null);
+  constructor(dominoes) {
+    console.log(`Boneyard(${dominoes})`);
+    this.dominoes = new Array(0);
+    for (let domino in dominoes) {
+      this.dominoes.push(domino);
+    }
   }
 
   add(domino) {
-    this.dominoes[this.size] = domino;
-    ++this.size;
+    console.log(`Boneyard.add(${domino})`);
+    this.dominoes.push(domino);
   }
 
   pop() {
-    let tmp = this.dominoes[this.size - 1];
-    this.dominoes[this.size - 1] = null;
-    --this.size;
-    return tmp;
+    console.log(`Boneyard.pop()`);
+    console.log(this.dominoes);
+    return this.dominoes.pop();
   }
 }

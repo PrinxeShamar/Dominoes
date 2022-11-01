@@ -34,7 +34,6 @@ export default class TurnSim {
     prompted by actions. We can try a literal prompt\n
     method as a temp structure. We'll skip this\n
     for now`);
-
     //assume the last turn of the round was just played
   }
 

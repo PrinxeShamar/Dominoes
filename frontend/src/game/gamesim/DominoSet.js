@@ -13,6 +13,10 @@ export default class DominoSet {
     return this.dominoCount;
   }
 
+  get dominoes() {
+    return this.dominoList;
+  }
+
   static triNum(x) {
     return Math.floor((x * (x + 1)) / 2);
   }
