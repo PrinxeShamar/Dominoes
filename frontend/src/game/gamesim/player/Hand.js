@@ -4,14 +4,14 @@ export default class Hand {
   }
 
   get dominoes() {
-    return [this._dominoes];
+    return [...this._dominoes];
   }
 
   get lightest() {
     console.log(`Hand.lightest()`);
     let domino = null;
     for (let i = 0; i < this.dominoes.length; i++) {
-      console.log(`${this.dominoes[i].toString(false)}`);
+      //console.log(`${this.dominoes[i].toString(false)}`);
       if (domino == null || this.dominoes[i].lighterThan(domino)) {
         domino = this.dominoes[i];
       }
@@ -23,7 +23,6 @@ export default class Hand {
     console.log(`Hand.weight`);
     let w = 0;
     for (let i = 0; i < this.dominoes.length; i++) {
-      console.log(`W: ${this.dominoes[i]}`);
       w += this.dominoes[i].weight;
     }
     return w;
@@ -35,7 +34,10 @@ export default class Hand {
 
   add(domino) {
     console.log(`Hand.add(${domino})`);
-    this.dominoes.push(domino);
+    if (domino == null) {
+      throw new Error("Can't Add Null Domino");
+    }
+    this._dominoes.push(domino);
   }
 
   drawFrom(dominoes) {
@@ -58,14 +60,12 @@ export default class Hand {
 
   lighterThan(other) {
     console.log(`Hand.lighterThan(${other})`);
-    let tmp = this.dominoes;
-    console.log(`${tmp}`);
-    for (let i = 0; i < tmp.length; i++) {
-      console.log(`${tmp[0]}`);
-      console.log(`${tmp[i].toString(false)}`);
-    }
     if (this.weight === other.weight) {
       return this.lightest.lighterThan(other.lightest);
     }
+  }
+
+  toString() {
+    return this.dominoes.toString();
   }
 }

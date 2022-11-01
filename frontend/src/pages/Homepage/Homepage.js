@@ -9,7 +9,10 @@ console.log("----");
 console.log(tmpGame);
 tmpGame.fillSeats(["human", "cpu", "cpu", "cpu"]);
 tmpGame.start();
-
+let players = tmpGame.players;
+console.log(players);
+console.log(players[0].points);
+console.log(tmpGame.winnerList);
 export default function Homepage() {
   return (
     <div>

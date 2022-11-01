@@ -94,4 +94,26 @@ export default class TypicalRuleSet extends RuleSet {
     }
     return winner;
   }
+
+  matchWinner(players) {
+    console.log(`TypicalRuleSet.roundWinner(${players})`);
+    let winner = players[0];
+    for (let i = 1; i < players.length; i++) {
+      if (players[i].points > winner.points) {
+        winner = players[i];
+      }
+    }
+    return winner;
+  }
+
+  addPoints(player, players) {
+    console.log(`TypicalRuleSet.addPoints(${player}, ${players})`);
+    let total = 0;
+    for (let other of players) {
+      if (player.playerId !== other.playerId) {
+        total += other.hand.weight;
+      }
+    }
+    player.addPoints(total);
+  }
 }

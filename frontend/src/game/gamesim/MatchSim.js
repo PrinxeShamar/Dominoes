@@ -10,8 +10,8 @@ export default class MatchSim {
     this.matchNum = 0;
   }
 
-  get winning() {
-    console.log("MatchSim.winning");
+  get winner() {
+    console.log("MatchSim.winner");
     return this.ruleSet.matchWinner(this.players);
   }
 

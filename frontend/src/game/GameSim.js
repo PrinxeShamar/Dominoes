@@ -32,7 +32,11 @@ export default class GameSim {
     for (let i = 0; i < tmp.length; i++) {
       tmp[i] = this._winnerList[i];
     }
-    return this.tmp;
+    return tmp;
+  }
+
+  get players() {
+    return [...this._players];
   }
 
   set matchNum(matchNum) {
@@ -43,6 +47,9 @@ export default class GameSim {
     this._winnerList = winnerList;
   }
 
+  set players(players) {
+    this._players = [...players];
+  }
   /**
    * @param {String} ruleStr
    * @param {Map<String, Number>} customRules
@@ -63,6 +70,8 @@ export default class GameSim {
   start() {
     console.log("GameSim.start()");
     this.matchSim.start();
+    console.log(this.matchSim);
+    console.log(this.matchSim.winner);
     this._winnerList.push(this.matchSim.winner);
   }
 
@@ -74,12 +83,12 @@ export default class GameSim {
       this.ruleSet.dRangeEnd
     );
     this.board = new Board(this.dominoSet);
-    this.players = new Array(this.ruleSet.playerCount);
+    this._players = new Array(this.ruleSet.playerCount);
     this.matchSim = new MatchSim(
       this.ruleSet,
       this.dominoSet,
       this.board,
-      this.players
+      this._players
     );
   }
 
@@ -91,15 +100,15 @@ export default class GameSim {
     for (let i = 0; i < strArr.length; i++) {
       switch (strArr[i].toLowerCase()) {
         case "human":
-          this.players[i] = new HumanPlayer(i);
+          this._players[i] = new HumanPlayer(i);
           break;
         case "cpu":
-          this.players[i] = new ComputerPlayer(i);
+          this._players[i] = new ComputerPlayer(i);
           break;
         default:
           throw new Error("Invalid Player Type");
       }
     }
-    return this.players;
+    return this._players;
   }
 }

@@ -23,6 +23,7 @@ export default class RoundSim {
       this.setup();
       this.turnSim.start();
       this.winner = this.ruleSet.roundWinner(this.players);
+      this.ruleSet.addPoints(this.winner, this.players);
       this.next();
     }
   }

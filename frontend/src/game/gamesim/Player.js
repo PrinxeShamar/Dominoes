@@ -37,12 +37,18 @@ export default class Player {
 
   lighterThan(other) {
     console.log(`Player.lighterThan(${other})`);
-    console.log(other);
-    console.log(other.hand);
     return this.hand.lighterThan(other.hand);
   }
 
   dropAll() {
     this.hand = new Hand();
+  }
+
+  addPoints(total) {
+    this._points += total;
+  }
+
+  toString() {
+    return `Player(${this.playerId}): (${this.hand})`;
   }
 }

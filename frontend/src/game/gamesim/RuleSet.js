@@ -110,4 +110,12 @@ export default class RuleSet {
   roundWinner(players) {
     throw new Error("Method Not Implemented");
   }
+
+  matchWinner(players) {
+    throw new Error("Method Not Implemented");
+  }
+
+  addPoints(player, players) {
+    throw new Error("Method Not Implemented");
+  }
 }
