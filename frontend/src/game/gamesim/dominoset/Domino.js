@@ -74,4 +74,15 @@ export default class Domino {
       return this.sum < other.sum;
     }
   }
+
+  toString(reverse) {
+    if (this.isDouble) {
+      return `[${this.x}]`;
+    }
+    if (reverse) {
+      return `[${this.y}|${this.x}]`;
+    } else {
+      return `[${this.x}|${this.y}]`;
+    }
+  }
 }

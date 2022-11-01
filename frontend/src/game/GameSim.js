@@ -1,8 +1,8 @@
 import Board from "./gamesim/Board";
 import DominoSet from "./gamesim/DominoSet";
 import MatchSim from "./gamesim/MatchSim";
-import DrawRuleSet from "./gamesim/ruleset/twoedgeruleset/DrawRuleSet";
-import BlockRuleSet from "./gamesim/ruleset/twoedgeruleset/BlockRuleSet";
+import DrawRuleSet from "./gamesim/ruleset/typicalruleset/DrawRuleSet";
+import BlockRuleSet from "./gamesim/ruleset/typicalruleset/BlockRuleSet";
 import ComputerPlayer from "./gamesim/player/ComputerPlayer";
 import HumanPlayer from "./gamesim/player/HumanPlayer";
 
@@ -49,6 +49,7 @@ export default class GameSim {
    * @returns {RuleSet}
    */
   static mapRule(ruleName, customRules) {
+    console.log(`GameSim.mapRule(${ruleName}, ${customRules})`);
     switch (ruleName.toLowerCase()) {
       case "draw":
         return new DrawRuleSet(customRules);
@@ -84,6 +85,7 @@ export default class GameSim {
   }
 
   fillSeats(strArr) {
+    console.log(`fillSeats(${strArr})`);
     if (strArr.length !== this.ruleSet.playerCount) {
       throw new Error("Inconsistent Player Count");
     }
@@ -99,14 +101,6 @@ export default class GameSim {
           throw new Error("Invalid Player Type");
       }
     }
-  }
-
-  next() {
-    this.matchSim = new MatchSim(
-      this.ruleSet,
-      this.dominoSet,
-      this.board,
-      this.players
-    );
+    return this.players;
   }
 }

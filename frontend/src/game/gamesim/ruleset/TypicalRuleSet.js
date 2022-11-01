@@ -1,7 +1,7 @@
 import RuleSet from "../RuleSet";
 import Move from "./Move";
 
-export default class TwoEdgeRuleSet extends RuleSet {
+export default class TypicalRuleSet extends RuleSet {
   defPlayerCount() {
     return 4;
   }
@@ -31,7 +31,7 @@ export default class TwoEdgeRuleSet extends RuleSet {
   }
 
   matchStop(players) {
-    console.log(`TwoEdgeRuleSet.matchStop(${players})`);
+    console.log(`TypicalRuleSet.matchStop(${players})`);
     let maxPoints = 0;
     for (let i = 0; i < players.length; i++) {
       if (players[i].points > maxPoints) {
@@ -42,7 +42,7 @@ export default class TwoEdgeRuleSet extends RuleSet {
   }
 
   winning(players) {
-    console.log(`TwoEdgeRuleSet.winning(${players})`);
+    console.log(`TypicalRuleSet.winning(${players})`);
     let winner = players[0];
     console.log(winner);
     let maxPoints = winner.points;
@@ -73,5 +73,9 @@ export default class TwoEdgeRuleSet extends RuleSet {
         player = players[i];
       }
     }
+  }
+
+  setup(board, players) {
+    throw new Error("Method Not Implemented");
   }
 }

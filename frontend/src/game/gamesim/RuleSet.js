@@ -102,4 +102,8 @@ export default class RuleSet {
   firstPlayer(lastWinner, players) {
     throw new Error("Method Not Implemented");
   }
+
+  setup(board, players) {
+    throw new Error("Method Not Implemented");
+  }
 }

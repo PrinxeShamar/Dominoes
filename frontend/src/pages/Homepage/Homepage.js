@@ -7,7 +7,7 @@ console.log("START TEST");
 let tmpGame = new GameSim("draw", new Map());
 console.log("----");
 console.log(tmpGame);
-tmpGame.fillSeats(["human", "human", "human", "human"]);
+tmpGame.fillSeats(["human", "cpu", "cpu", "cpu"]);
 tmpGame.start();
 
 export default function Homepage() {

@@ -1,6 +1,7 @@
 import Domino from "./dominoset/Domino";
 export default class DominoSet {
   constructor(dRangeStart, dRangeEnd) {
+    console.log(`DominoSet(${dRangeStart}, ${dRangeEnd})`);
     this.dominoCount = DominoSet.makeSetSize(dRangeStart, dRangeEnd);
     this.dRangeStart = dRangeStart;
     this.dRangeEnd = dRangeEnd;
@@ -21,12 +22,18 @@ export default class DominoSet {
   }
 
   generateSet() {
+    console.log(`DominoSet.generateSet()`);
     let index = 0;
     for (let i = this.dRangeStart; i <= this.dRangeEnd; i++) {
-      for (let j = i; j <= this.dRangeEnd; i++) {
+      for (let j = i; j <= this.dRangeEnd; j++) {
         this.dominoList[index] = new Domino(i, j);
         ++index;
       }
     }
+    /*
+    for (let i = 0; i < index; i++) {
+      let tmp = this.dominoList[i];
+      console.log(tmp.toString(false));
+    }*/
   }
 }

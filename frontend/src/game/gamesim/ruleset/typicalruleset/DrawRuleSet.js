@@ -1,7 +1,7 @@
-import TwoEdgeRuleSet from "../TwoEdgeRuleSet";
+import TypicalRuleSet from "../TypicalRuleSet";
 import Move from "../Move";
 
-export default class DrawRuleSet extends TwoEdgeRuleSet {
+export default class DrawRuleSet extends TypicalRuleSet {
   legalMoves(board, player) {
     const moves = new Set();
     const boardEnds = board.endList;
