@@ -12,7 +12,11 @@ tmpGame.start();
 let players = tmpGame.players;
 console.log(players);
 console.log(players[0].points);
+console.log(players[1].points);
+console.log(players[2].points);
+console.log(players[3].points);
 console.log(tmpGame.winnerList);
+console.log(tmpGame.winnerList[0].playerId);
 export default function Homepage() {
   return (
     <div>

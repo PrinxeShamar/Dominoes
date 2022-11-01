@@ -99,10 +99,6 @@ export default class RuleSet {
     throw new Error("Method Not Implemented");
   }
 
-  firstPlayer(lastWinner, players) {
-    throw new Error("Method Not Implemented");
-  }
-
   setup(board, players) {
     throw new Error("Method Not Implemented");
   }
@@ -116,6 +112,10 @@ export default class RuleSet {
   }
 
   addPoints(player, players) {
+    throw new Error("Method Not Implemented");
+  }
+
+  firstPlayerMoves(lastWinner, players) {
     throw new Error("Method Not Implemented");
   }
 }

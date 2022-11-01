@@ -23,18 +23,31 @@ export default class TurnSim {
     return this.ruleSet.winning(this.players);
   }
 
-  start() {
+  setup() {
+    console.log(`RoundSim.setup()`);
+    this.ruleSet.setup(this.board, this.players);
+  }
+
+  start(lastWinner) {
     // This is the first turn of a new round
     console.log(`TurnSim.start()`);
-    console.log(`Welcome to the TurnSim\n
-    Today, we'll be trying to figure out what I do.\n
-    Clearly, the game needs to be played somehow,\n
-    and I'm supposed to represent the lowest level\n
-    of simulation. The players will need to be\n
-    prompted by actions. We can try a literal prompt\n
-    method as a temp structure. We'll skip this\n
-    for now`);
-    //throw new Error("NOT FINISHED");
+    // While there's a problem getting a first player,
+    // keep resetting
+    let firstOp = null;
+    while (firstOp == null) {
+      firstOp = this.ruleSet.firstPlayerMoves(lastWinner, this.players);
+    }
+    let playing = firstOp[0];
+    let moves = firstOp[1];
+
+    this.ruleSet.pickMove(playing, moves);
+
+    while (!this.ruleSet.roundStop(this.players, this.passes)) {
+      playing = this.ruleSet.nextPlayer(playing, this.players);
+      moves = this.ruleSet.legalMoves(this.board, playing);
+      throw new Error("STOP");
+    }
+
     //assume the last turn of the round was just played
   }
 

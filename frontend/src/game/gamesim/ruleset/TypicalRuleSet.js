@@ -41,29 +41,6 @@ export default class TypicalRuleSet extends RuleSet {
     return maxPoints >= this.stopCondition;
   }
 
-  winning(players) {
-    console.log(`TypicalRuleSet.winning(${players})`);
-    let winner = players[0];
-    console.log(winner);
-    let maxPoints = winner.points;
-    for (let i = 1; i < players.length; i++) {
-      if (players[i].points > maxPoints) {
-        winner = players[i];
-        maxPoints = winner.points;
-      }
-    }
-    return winner.playerId;
-  }
-
-  //If this returns false, that will force a reshuffle
-  firstMove(lastWinner, players) {
-    let player = null;
-    if (lastWinner == null) {
-      this.highestDoubleHolder(players);
-    }
-    return new Move(player.highestDouble);
-  }
-
   highestDoubleHolder(players) {
     let domino = null;
     let player = null;
@@ -77,7 +54,9 @@ export default class TypicalRuleSet extends RuleSet {
   }
 
   setup(board, players) {
+    board.reset();
     for (let i = 0; i < players.length; i++) {
+      players[i].dropAll();
       for (let j = 0; j < this.handSize; j++) {
         players[i].drawFrom(board);
       }
@@ -88,6 +67,8 @@ export default class TypicalRuleSet extends RuleSet {
     console.log(`TypicalRuleSet.roundWinner(${players})`);
     let winner = players[0];
     for (let i = 1; i < players.length; i++) {
+      console.log(`${players[i]}`);
+      console.log(`${winner}`);
       if (players[i].lighterThan(winner)) {
         winner = players[i];
       }
@@ -115,5 +96,30 @@ export default class TypicalRuleSet extends RuleSet {
       }
     }
     player.addPoints(total);
+  }
+
+  firstPlayerMoves(lastWinner, players) {
+    let player = lastWinner;
+    let moves = [];
+    if (lastWinner == null) {
+      // This is the first round of the match.
+      let domino = null;
+      for (let i = 0; i < players.length; i++) {
+        if (domino == null) {
+          domino = players[i].highestDouble;
+          player = players[i];
+        }
+      }
+      // Play the highest double
+      moves.push(new Move(domino, -1, -1));
+    } else {
+      // There's been a previous round, so we
+      // already know who goes first. All
+      // moves are available
+      for (let domino in player.hand.dominoes) {
+        moves.push(new Move(domino, -1, -1));
+      }
+    }
+    return [player, moves];
   }
 }

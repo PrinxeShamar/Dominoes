@@ -3,6 +3,20 @@ export default class Hand {
     this.dominoes = new Array(0);
   }
 
+  get highestDouble() {
+    let highest = null;
+    for (let domino of this._dominoes) {
+      if (domino.isDouble && (highest == null || highest.lighterThan(domino))) {
+        highest = domino;
+      }
+    }
+    return highest;
+  }
+
+  get length() {
+    return this._dominoes.length;
+  }
+
   get dominoes() {
     return [...this._dominoes];
   }
@@ -10,10 +24,10 @@ export default class Hand {
   get lightest() {
     console.log(`Hand.lightest()`);
     let domino = null;
-    for (let i = 0; i < this.dominoes.length; i++) {
+    for (let i = 0; i < this._dominoes.length; i++) {
       //console.log(`${this.dominoes[i].toString(false)}`);
-      if (domino == null || this.dominoes[i].lighterThan(domino)) {
-        domino = this.dominoes[i];
+      if (domino == null || this._dominoes[i].lighterThan(domino)) {
+        domino = this._dominoes[i];
       }
     }
     return domino;
@@ -22,9 +36,10 @@ export default class Hand {
   get weight() {
     console.log(`Hand.weight`);
     let w = 0;
-    for (let i = 0; i < this.dominoes.length; i++) {
-      w += this.dominoes[i].weight;
+    for (let i = 0; i < this._dominoes.length; i++) {
+      w += this._dominoes[i].weight;
     }
+    console.log(`WEIGHT OF ${this}\n${w}`);
     return w;
   }
 
@@ -60,8 +75,12 @@ export default class Hand {
 
   lighterThan(other) {
     console.log(`Hand.lighterThan(${other})`);
-    if (this.weight === other.weight) {
+    const w1 = this.weight;
+    const w2 = other.weight;
+    if (w1 === w2) {
       return this.lightest.lighterThan(other.lightest);
+    } else {
+      return w1 < w2;
     }
   }
 

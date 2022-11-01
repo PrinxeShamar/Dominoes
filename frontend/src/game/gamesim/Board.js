@@ -10,8 +10,7 @@ export default class Board {
   constructor(dominoSet) {
     console.log(`Board(${dominoSet})`);
     this.dominoSet = dominoSet;
-    this.boneyard = new Boneyard(dominoSet.dominoes);
-    this.dominoLine = new DominoLine();
+    this.reset();
   }
 
   play(move) {
@@ -26,5 +25,10 @@ export default class Board {
 
   toString() {
     return `${this.boneyard.toString()}`;
+  }
+
+  reset() {
+    this.boneyard = new Boneyard(this.dominoSet.dominoes);
+    this.dominoLine = new DominoLine();
   }
 }

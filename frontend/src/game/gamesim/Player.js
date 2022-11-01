@@ -6,6 +6,14 @@ export default class Player {
     this.playerId = playerId;
   }
 
+  get length() {
+    return this._hand.length;
+  }
+
+  get highestDouble() {
+    return this._hand.highestDouble;
+  }
+
   get hand() {
     return this._hand;
   }
@@ -41,10 +49,12 @@ export default class Player {
   }
 
   dropAll() {
+    console.log(`Player.dropAll()`);
     this.hand = new Hand();
   }
 
   addPoints(total) {
+    console.log(`Player.addPoints(${total})`);
     this._points += total;
   }
 
