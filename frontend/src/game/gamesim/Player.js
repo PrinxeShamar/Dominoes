@@ -64,7 +64,7 @@ export default class Player {
     this._points += total;
   }
 
-  pickMove(moves, board, ruleSet) {
+  pickMove(moves) {
     throw new Error("Method Not Implemented");
   }
 
