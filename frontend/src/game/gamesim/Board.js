@@ -23,4 +23,8 @@ export default class Board {
     console.log(`Board.pop()`);
     return this.boneyard.pop();
   }
+
+  toString() {
+    return `${this.boneyard.toString()}`;
+  }
 }

@@ -4,10 +4,8 @@
 export default class Boneyard {
   constructor(dominoes) {
     console.log(`Boneyard(${dominoes})`);
-    this.dominoes = new Array(0);
-    for (let domino in dominoes) {
-      this.dominoes.push(domino);
-    }
+    this.dominoes = [...dominoes];
+    this.shuffle();
   }
 
   add(domino) {
@@ -19,5 +17,19 @@ export default class Boneyard {
     console.log(`Boneyard.pop()`);
     console.log(this.dominoes);
     return this.dominoes.pop();
+  }
+
+  shuffle() {
+    for (let i = this.dominoes.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [this.dominoes[i], this.dominoes[j]] = [
+        this.dominoes[j],
+        this.dominoes[i],
+      ];
+    }
+  }
+
+  toString() {
+    return this.dominoes.toString();
   }
 }

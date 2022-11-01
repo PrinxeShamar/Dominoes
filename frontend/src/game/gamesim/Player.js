@@ -41,4 +41,8 @@ export default class Player {
     console.log(other.hand);
     return this.hand.lighterThan(other.hand);
   }
+
+  dropAll() {
+    this.hand = new Hand();
+  }
 }

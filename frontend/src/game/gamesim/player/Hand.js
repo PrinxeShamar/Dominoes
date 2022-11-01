@@ -3,6 +3,10 @@ export default class Hand {
     this.dominoes = new Array(0);
   }
 
+  get dominoes() {
+    return [this._dominoes];
+  }
+
   get lightest() {
     console.log(`Hand.lightest()`);
     let domino = null;
@@ -23,6 +27,10 @@ export default class Hand {
       w += this.dominoes[i].weight;
     }
     return w;
+  }
+
+  set dominoes(dominoes) {
+    this._dominoes = [...dominoes];
   }
 
   add(domino) {
