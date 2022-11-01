@@ -26,7 +26,16 @@ export default class TurnSim {
   start() {
     // This is the first turn of a new round
     console.log(`TurnSim.start()`);
-    console.log(`NOT IMPLEMENTED`);
+    console.log(`Welcome to the TurnSim\n
+    Today, we'll be trying to figure out what I do.\n
+    Clearly, the game needs to be played somehow,\n
+    and I'm supposed to represent the lowest level\n
+    of simulation. The players will need to be\n
+    prompted by actions. We can try a literal prompt\n
+    method as a temp structure. We'll skip this\n
+    for now`);
+
+    //assume the last turn of the round was just played
   }
 
   next() {

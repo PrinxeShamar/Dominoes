@@ -73,9 +73,25 @@ export default class TypicalRuleSet extends RuleSet {
         player = players[i];
       }
     }
+    return player;
   }
 
   setup(board, players) {
-    throw new Error("Method Not Implemented");
+    for (let i = 0; i < players.length; i++) {
+      for (let j = 0; j < this.handSize; j++) {
+        players[i].drawFrom(board);
+      }
+    }
+  }
+
+  roundWinner(players) {
+    console.log(`TypicalRuleSet.roundWinner(${players})`);
+    let winner = players[0];
+    for (let i = 1; i < players.length; i++) {
+      if (players[i].lighterThan(winner)) {
+        winner = players[i];
+      }
+    }
+    return winner;
   }
 }

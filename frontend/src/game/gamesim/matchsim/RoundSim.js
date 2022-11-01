@@ -11,11 +11,16 @@ export default class RoundSim {
     this.winner = null;
   }
 
+  setup() {
+    console.log(`RoundSim.setup()`);
+    this.ruleSet.setup(this.board, this.players);
+  }
+
   start() {
     console.log(`RoundSim.start()`);
     while (!this.ruleSet.matchStop(this.players)) {
       ++this.roundNum;
-      this.ruleSet.setup(this.board, this.players);
+      this.setup();
       this.turnSim.start();
       this.winner = this.ruleSet.roundWinner(this.players);
       this.next();
@@ -23,6 +28,7 @@ export default class RoundSim {
   }
 
   next() {
+    console.log(`RoundSim.next()`);
     this.turnSim = new TurnSim(
       this.ruleSet,
       this.dominoSet,

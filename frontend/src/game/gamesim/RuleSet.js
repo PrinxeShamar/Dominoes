@@ -106,4 +106,8 @@ export default class RuleSet {
   setup(board, players) {
     throw new Error("Method Not Implemented");
   }
+
+  roundWinner(players) {
+    throw new Error("Method Not Implemented");
+  }
 }

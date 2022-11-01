@@ -16,4 +16,8 @@ export default class Board {
   play(move) {
     this.dominoLine.play(move);
   }
+
+  pop() {
+    return this.boneyard.pop();
+  }
 }

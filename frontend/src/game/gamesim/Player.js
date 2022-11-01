@@ -6,12 +6,20 @@ export default class Player {
     this.playerId = playerId;
   }
 
+  get hand() {
+    return this._hand;
+  }
+
   get points() {
     return this._points;
   }
 
   get playerId() {
     return this._playerId;
+  }
+
+  set hand(hand) {
+    this._hand = hand;
   }
 
   set points(points) {
@@ -24,5 +32,10 @@ export default class Player {
 
   drawFrom(dominoes) {
     this.hand.drawFrom(dominoes);
+  }
+
+  lighterThan(other) {
+    console.log(`Player.lighterThan(${other})`);
+    return this.hand.lighterThan(other.hand);
   }
 }

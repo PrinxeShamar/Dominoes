@@ -62,7 +62,6 @@ export default class GameSim {
 
   start() {
     console.log("GameSim.start()");
-    ++this.matchNum;
     this.matchSim.start();
     this._winnerList.push(this.matchSim.winner);
   }
