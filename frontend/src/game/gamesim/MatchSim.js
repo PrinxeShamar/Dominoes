@@ -6,27 +6,30 @@ export default class MatchSim {
     this.dominoSet = dominoSet;
     this.board = board;
     this.players = players;
+    this.next();
+    this.matchNum = 0;
+  }
+
+  get winning() {
+    console.log("MatchSim.winning");
+    return this.ruleSet.matchWinner(this.players);
+  }
+
+  start() {
+    // Matches don't increment themselves
+    console.log("MatchSim.start()");
+    ++this.matchNum;
+    this.roundSim.start();
+    this.next();
+  }
+
+  next() {
+    console.log(`MatchSim.next()`);
     this.roundSim = new RoundSim(
       this.ruleSet,
       this.dominoSet,
       this.board,
       this.players
     );
-    this.roundNum = 0;
-    this.lastWinner = null;
-  }
-
-  get winning() {
-    console.log("MatchSim.winning");
-    return this.ruleSet.winning(this.players);
-  }
-
-  start() {
-    console.log("MatchSim.start()");
-    while (!this.ruleSet.matchStop(this.players)) {
-      ++this.roundNum;
-      console.log(`Round ${this.roundNum}`);
-      this.roundSim.start(this.lastWinner);
-    }
   }
 }

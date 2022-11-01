@@ -6,24 +6,29 @@ export default class RoundSim {
     this.dominoSet = dominoSet;
     this.board = board;
     this.players = players;
+    this.next();
+    this.roundNum = 0;
+    this.winner = null;
+  }
+
+  start() {
+    console.log(`RoundSim.start()`);
+    while (!this.ruleSet.matchStop(this.players)) {
+      ++this.roundNum;
+      this.ruleSet.setup(this.board, this.players);
+      this.turnSim.start();
+      this.winner = this.ruleSet.roundWinner(this.players);
+      this.next();
+    }
+  }
+
+  next() {
     this.turnSim = new TurnSim(
       this.ruleSet,
       this.dominoSet,
       this.board,
       this.players
     );
-  }
-
-  start(lastWinner) {
-    //To start the round, we need to know
-    //who won the last round, since it determines
-    //who starts this one.
-    console.log(`RoundSim.start(${lastWinner})`);
-    while (!this.ruleSet.roundStop(this.players)) {
-      ++this.turnNum;
-      console.log(`Turn ${this.turnNum}`);
-      //Using the lastWinner, we can start the turn
-      this.turnSim.start(lastWinner);
-    }
+    this.turnNum = 0;
   }
 }

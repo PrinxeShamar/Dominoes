@@ -100,4 +100,13 @@ export default class GameSim {
       }
     }
   }
+
+  next() {
+    this.matchSim = new MatchSim(
+      this.ruleSet,
+      this.dominoSet,
+      this.board,
+      this.players
+    );
+  }
 }

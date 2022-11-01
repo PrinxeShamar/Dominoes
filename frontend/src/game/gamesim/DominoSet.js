@@ -4,7 +4,8 @@ export default class DominoSet {
     this.dominoCount = DominoSet.makeSetSize(dRangeStart, dRangeEnd);
     this.dRangeStart = dRangeStart;
     this.dRangeEnd = dRangeEnd;
-    this.dominoList = Domino[this.dominoCount];
+    this.dominoList = new Array(this.dominoCount);
+    this.generateSet();
   }
 
   get length() {
@@ -17,5 +18,15 @@ export default class DominoSet {
 
   static makeSetSize(start, end) {
     return DominoSet.triNum(end + 1) - DominoSet.triNum(start);
+  }
+
+  generateSet() {
+    let index = 0;
+    for (let i = this.dRangeStart; i <= this.dRangeEnd; i++) {
+      for (let j = i; j <= this.dRangeEnd; i++) {
+        this.dominoList[index] = new Domino(i, j);
+        ++index;
+      }
+    }
   }
 }

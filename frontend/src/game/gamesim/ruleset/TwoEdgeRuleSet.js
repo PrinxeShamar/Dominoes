@@ -38,7 +38,6 @@ export default class TwoEdgeRuleSet extends RuleSet {
         maxPoints = players[i].points;
       }
     }
-    console.log(`Stop?: ${maxPoints >= this.stopCondition}`);
     return maxPoints >= this.stopCondition;
   }
 
