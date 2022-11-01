@@ -6,14 +6,26 @@ export default class Move {
   }
 
   get domino() {
-    return this.domino;
+    return this._domino;
   }
 
   get endId() {
-    return this.endId;
+    return this._endId;
   }
 
   get connectedSide() {
-    return this.connectedSide;
+    return this._connectedSide;
+  }
+
+  set domino(domino) {
+    this._domino = domino;
+  }
+
+  set endId(endId) {
+    this._endId = endId;
+  }
+
+  set connectedSide(connectedSide) {
+    this._connectedSide = connectedSide;
   }
 }

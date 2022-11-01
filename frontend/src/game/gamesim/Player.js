@@ -1,9 +1,15 @@
 import Hand from "./player/Hand";
+/**
+ * This is the connective class between
+ * the game and the player. The visual
+ * object is the interface
+ */
 export default class Player {
-  constructor(playerId) {
+  constructor(playerId, visual) {
     this.hand = new Hand();
     this.points = 0;
     this.playerId = playerId;
+    this.visual = visual;
   }
 
   get length() {
@@ -56,6 +62,10 @@ export default class Player {
   addPoints(total) {
     console.log(`Player.addPoints(${total})`);
     this._points += total;
+  }
+
+  pickMove(moves, board, ruleSet) {
+    throw new Error("Method Not Implemented");
   }
 
   toString() {

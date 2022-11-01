@@ -5,6 +5,7 @@ import DrawRuleSet from "./gamesim/ruleset/typicalruleset/DrawRuleSet";
 import BlockRuleSet from "./gamesim/ruleset/typicalruleset/BlockRuleSet";
 import ComputerPlayer from "./gamesim/player/ComputerPlayer";
 import HumanPlayer from "./gamesim/player/HumanPlayer";
+import Visual from "./gamesim/Visual";
 
 /**
  * GameSim takes raw game parameters that define the
@@ -98,12 +99,13 @@ export default class GameSim {
       throw new Error("Inconsistent Player Count");
     }
     for (let i = 0; i < strArr.length; i++) {
+      let visual = new Visual(this, i);
       switch (strArr[i].toLowerCase()) {
         case "human":
-          this._players[i] = new HumanPlayer(i);
+          this._players[i] = new HumanPlayer(i, visual);
           break;
         case "cpu":
-          this._players[i] = new ComputerPlayer(i);
+          this._players[i] = new ComputerPlayer(i, visual);
           break;
         default:
           throw new Error("Invalid Player Type");

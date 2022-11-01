@@ -40,7 +40,9 @@ export default class TurnSim {
     let playing = firstOp[0];
     let moves = firstOp[1];
 
-    this.ruleSet.pickMove(playing, moves);
+    console.log(playing);
+
+    this.playing.pickMove(moves, this.board, this.ruleSet);
 
     while (!this.ruleSet.roundStop(this.players, this.passes)) {
       playing = this.ruleSet.nextPlayer(playing, this.players);
