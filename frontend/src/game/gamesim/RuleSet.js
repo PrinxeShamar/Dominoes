@@ -118,4 +118,12 @@ export default class RuleSet {
   firstPlayerMoves(lastWinner, players) {
     throw new Error("Method Not Implemented");
   }
+
+  roundStop(players, passes) {
+    throw new Error("Method Not Implemented");
+  }
+
+  nextPlayer(playing, players) {
+    throw new Error("Method Not Implemented");
+  }
 }

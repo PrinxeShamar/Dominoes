@@ -122,4 +122,25 @@ export default class TypicalRuleSet extends RuleSet {
     }
     return [player, moves];
   }
+
+  roundStop(players, passes) {
+    if (passes >= players.length) {
+      return true;
+    }
+    for (let player of players) {
+      if (player.length === 0) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  nextPlayer(playing, players) {
+    let index = playing.playerId;
+    ++index;
+    if (index >= players.length) {
+      index = 0;
+    }
+    return players[index];
+  }
 }

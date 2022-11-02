@@ -4,7 +4,7 @@ import Move from "../Move";
 export default class DrawRuleSet extends TypicalRuleSet {
   legalMoves(board, player) {
     const moves = new Set();
-    const boardEnds = board.endList;
+    const boardEnds = board.ends;
     for (let i = 0; i < boardEnds.length; i++) {
       for (const domino of player.hand) {
         const sides = domino.sides;

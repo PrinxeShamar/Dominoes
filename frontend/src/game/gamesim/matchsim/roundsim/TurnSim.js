@@ -42,7 +42,7 @@ export default class TurnSim {
 
     console.log(playing);
 
-    this.playing.pickMove(moves);
+    playing.pickMove(moves);
 
     while (!this.ruleSet.roundStop(this.players, this.passes)) {
       playing = this.ruleSet.nextPlayer(playing, this.players);

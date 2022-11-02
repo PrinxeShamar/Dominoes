@@ -13,6 +13,11 @@ export default class Board {
     this.reset();
   }
 
+  get ends() {
+    console.log(`Board.ends`);
+    return this.dominoLine.ends;
+  }
+
   play(move) {
     console.log(`Board.play(${move})`);
     this.dominoLine.play(move);

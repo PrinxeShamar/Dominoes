@@ -28,4 +28,8 @@ export default class Move {
   set connectedSide(connectedSide) {
     this._connectedSide = connectedSide;
   }
+
+  toString() {
+    return `Move(${this._domino}, ${this._endId}, ${this._connectedSide})`;
+  }
 }

@@ -14,12 +14,13 @@ export default class DominoLine {
     this.ends = [];
   }
 
-  /*
-  start(domino) {
-    this.ends[0] = new DominoNode(domino);
-    this.ends[1] = new DominoNode(domino);
+  get ends() {
+    return this._ends;
   }
-  */
+
+  set ends(ends) {
+    this._ends = [...ends];
+  }
 
   play(move, endCounts) {
     console.log(`DominoLine.play(${(move, endCounts)})`);
@@ -36,7 +37,7 @@ export default class DominoLine {
           // Add node to the list of nodes
           this.nodes.push(node);
           // Add end value to the same index as the node
-          this.ends.push(sides[i]);
+          this._ends.push(sides[i]);
         }
       }
       // increment the length
@@ -57,18 +58,18 @@ export default class DominoLine {
       let empty = node.empty;
       for (let i = 0; i < empty[0]; i++) {
         this.nodes.push(node);
-        this.ends.push(node.x);
+        this._ends.push(node.x);
       }
       // Do the same for the 1 side
       for (let i = 0; i < empty[1]; i++) {
         this.nodes.push(node);
-        this.ends.push(node.y);
+        this._ends.push(node.y);
       }
     }
   }
 
   remove(endId) {
     this.nodes.splice(endId, 1);
-    this.ends.splice(endId, 1);
+    this._ends.splice(endId, 1);
   }
 }
