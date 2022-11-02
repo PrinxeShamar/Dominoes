@@ -125,7 +125,7 @@ export default class TypicalRuleSet extends RuleSet {
       // There's been a previous round, so we
       // already know who goes first. All
       // moves are available
-      for (let domino in player.hand.dominoes) {
+      for (let domino of player.hand.dominoes) {
         moves.push(new Move(domino, -1, -1));
       }
     }

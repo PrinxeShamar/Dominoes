@@ -30,8 +30,12 @@ export default class Board {
     return this.boneyard.pop();
   }
 
+  lineStr() {
+    return this.dominoLine.toString();
+  }
+
   toString() {
-    return `${this.boneyard.toString()}|${this.dominoLine.toString()}`;
+    return `${this.boneyard.toString()}|${this.lineStr()}`;
   }
 
   reset() {

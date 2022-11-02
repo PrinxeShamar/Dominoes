@@ -30,7 +30,7 @@ export default class TurnSim {
 
   start(lastWinner) {
     // This is the first turn of a new round
-    console.log(`TurnSim.start()`);
+    console.log(`TurnSim.start(${lastWinner})`);
     // While there's a problem getting a first player,
     // keep resetting
     let firstOp = null;
@@ -43,6 +43,8 @@ export default class TurnSim {
 
     console.log(playing);
 
+    console.log(this.board.lineStr());
+
     let move = playing.pickMove(moves);
     playing.play(this.board, move, this.ruleSet.endCounts(move));
     while (!this.ruleSet.roundStop(this.players, this.passes)) {
@@ -51,6 +53,7 @@ export default class TurnSim {
       move = playing.pickMove(moves);
       if (move != null) {
         playing.play(this.board, move, this.ruleSet.endCounts(move));
+        console.log(this.board.lineStr());
       } else {
         console.log("PASS");
         ++this.passes;
