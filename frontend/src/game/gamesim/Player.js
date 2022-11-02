@@ -64,6 +64,10 @@ export default class Player {
     this._points += total;
   }
 
+  remove(domino) {
+    this._hand.remove(domino);
+  }
+
   pickMove(moves) {
     throw new Error("Method Not Implemented");
   }

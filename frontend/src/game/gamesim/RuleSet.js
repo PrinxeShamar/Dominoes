@@ -126,4 +126,8 @@ export default class RuleSet {
   nextPlayer(playing, players) {
     throw new Error("Method Not Implemented");
   }
+
+  endCounts(move) {
+    throw new Error("Method Not Implemented");
+  }
 }

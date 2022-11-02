@@ -23,7 +23,7 @@ export default class DominoLine {
   }
 
   play(move, endCounts) {
-    console.log(`DominoLine.play(${(move, endCounts)})`);
+    console.log(`DominoLine.play(${move}, ${endCounts})`);
     if (this.length === 0) {
       // This is the first move
       // Create the first node
@@ -71,5 +71,25 @@ export default class DominoLine {
   remove(endId) {
     this.nodes.splice(endId, 1);
     this._ends.splice(endId, 1);
+  }
+
+  toString() {
+    if (this.length === 0) {
+      return "";
+    }
+    let totalStr = this.nodes[0].toString();
+    //Left
+    let current = this.nodes[0];
+    while (current.left != null) {
+      current = current.left;
+      totalStr = `${current.toString()}${totalStr}`;
+    }
+    //Right
+    current = this.nodes[0];
+    while (current.right != null) {
+      current = current.right;
+      totalStr = `${totalStr}${current.toString()}`;
+    }
+    return totalStr;
   }
 }

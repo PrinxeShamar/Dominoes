@@ -22,6 +22,7 @@ export default class TypicalRuleSet extends RuleSet {
   }
 
   isLegal(board, move) {
+    console.log(`TypicalRuleSet.isLegal(${board}, ${move})`);
     return board.ends[move.endId] === move.connectedSide;
   }
 
@@ -99,19 +100,25 @@ export default class TypicalRuleSet extends RuleSet {
   }
 
   firstPlayerMoves(lastWinner, players) {
+    console.log(`TypicalRuleSet.firstPlayerMoves(${lastWinner}, ${players})`);
     let player = lastWinner;
     let moves = [];
     if (lastWinner == null) {
       // This is the first round of the match.
-      let domino = null;
+      let highest = null;
       for (let i = 0; i < players.length; i++) {
-        if (domino == null) {
-          domino = players[i].highestDouble;
+        let domino = players[i].highestDouble;
+        if (
+          domino != null &&
+          (highest == null || highest.lighterThan(domino))
+        ) {
+          highest = domino;
           player = players[i];
         }
       }
+      console.log(`Highest Double: ${highest}`);
       // Play the highest double
-      moves.push(new Move(domino, -1, -1));
+      moves.push(new Move(highest, -1, -1));
     } else {
       // There's been a previous round, so we
       // already know who goes first. All
@@ -142,5 +149,9 @@ export default class TypicalRuleSet extends RuleSet {
       index = 0;
     }
     return players[index];
+  }
+
+  endCounts(move) {
+    return [1, 1];
   }
 }

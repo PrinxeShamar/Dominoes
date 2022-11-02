@@ -18,9 +18,9 @@ export default class Board {
     return this.dominoLine.ends;
   }
 
-  play(move) {
-    console.log(`Board.play(${move})`);
-    this.dominoLine.play(move);
+  play(move, endCounts) {
+    console.log(`Board.play(${move}, ${endCounts})`);
+    this.dominoLine.play(move, endCounts);
   }
 
   pop() {
@@ -29,7 +29,7 @@ export default class Board {
   }
 
   toString() {
-    return `${this.boneyard.toString()}`;
+    return `${this.boneyard.toString()}|${this.dominoLine.toString()}`;
   }
 
   reset() {

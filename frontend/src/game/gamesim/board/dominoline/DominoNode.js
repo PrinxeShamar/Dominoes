@@ -6,7 +6,11 @@ export default class DominoNode {
     console.log(`DominoNode(${domino}, ${ends})`);
     this.domino = domino;
     this.ends = ends;
-    this.adjacent = [DominoNode[ends], DominoNode[ends]];
+    this.adjacent = [
+      new Array(ends[0]).fill(null),
+      new Array(ends[1]).fill(null),
+    ];
+    console.log(this.adjacent[0]);
     this.filled = [0, 0];
   }
 
@@ -24,6 +28,14 @@ export default class DominoNode {
 
   get empty() {
     return [this.ends[0] - this.filled[0], this.ends[1] - this.filled[1]];
+  }
+
+  get left() {
+    return this.adjacent[0][0];
+  }
+
+  get right() {
+    return this.adjacent[1][0];
   }
 
   valToIndex(val) {
@@ -65,5 +77,9 @@ export default class DominoNode {
     this.adjacent[this.filled] = tmp;
     // Incriment the filled variable
     ++this.filled;
+  }
+
+  toString(reverse) {
+    return this.domino.toString(reverse);
   }
 }
