@@ -12,6 +12,10 @@ export default class DominoLine {
     // Ends are OPEN end points with indices that
     // represent the ID of the corresponding node
     this.ends = [];
+    // What side to add the domino (0 = left, 1 = right)
+    // 2 is up, 3 is down (later use)
+    this.orient = [];
+    this.repStr = "";
   }
 
   get ends() {
@@ -23,6 +27,7 @@ export default class DominoLine {
   }
 
   play(move, endCounts) {
+    //throw new Error("STOP");
     console.log(`DominoLine.play(${move}, ${endCounts})`);
     if (this.length === 0) {
       // This is the first move
@@ -40,7 +45,9 @@ export default class DominoLine {
           this._ends.push(sides[i]);
         }
       }
-      // increment the length
+
+      this.orient = [0, 1];
+      this.repStr = `${node.toString()}`;
       ++this.length;
     } else {
       let domino = move.domino;
@@ -52,18 +59,37 @@ export default class DominoLine {
       node.connectTo(this.nodes[endId], connectedSide);
       this.nodes[endId].connectTo(node, connectedSide);
       // Adjust nodes and ends accordingly
+      let orientation = this.orient[endId];
+
       // Delete the end this was connected to
       this.remove(endId);
+
       // Add extra ends of 0 side
       let empty = node.empty;
       for (let i = 0; i < empty[0]; i++) {
         this.nodes.push(node);
         this._ends.push(node.x);
+        this.orient.push(orientation);
       }
       // Do the same for the 1 side
       for (let i = 0; i < empty[1]; i++) {
         this.nodes.push(node);
         this._ends.push(node.y);
+        this.orient.push(orientation);
+      }
+
+      if (orientation === 0) {
+        if (connectedSide === node.y) {
+          this.repStr = node.toString(false) + this.repStr;
+        } else {
+          this.repStr = node.toString(true) + this.repStr;
+        }
+      } else {
+        if (connectedSide === node.x) {
+          this.repStr = this.repStr + node.toString(false);
+        } else {
+          this.repStr = this.repStr + node.toString(true);
+        }
       }
       ++this.length;
     }
@@ -72,42 +98,11 @@ export default class DominoLine {
   remove(endId) {
     this.nodes.splice(endId, 1);
     this._ends.splice(endId, 1);
+    this.orient.splice(endId, 1);
   }
 
   toString() {
     console.log(`Line Len = ${this.length}`);
-    if (this.length === 0) {
-      return "";
-    }
-    let totalStr = this.nodes[0].toString();
-    //Left
-    let current = this.nodes[0].left;
-    let last = this.nodes[0];
-    while (current != null) {
-      console.log("left");
-      totalStr = `${current.toString()}${totalStr}`;
-      if (current.left === last) {
-        last = current;
-        current = current.right;
-      } else {
-        last = current;
-        current = current.left;
-      }
-    }
-    //Right
-    current = this.nodes[0].right;
-    last = this.nodes[0];
-    while (current != null) {
-      console.log("right");
-      totalStr = `${current.toString()}${totalStr}`;
-      if (current.right === last) {
-        last = current;
-        current = current.left;
-      } else {
-        last = current;
-        current = current.right;
-      }
-    }
-    return totalStr;
+    return this.repStr;
   }
 }
