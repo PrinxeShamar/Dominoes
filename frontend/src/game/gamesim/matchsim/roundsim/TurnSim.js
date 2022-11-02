@@ -53,6 +53,7 @@ export default class TurnSim {
         playing.play(this.board, move, this.ruleSet.endCounts(move));
       } else {
         console.log("PASS");
+        ++this.passes;
       }
     }
 

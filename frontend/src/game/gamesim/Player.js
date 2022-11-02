@@ -65,12 +65,18 @@ export default class Player {
   }
 
   remove(domino) {
+    console.log(`Player.remove(${domino})`);
     this._hand.remove(domino);
   }
 
   play(board, move, endCounts) {
     console.log(`Player.play(${board}, ${move}, ${endCounts})`);
+    let l1 = this.length;
     board.play(move, endCounts);
+    this.remove(move.domino);
+    if (l1 !== this.length + 1) {
+      throw new Error(`Sanity Check Fail`);
+    }
   }
 
   pickMove(moves) {

@@ -62,10 +62,13 @@ export default class Hand {
 
   remove(domino) {
     console.log(`Hand.remove(${domino})`);
-    const index = this.dominoes.indexOf(domino);
+    console.log(`${this._dominoes}`);
+    const index = this._dominoes.indexOf(domino);
     if (index > -1) {
-      this.dominoes.splice(index, 1);
+      console.log(`splicing`);
+      this._dominoes.splice(index, 1);
     }
+    console.log(`${this._dominoes}`);
   }
 
   pop() {

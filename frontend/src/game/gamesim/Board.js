@@ -20,7 +20,9 @@ export default class Board {
 
   play(move, endCounts) {
     console.log(`Board.play(${move}, ${endCounts})`);
+    console.log(this.toString());
     this.dominoLine.play(move, endCounts);
+    console.log(this.toString());
   }
 
   pop() {
