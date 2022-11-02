@@ -44,12 +44,16 @@ export default class TurnSim {
     console.log(playing);
 
     let move = playing.pickMove(moves);
-    this.board.play(move, this.ruleSet.endCounts(move));
-    playing.remove(move.domino);
+    playing.play(this.board, move, this.ruleSet.endCounts(move));
     while (!this.ruleSet.roundStop(this.players, this.passes)) {
       playing = this.ruleSet.nextPlayer(playing, this.players);
       moves = this.ruleSet.legalMoves(this.board, playing);
-      throw new Error("STOP");
+      move = playing.pickMove(moves);
+      if (move != null) {
+        playing.play(this.board, move, this.ruleSet.endCounts(move));
+      } else {
+        console.log("PASS");
+      }
     }
 
     //assume the last turn of the round was just played

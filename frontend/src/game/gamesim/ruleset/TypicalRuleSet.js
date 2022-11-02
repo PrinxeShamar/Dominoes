@@ -23,7 +23,9 @@ export default class TypicalRuleSet extends RuleSet {
 
   isLegal(board, move) {
     console.log(`TypicalRuleSet.isLegal(${board}, ${move})`);
-    return board.ends[move.endId] === move.connectedSide;
+    const ans = board.ends[move.endId] === move.connectedSide;
+    console.log(ans);
+    return ans;
   }
 
   play(board, move) {
@@ -152,6 +154,7 @@ export default class TypicalRuleSet extends RuleSet {
   }
 
   endCounts(move) {
+    console.log(`TypicalRuleSet.endCounts(${move})`);
     return [1, 1];
   }
 }

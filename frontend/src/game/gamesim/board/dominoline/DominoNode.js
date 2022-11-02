@@ -38,8 +38,16 @@ export default class DominoNode {
     return this.adjacent[1][0];
   }
 
+  get isDouble() {
+    return this.domino.isDouble;
+  }
+
   valToIndex(val) {
+    // Tries to get an unfilled index
     if (val === this.x) {
+      if (this.isDouble && this.indexFilled(0)) {
+        return 1;
+      }
       return 0;
     }
     if (val === this.y) {
@@ -67,16 +75,16 @@ export default class DominoNode {
     return this.filled[index] >= this.ends[index];
   }
 
-  addToEnd(domino, ends) {
-    if (this.filled === this.ends) {
+  connectTo(otherNode, connectedSide) {
+    console.log(`DominoNode.connectTo(${otherNode}, ${connectedSide})`);
+    const sideIndex = this.valToIndex(connectedSide);
+    if (this.filled[sideIndex] >= this.ends[sideIndex]) {
       throw new Error("This domino has no more available ends");
     }
-    // Create the node with domino and other ends
-    let tmp = new DominoNode(domino, ends);
     // Add node to the adjacency list
-    this.adjacent[this.filled] = tmp;
+    this.adjacent[sideIndex][this.filled] = otherNode;
     // Incriment the filled variable
-    ++this.filled;
+    this.filled[sideIndex]++;
   }
 
   toString(reverse) {

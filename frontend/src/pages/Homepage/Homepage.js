@@ -7,7 +7,7 @@ console.log("START TEST");
 let tmpGame = new GameSim("draw", new Map());
 console.log("----");
 console.log(tmpGame);
-tmpGame.fillSeats(["human", "cpu", "cpu", "cpu"]);
+tmpGame.fillSeats(["cpu", "cpu", "cpu", "cpu"]);
 tmpGame.start();
 let players = tmpGame.players;
 console.log(players);

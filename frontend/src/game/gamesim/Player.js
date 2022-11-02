@@ -68,6 +68,11 @@ export default class Player {
     this._hand.remove(domino);
   }
 
+  play(board, move, endCounts) {
+    console.log(`Player.play(${board}, ${move}, ${endCounts})`);
+    board.play(move, endCounts);
+  }
+
   pickMove(moves) {
     throw new Error("Method Not Implemented");
   }
