@@ -78,6 +78,12 @@ export default class Hand {
 
   lighterThan(other) {
     console.log(`Hand.lighterThan(${other})`);
+    if (this.length === 0) {
+      return true;
+    }
+    if (other.length === 0) {
+      return false;
+    }
     const w1 = this.weight;
     const w2 = other.weight;
     if (w1 === w2) {

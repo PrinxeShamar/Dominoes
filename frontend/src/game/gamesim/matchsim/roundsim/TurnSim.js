@@ -38,22 +38,22 @@ export default class TurnSim {
       this.setup();
       firstOp = this.ruleSet.firstPlayerMoves(lastWinner, this.players);
     }
-    let playing = firstOp[0];
+    this.playing = firstOp[0];
     let moves = firstOp[1];
 
-    console.log(playing);
+    console.log(this.playing);
 
     console.log(this.board.lineStr);
 
-    let move = playing.pickMove(moves);
-    playing.play(this.board, move, this.ruleSet.endCounts(move));
+    let move = this.playing.pickMove(moves);
+    this.playing.play(this.board, move, this.ruleSet.endCounts(move));
     while (!this.ruleSet.roundStop(this.players, this.passes)) {
       console.log("Continue TurnSim");
-      playing = this.ruleSet.nextPlayer(playing, this.players);
-      moves = this.ruleSet.legalMoves(this.board, playing);
-      move = playing.pickMove(moves);
+      this.next();
+      moves = this.ruleSet.legalMoves(this.board, this.playing);
+      move = this.playing.pickMove(moves);
       if (move != null) {
-        playing.play(this.board, move, this.ruleSet.endCounts(move));
+        this.playing.play(this.board, move, this.ruleSet.endCounts(move));
         console.log(`BOARD STATE\n${this.board.lineStr}`);
       } else {
         console.log("PASS");
@@ -66,6 +66,6 @@ export default class TurnSim {
 
   next() {
     console.log(`TurnSim.next()`);
-    this.playing = this.ruleSet.next(this.playing, this.players);
+    this.playing = this.ruleSet.nextPlayer(this.playing, this.players);
   }
 }

@@ -32,5 +32,6 @@ export default class RoundSim {
       this.players
     );
     this.turnNum = 0;
+    this.board.reset();
   }
 }

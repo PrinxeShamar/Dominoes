@@ -42,7 +42,7 @@ export default class DominoLine {
           // Add node to the list of nodes
           this.nodes.push(node);
           // Add end value to the same index as the node
-          this._ends.push(sides[i]);
+          this._ends.push(sides[index]);
         }
       }
 
