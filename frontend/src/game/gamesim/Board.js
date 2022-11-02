@@ -14,8 +14,12 @@ export default class Board {
   }
 
   get ends() {
-    console.log(`Board.ends`);
+    //console.log(`Board.ends`);
     return this.dominoLine.ends;
+  }
+
+  get lineStr() {
+    return this.dominoLine.toString();
   }
 
   play(move, endCounts) {
@@ -30,12 +34,8 @@ export default class Board {
     return this.boneyard.pop();
   }
 
-  lineStr() {
-    return this.dominoLine.toString();
-  }
-
   toString() {
-    return `${this.boneyard.toString()}|${this.lineStr()}`;
+    return `${this.boneyard.toString()}|${this.lineStr}`;
   }
 
   reset() {

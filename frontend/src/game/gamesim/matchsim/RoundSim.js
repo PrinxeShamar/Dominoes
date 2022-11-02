@@ -14,6 +14,7 @@ export default class RoundSim {
   start() {
     console.log(`RoundSim.start()`);
     while (!this.ruleSet.matchStop(this.players)) {
+      console.log("Continue RoundSim");
       ++this.roundNum;
       this.turnSim.start(this.winner);
       this.winner = this.ruleSet.roundWinner(this.players);

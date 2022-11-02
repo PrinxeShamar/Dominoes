@@ -10,7 +10,6 @@ export default class DominoNode {
       new Array(ends[0]).fill(null),
       new Array(ends[1]).fill(null),
     ];
-    console.log(this.adjacent[0]);
     this.filled = [0, 0];
   }
 
@@ -82,7 +81,7 @@ export default class DominoNode {
       throw new Error("This domino has no more available ends");
     }
     // Add node to the adjacency list
-    this.adjacent[sideIndex][this.filled] = otherNode;
+    this.adjacent[sideIndex][this.filled[sideIndex]] = otherNode;
     // Incriment the filled variable
     this.filled[sideIndex]++;
   }

@@ -23,6 +23,10 @@ export default class GameSim {
     this.winnerList = [];
   }
 
+  get lineStr() {
+    return this.board.lineStr;
+  }
+
   get matchNum() {
     return this._matchNum;
   }
@@ -74,6 +78,7 @@ export default class GameSim {
     console.log(this.matchSim);
     console.log(this.matchSim.winner);
     this._winnerList.push(this.matchSim.winner);
+    console.log("MatchOver");
   }
 
   changeRules(ruleName, customRules) {

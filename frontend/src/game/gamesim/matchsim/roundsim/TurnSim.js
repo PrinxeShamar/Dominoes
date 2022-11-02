@@ -43,17 +43,18 @@ export default class TurnSim {
 
     console.log(playing);
 
-    console.log(this.board.lineStr());
+    console.log(this.board.lineStr);
 
     let move = playing.pickMove(moves);
     playing.play(this.board, move, this.ruleSet.endCounts(move));
     while (!this.ruleSet.roundStop(this.players, this.passes)) {
+      console.log("Continue TurnSim");
       playing = this.ruleSet.nextPlayer(playing, this.players);
       moves = this.ruleSet.legalMoves(this.board, playing);
       move = playing.pickMove(moves);
       if (move != null) {
         playing.play(this.board, move, this.ruleSet.endCounts(move));
-        console.log(this.board.lineStr());
+        console.log(`BOARD STATE\n${this.board.lineStr}`);
       } else {
         console.log("PASS");
         ++this.passes;

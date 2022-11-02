@@ -13,4 +13,7 @@ export default class Visual {
 
   // Add methods that return elements for the
   // player to see.
+  get lineStr() {
+    return this.gamesim.lineStr;
+  }
 }

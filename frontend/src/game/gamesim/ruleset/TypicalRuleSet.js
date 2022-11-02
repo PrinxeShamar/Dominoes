@@ -22,9 +22,9 @@ export default class TypicalRuleSet extends RuleSet {
   }
 
   isLegal(board, move) {
-    console.log(`TypicalRuleSet.isLegal(${board}, ${move})`);
+    //console.log(`TypicalRuleSet.isLegal(${board}, ${move})`);
     const ans = board.ends[move.endId] === move.connectedSide;
-    console.log(ans);
+    //console.log(ans);
     return ans;
   }
 

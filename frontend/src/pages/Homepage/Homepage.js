@@ -4,10 +4,11 @@ import GameSim from "../../game/GameSim";
 
 const socket = io("http://localhost:4500");
 console.log("START TEST");
-let tmpGame = new GameSim("draw", new Map());
+let tmpMap = new Map();
+let tmpGame = new GameSim("draw", tmpMap);
 console.log("----");
 console.log(tmpGame);
-tmpGame.fillSeats(["cpu", "cpu", "cpu", "cpu"]);
+tmpGame.fillSeats(["human", "cpu", "cpu", "cpu"]);
 tmpGame.start();
 let players = tmpGame.players;
 console.log(players);
@@ -17,6 +18,7 @@ console.log(players[2].points);
 console.log(players[3].points);
 console.log(tmpGame.winnerList);
 console.log(tmpGame.winnerList[0].playerId);
+console.log("DONE--------------------");
 export default function Homepage() {
   return (
     <div>

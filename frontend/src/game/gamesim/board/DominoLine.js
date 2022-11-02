@@ -65,6 +65,7 @@ export default class DominoLine {
         this.nodes.push(node);
         this._ends.push(node.y);
       }
+      ++this.length;
     }
   }
 
@@ -74,21 +75,38 @@ export default class DominoLine {
   }
 
   toString() {
+    console.log(`Line Len = ${this.length}`);
     if (this.length === 0) {
       return "";
     }
     let totalStr = this.nodes[0].toString();
     //Left
-    let current = this.nodes[0];
-    while (current.left != null) {
-      current = current.left;
+    let current = this.nodes[0].left;
+    let last = this.nodes[0];
+    while (current != null) {
+      console.log("left");
       totalStr = `${current.toString()}${totalStr}`;
+      if (current.left === last) {
+        last = current;
+        current = current.right;
+      } else {
+        last = current;
+        current = current.left;
+      }
     }
     //Right
-    current = this.nodes[0];
-    while (current.right != null) {
-      current = current.right;
-      totalStr = `${totalStr}${current.toString()}`;
+    current = this.nodes[0].right;
+    last = this.nodes[0];
+    while (current != null) {
+      console.log("right");
+      totalStr = `${current.toString()}${totalStr}`;
+      if (current.right === last) {
+        last = current;
+        current = current.left;
+      } else {
+        last = current;
+        current = current.right;
+      }
     }
     return totalStr;
   }
