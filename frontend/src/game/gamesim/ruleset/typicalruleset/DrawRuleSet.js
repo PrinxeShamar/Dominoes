@@ -1,5 +1,5 @@
 import TypicalRuleSet from "../TypicalRuleSet";
-import Move from "../Move";
+import Move from "../action/Move";
 
 export default class DrawRuleSet extends TypicalRuleSet {
   legalMoves(board, player) {

@@ -79,6 +79,14 @@ export default class Player {
     }
   }
 
+  updateVisual(instr) {
+    this.visual.updateAll(instr);
+  }
+
+  update(instr) {
+    console.log(`Player[${this.playerId}].update.(${instr})`);
+  }
+
   pickMove(moves) {
     throw new Error("Method Not Implemented");
   }

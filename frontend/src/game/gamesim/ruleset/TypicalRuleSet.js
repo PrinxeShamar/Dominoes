@@ -1,5 +1,5 @@
 import RuleSet from "../RuleSet";
-import Move from "./Move";
+import Move from "./Action";
 
 export default class TypicalRuleSet extends RuleSet {
   defPlayerCount() {

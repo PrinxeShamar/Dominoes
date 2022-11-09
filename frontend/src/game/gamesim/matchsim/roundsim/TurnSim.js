@@ -68,4 +68,10 @@ export default class TurnSim {
     console.log(`TurnSim.next()`);
     this.playing = this.ruleSet.nextPlayer(this.playing, this.players);
   }
+
+  updateVisual() {
+    for (let player of this.players) {
+      player.updateVisual();
+    }
+  }
 }

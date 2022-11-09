@@ -11,9 +11,19 @@ export default class Visual {
     this.playerId = playerId;
   }
 
+  get player() {
+    return this.gamesim.players[this.playerId];
+  }
+
   // Add methods that return elements for the
   // player to see.
+
+  //Returns the string representation of the board
   get lineStr() {
     return this.gamesim.lineStr;
+  }
+
+  get handStr() {
+    return this.player.hand.toString();
   }
 }

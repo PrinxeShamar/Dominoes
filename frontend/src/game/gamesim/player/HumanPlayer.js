@@ -10,9 +10,14 @@ export default class HumanPlayer extends Player {
     while (isNaN(rawinput) || rawinput < 0 || rawinput >= moves.length) {
       rawinput = parseInt(
         prompt(
-          `${this.visual.lineStr}\n${moves}\nPlayer ${this.playerId + 1} Move:`
+          `${this.visual.lineStr}\nHand:\n${
+            this.visual.handStr
+          }\n${moves}\nPlayer ${this.playerId + 1} Move:`
         )
       );
+      if (rawinput === "v") {
+        console.log(`${this.visual}`);
+      }
     }
     return moves[rawinput];
   }

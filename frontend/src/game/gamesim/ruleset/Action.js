@@ -1,10 +1,4 @@
-export default class Move {
-  constructor(domino, endId, connectedSide) {
-    this.domino = domino;
-    this.endId = endId;
-    this.connectedSide = connectedSide;
-  }
-
+export default class Action {
   get domino() {
     return this._domino;
   }
