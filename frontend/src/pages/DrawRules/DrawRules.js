@@ -1,10 +1,18 @@
+import logo from "../../images/logo/logo.png"
+import { Link } from "react-router-dom";
+
 export default function DrawRules() {
   return (
     <div>
+      <Link to="/" id="logo">
+        <img src={logo} />
+      </Link>
       <h1>Draw Rules</h1>
-      <p>Setup: Shuffle the dominoes. Each player draws the same amount of
-      dominoes. The remaining dominoes are in the “boneyard”. Gameplay: If this
-      is the first round, the player with the highest double (usually double 6)
+      <h3>Setup</h3>
+      <p>Shuffle the dominoes. Each player draws the same amount of
+      dominoes. The remaining dominoes are in the “boneyard”.</p>
+      <h3>Gameplay</h3>
+      <p>If this is the first round, the player with the highest double (usually double 6)
       places that double as the first domino. In the event that no player has a
       double, redo the setup. If this is not the first round, the last winner
       plays first. Play proceeds to the left (clockwise). Each player adds a
@@ -15,8 +23,9 @@ export default function DrawRules() {
       uses the last domino in his hand or no more plays can be made. If all
       players still have tiles in their hands, but can more no moves can be
       made, then the game is said to be "blocked". Note that there is no
-      difference between “draw” and “block” rules if the boneyard is empty.
-      Scoring: If the game ended because someone placed their last domino, that
+      difference between “draw” and “block” rules if the boneyard is empty.</p>
+      <h3>Scoring</h3>
+      <p>If the game ended because someone placed their last domino, that
       person is the winner. If the game ended because it was “blocked”, the
       winning player is the player with the lowest sum of the dominoes in their
       hand. The win goes to the player with the lightest individual tile if

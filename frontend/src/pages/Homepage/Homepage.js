@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import io from "socket.io-client";
 import GameSim from "../../game/GameSim";
+import logo from "../../images/logo/logo.png"
 
 const socket = io("http://localhost:4500");
 console.log("START TEST");
@@ -57,6 +58,9 @@ while (userIn == null) {
 export default function Homepage() {
   return (
     <div>
+      <Link to="/" id="logo">
+        <img src={logo} />
+      </Link>
       <h1>Dominoes</h1>
       <div>
         <h2>Choose Game Mode:</h2>
