@@ -1,5 +1,5 @@
 import RuleSet from "../RuleSet";
-import Move from "./Action";
+import Move from "./action/Move";
 
 export default class TypicalRuleSet extends RuleSet {
   defPlayerCount() {
@@ -116,8 +116,8 @@ export default class TypicalRuleSet extends RuleSet {
       console.log(`Highest Double: ${highest}`);
       // Play the highest double
       let tmpmove = new Move(highest, -1, -1, -1, [null, null]);
-      console.log(`${tmpmove.toString()}`);
-      console.log(`Action Type: ${tmpmove.constructor}`);
+      //console.log(`${tmpmove.toString()}`);
+      //console.log(`Action Type: ${tmpmove.constructor}`);
       moves.push(tmpmove);
       tmpmove.endCounts = this.endCounts(tmpmove);
     } else {

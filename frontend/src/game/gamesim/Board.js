@@ -18,6 +18,10 @@ export default class Board {
     return this.dominoLine.ends;
   }
 
+  get orient() {
+    return this.dominoLine.orient;
+  }
+
   get lineStr() {
     return this.dominoLine.toString();
   }

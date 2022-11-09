@@ -9,6 +9,9 @@
  * until RoundSim increments
  */
 
+import Draw from "../../ruleset/action/Draw";
+import Pass from "../../ruleset/action/Pass";
+
 export default class TurnSim {
   constructor(ruleSet, dominoSet, board, players) {
     this.ruleSet = ruleSet;
@@ -21,6 +24,10 @@ export default class TurnSim {
 
   get winning() {
     return this.ruleSet.winning(this.players);
+  }
+
+  get observers() {
+    return [...this.players];
   }
 
   setup() {
@@ -44,24 +51,40 @@ export default class TurnSim {
 
     console.log(this.playing);
 
+    console.log(moves.toString());
+
     console.log(this.board.lineStr);
-    //Game Event
+    //Game Event?
     let move = this.playing.pickMove(moves);
     //Player Event
-    this.playing.play(this.board, move);
+    this.playing.actionToBoard(move, this.board);
+    for (let observer of this.observers) {
+      observer.playerActed(this.playing.playerId, move);
+    }
+    move = null;
     while (!this.ruleSet.roundStop(this.players, this.passes)) {
       console.log("Continue TurnSim");
       //Game Event
       this.next();
-      moves = this.ruleSet.legalMoves(this.board, this.playing);
-      //Player Event
-      move = this.playing.pickMove(moves);
-      if (move != null) {
-        this.playing.play(this.board, move, this.ruleSet.endCounts(move));
-        console.log(`BOARD STATE\n${this.board.lineStr}`);
-      } else {
+
+      //Assumes Drawing must mean the same player plays
+      while (move == null || move.constructor === Draw) {
+        moves = this.ruleSet.legalActions(this.board, this.playing);
+        //Player Event
+        move = this.playing.pickMove(moves);
+        this.playing.actionToBoard(move, this.board);
+        for (let observer of this.observers) {
+          observer.playerActed(this.playing.playerId, move);
+        }
+      }
+
+      console.log(`BOARD STATE\n${this.board.lineStr}`);
+
+      if (move.constructor === Pass) {
         console.log("PASS");
         ++this.passes;
+      } else {
+        this.passes = 0;
       }
     }
 
@@ -71,11 +94,5 @@ export default class TurnSim {
   next() {
     console.log(`TurnSim.next()`);
     this.playing = this.ruleSet.nextPlayer(this.playing, this.players);
-  }
-
-  updateVisual() {
-    for (let player of this.players) {
-      player.updateVisual();
-    }
   }
 }

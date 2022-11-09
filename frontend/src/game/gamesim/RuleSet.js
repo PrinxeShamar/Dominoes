@@ -77,7 +77,7 @@ export default class RuleSet {
    * @param {Board} board
    * @param {Player} player
    */
-  legalMoves(board, player) {
+  legalActions(board, player) {
     throw new Error("Method Not Implemented");
   }
 

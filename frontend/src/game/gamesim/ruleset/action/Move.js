@@ -59,7 +59,9 @@ export default class Move extends Action {
   }
 
   toString() {
-    console.log(`Move.toString()`);
+    if (this._connectedSide <= -1) {
+      return `(Play ${this._domino})`;
+    }
     return `(Play ${this._domino} on the ${this.leftRight} connected to ${this._connectedSide})`;
   }
 }

@@ -1,8 +1,9 @@
 import TypicalRuleSet from "../TypicalRuleSet";
 import Move from "../action/Move";
+import Pass from "../action/Pass";
 
 export default class BlockRuleSet extends TypicalRuleSet {
-  legalMoves(board, player) {
+  legalActions(board, player) {
     const moves = [];
     const boardEnds = board.ends;
     for (let i = 0; i < boardEnds.length; i++) {
@@ -20,8 +21,9 @@ export default class BlockRuleSet extends TypicalRuleSet {
         }
       }
     }
-    //This assumes a player will always need to pass
-    //when there's no moves, no matter the game mode
+    if (moves.length === 0) {
+      return [new Pass()];
+    }
     return moves;
   }
 }

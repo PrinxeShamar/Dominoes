@@ -73,9 +73,8 @@ export default class Player {
     this._hand.remove(domino);
   }
 
-  pass() {
+  pass(board) {
     console.log(`Player.pass()`);
-    this.visual.announcePass();
   }
 
   play(move, board) {
@@ -108,8 +107,34 @@ export default class Player {
     this.visual.updateVisual(instr);
   }
 
-  update(instr) {
-    console.log(`Player[${this.playerId}].update.(${instr})`);
+  playerActed(idNum, action) {
+    console.log(`Player.playerActed(${idNum}, ${action})`);
+    this.visual.playerActed(idNum, action);
+    switch (action.constructor) {
+      case Move:
+        this.playerMoved(idNum, action);
+        break;
+      case Draw:
+        this.playerDrew(idNum, action);
+        break;
+      case Pass:
+        this.playerPassed(idNum, action);
+        break;
+      default:
+        throw new Error("Action Undefined");
+    }
+  }
+
+  playerMoved(idNum, move) {
+    // Socket Conseqence Here
+  }
+
+  playerDrew(idNum, draw) {
+    // Socket Conseqence Here
+  }
+
+  playerPass(idNum, pass) {
+    // Socket Conseqence Here
   }
 
   pickMove(moves) {

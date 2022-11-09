@@ -1,11 +1,14 @@
 import TypicalRuleSet from "../TypicalRuleSet";
 import Move from "../action/Move";
+import Draw from "../action/Draw";
+import Pass from "../action/Pass";
 
 export default class DrawRuleSet extends TypicalRuleSet {
-  legalMoves(board, player) {
-    console.log(`DrawRuleSet.legalMoves(${board}, ${player})`);
+  legalActions(board, player) {
+    console.log(`DrawRuleSet.legalActions(${board}, ${player})`);
     const moves = [];
     const boardEnds = board.ends;
+    const boardOrients = board.orients;
     for (let i = 0; i < boardEnds.length; i++) {
       for (const domino of player.hand.dominoes) {
         const sides = domino.sides;
@@ -23,16 +26,16 @@ export default class DrawRuleSet extends TypicalRuleSet {
     }
 
     if (moves.length === 0 && board.boneyard.length >= 1) {
-      player.drawFrom(board.boneyard);
-      const ans = this.legalMoves(board, player);
-      console.log(ans);
-      return ans;
+      return [new Draw("Boneyard", board.boneyard)];
     }
     //This assumes a player will always need to pass
     //when there's no moves, no matter the game mode
     const ans = moves;
     console.log(ans.toString());
     console.log(ans.length);
-    return ans;
+    if (moves.length === 0) {
+      return [new Pass()];
+    }
+    return moves;
   }
 }

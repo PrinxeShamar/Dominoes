@@ -19,11 +19,19 @@ export default class DominoLine {
   }
 
   get ends() {
-    return this._ends;
+    return [...this._ends];
+  }
+
+  get orient() {
+    return [...this._orient];
   }
 
   set ends(ends) {
     this._ends = [...ends];
+  }
+
+  set orient(orient) {
+    this._orient = [...orient];
   }
 
   play(move) {
