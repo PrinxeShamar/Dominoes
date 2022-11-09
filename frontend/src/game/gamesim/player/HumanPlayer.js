@@ -10,7 +10,7 @@ export default class HumanPlayer extends Player {
     while (isNaN(rawinput) || rawinput < 0 || rawinput >= moves.length) {
       rawinput = parseInt(
         this.promptNormal(
-          `${this.visual.boardRep}\nHand:\n${
+          `Score: ${this.visual.score}\n${this.visual.boardRep}\nHand:\n${
             this.visual.handRep
           }\n${moves}\nPlayer ${this.playerId + 1} Move:`
         )

@@ -25,6 +25,7 @@ export default class RoundSim {
       this.ruleSet.addPoints(this.winner, this.players);
       this.next();
       for (let observer of this.observers) {
+        observer.updatePlayerScore(this.winner.playerId, this.winner.points);
         observer.updateBoard(this.board);
       }
     }

@@ -84,7 +84,11 @@ export default class Visual {
   }
 
   // Add methods that update the player when
-  // some visible hange occurs.
+  // some visible change occurs.
+
+  updatePlayerScore(idNum, total) {
+    this._score[idNum] = total;
+  }
 
   playerPassed(idNum, pass) {
     console.log(`Visual.playerPassed(${idNum}, ${pass})`);
