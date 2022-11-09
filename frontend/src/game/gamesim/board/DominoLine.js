@@ -55,7 +55,7 @@ export default class DominoLine {
         }
       }
 
-      this.orient = [0, 1];
+      this._orient = [0, 1];
       this.repStr = `${node.toString()}`;
       ++this.length;
     } else {
@@ -68,7 +68,7 @@ export default class DominoLine {
       node.connectTo(this.nodes[endId], connectedSide);
       this.nodes[endId].connectTo(node, connectedSide);
       // Adjust nodes and ends accordingly
-      let orientation = this.orient[endId];
+      let orientation = this._orient[endId];
       if (move.orient !== orientation) {
         throw new Error("Sanity Check Failure: RuleSet sent bad orientation");
       }
@@ -81,13 +81,13 @@ export default class DominoLine {
       for (let i = 0; i < empty[0]; i++) {
         this.nodes.push(node);
         this._ends.push(node.x);
-        this.orient.push(orientation);
+        this._orient.push(orientation);
       }
       // Do the same for the 1 side
       for (let i = 0; i < empty[1]; i++) {
         this.nodes.push(node);
         this._ends.push(node.y);
-        this.orient.push(orientation);
+        this._orient.push(orientation);
       }
       this.addToRep(node, orientation, connectedSide);
       ++this.length;
@@ -95,6 +95,9 @@ export default class DominoLine {
   }
 
   addToRep(node, orientation, connectedSide) {
+    console.log(
+      `DominoLine.addToRep(${node}, ${orientation}, ${connectedSide})`
+    );
     if (orientation === 0) {
       if (connectedSide === node.y) {
         this.repStr = node.toString(false) + this.repStr;
@@ -113,11 +116,12 @@ export default class DominoLine {
   remove(endId) {
     this.nodes.splice(endId, 1);
     this._ends.splice(endId, 1);
-    this.orient.splice(endId, 1);
+    this._orient.splice(endId, 1);
   }
 
   toString() {
     console.log(`Line Len = ${this.length}`);
+    //return this.repStr + `|${this._ends}, ${this._orient}`;
     return this.repStr;
   }
 }

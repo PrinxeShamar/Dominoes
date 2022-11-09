@@ -47,6 +47,9 @@ export default class TurnSim {
       firstOp = this.ruleSet.firstPlayerMoves(lastWinner, this.players);
     }
     this.playing = firstOp[0];
+    for (let observer of this.observers) {
+      observer.updatePlayingId(this.playing.playerId);
+    }
     let moves = firstOp[1];
 
     console.log(this.playing);
@@ -60,10 +63,11 @@ export default class TurnSim {
     this.playing.actionToBoard(move, this.board);
     for (let observer of this.observers) {
       observer.playerActed(this.playing.playerId, move);
+      observer.updateBoard(this.board);
     }
-    move = null;
     while (!this.ruleSet.roundStop(this.players, this.passes)) {
       console.log("Continue TurnSim");
+      move = null;
       //Game Event
       this.next();
 
@@ -75,6 +79,7 @@ export default class TurnSim {
         this.playing.actionToBoard(move, this.board);
         for (let observer of this.observers) {
           observer.playerActed(this.playing.playerId, move);
+          observer.updateBoard(this.board);
         }
       }
 
@@ -94,5 +99,8 @@ export default class TurnSim {
   next() {
     console.log(`TurnSim.next()`);
     this.playing = this.ruleSet.nextPlayer(this.playing, this.players);
+    for (let observer of this.observers) {
+      observer.updatePlayingId(this.playing.playerId);
+    }
   }
 }

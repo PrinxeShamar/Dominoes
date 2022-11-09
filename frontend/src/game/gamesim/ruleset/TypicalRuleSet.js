@@ -24,6 +24,10 @@ export default class TypicalRuleSet extends RuleSet {
   isLegal(board, move) {
     //console.log(`TypicalRuleSet.isLegal(${board}, ${move})`);
     const ans = board.ends[move.endId] === move.connectedSide;
+    if (board.orient[move.endId] !== move.orient) {
+      console.log(`${board.orient[move.endId]}, ${move.orient}`);
+      throw new Error("Sanity Check Failed");
+    }
     //console.log(ans);
     return ans;
   }

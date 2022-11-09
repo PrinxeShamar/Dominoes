@@ -51,6 +51,7 @@ export default class Player {
   drawFrom(dominoes) {
     console.log(`Player.drawFrom(${dominoes})`);
     this.hand.drawFrom(dominoes);
+    this.visual.handRep = this.hand.toString();
   }
 
   lighterThan(other) {
@@ -109,7 +110,6 @@ export default class Player {
 
   playerActed(idNum, action) {
     console.log(`Player.playerActed(${idNum}, ${action})`);
-    this.visual.playerActed(idNum, action);
     switch (action.constructor) {
       case Move:
         this.playerMoved(idNum, action);
@@ -123,18 +123,33 @@ export default class Player {
       default:
         throw new Error("Action Undefined");
     }
+    this.visual.handRep = this.hand.toString();
   }
 
   playerMoved(idNum, move) {
+    console.log(`Player.playerMoved(${idNum}, ${move})`);
+    this.visual.playerMoved(idNum, move);
     // Socket Conseqence Here
   }
 
   playerDrew(idNum, draw) {
+    console.log(`Player.playerDrew(${idNum}, ${draw})`);
+    this.visual.playerDrew(idNum, draw);
     // Socket Conseqence Here
   }
 
-  playerPass(idNum, pass) {
+  playerPassed(idNum, pass) {
+    console.log(`Player.playerPassed(${idNum}, ${pass})`);
+    this.visual.playerPassed(idNum, pass);
     // Socket Conseqence Here
+  }
+
+  updateBoard(board) {
+    this.visual.boardRep = board.lineStr;
+  }
+
+  updatePlayingId(playingId) {
+    this.visual.playingId = playingId;
   }
 
   pickMove(moves) {
