@@ -28,11 +28,6 @@ export default class TypicalRuleSet extends RuleSet {
     return ans;
   }
 
-  play(board, move) {
-    let dominoNode = board.place(move.domino, move.end, move.connectedSide);
-    dominoNode.addEnd();
-  }
-
   matchStop(players) {
     console.log(`TypicalRuleSet.matchStop(${players})`);
     let maxPoints = 0;
@@ -120,13 +115,19 @@ export default class TypicalRuleSet extends RuleSet {
       }
       console.log(`Highest Double: ${highest}`);
       // Play the highest double
-      moves.push(new Move(highest, -1, -1));
+      let tmpmove = new Move(highest, -1, -1, -1, [null, null]);
+      console.log(`${tmpmove.toString()}`);
+      console.log(`Action Type: ${tmpmove.constructor}`);
+      moves.push(tmpmove);
+      tmpmove.endCounts = this.endCounts(tmpmove);
     } else {
       // There's been a previous round, so we
       // already know who goes first. All
       // moves are available
       for (let domino of player.hand.dominoes) {
-        moves.push(new Move(domino, -1, -1));
+        let tmpmove = new Move(domino, -1, -1, -1, [null, null]);
+        moves.push(tmpmove);
+        tmpmove.endCounts = this.endCounts(tmpmove);
       }
     }
     return [player, moves];

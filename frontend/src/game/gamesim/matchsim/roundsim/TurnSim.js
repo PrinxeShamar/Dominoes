@@ -35,6 +35,7 @@ export default class TurnSim {
     // keep resetting
     let firstOp = null;
     while (firstOp == null) {
+      //Game Event
       this.setup();
       firstOp = this.ruleSet.firstPlayerMoves(lastWinner, this.players);
     }
@@ -44,13 +45,16 @@ export default class TurnSim {
     console.log(this.playing);
 
     console.log(this.board.lineStr);
-
+    //Game Event
     let move = this.playing.pickMove(moves);
-    this.playing.play(this.board, move, this.ruleSet.endCounts(move));
+    //Player Event
+    this.playing.play(this.board, move);
     while (!this.ruleSet.roundStop(this.players, this.passes)) {
       console.log("Continue TurnSim");
+      //Game Event
       this.next();
       moves = this.ruleSet.legalMoves(this.board, this.playing);
+      //Player Event
       move = this.playing.pickMove(moves);
       if (move != null) {
         this.playing.play(this.board, move, this.ruleSet.endCounts(move));

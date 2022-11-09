@@ -1,4 +1,8 @@
 import Hand from "./player/Hand";
+import Move from "./ruleset/action/Move";
+import Draw from "./ruleset/action/Draw";
+import Pass from "./ruleset/action/Pass";
+
 /**
  * This is the connective class between
  * the game and the player. The visual
@@ -56,7 +60,7 @@ export default class Player {
 
   dropAll() {
     console.log(`Player.dropAll()`);
-    this.hand = new Hand();
+    this.hand.clear();
   }
 
   addPoints(total) {
@@ -69,18 +73,39 @@ export default class Player {
     this._hand.remove(domino);
   }
 
-  play(board, move, endCounts) {
-    console.log(`Player.play(${board}, ${move}, ${endCounts})`);
+  pass() {
+    console.log(`Player.pass()`);
+    this.visual.announcePass();
+  }
+
+  play(move, board) {
+    console.log(`Player.play(${move}, ${board})`);
     let l1 = this.length;
-    board.play(move, endCounts);
     this.remove(move.domino);
+    board.play(move);
     if (l1 !== this.length + 1) {
       throw new Error(`Sanity Check Fail`);
     }
   }
 
+  actionToBoard(action, board) {
+    switch (action.constructor) {
+      case Move:
+        this.play(action, board);
+        break;
+      case Draw:
+        this.drawFrom(action, board);
+        break;
+      case Pass:
+        this.pass();
+        break;
+      default:
+        throw new Error("Action Undefined");
+    }
+  }
+
   updateVisual(instr) {
-    this.visual.updateAll(instr);
+    this.visual.updateVisual(instr);
   }
 
   update(instr) {

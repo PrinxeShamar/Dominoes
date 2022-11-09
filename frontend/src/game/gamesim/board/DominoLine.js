@@ -26,9 +26,10 @@ export default class DominoLine {
     this._ends = [...ends];
   }
 
-  play(move, endCounts) {
+  play(move) {
     //throw new Error("STOP");
-    console.log(`DominoLine.play(${move}, ${endCounts})`);
+    console.log(`DominoLine.play(${move})`);
+    let endCounts = move.endCounts;
     if (this.length === 0) {
       // This is the first move
       // Create the first node
@@ -60,6 +61,9 @@ export default class DominoLine {
       this.nodes[endId].connectTo(node, connectedSide);
       // Adjust nodes and ends accordingly
       let orientation = this.orient[endId];
+      if (move.orient !== orientation) {
+        throw new Error("Sanity Check Failure: RuleSet sent bad orientation");
+      }
 
       // Delete the end this was connected to
       this.remove(endId);
@@ -77,21 +81,24 @@ export default class DominoLine {
         this._ends.push(node.y);
         this.orient.push(orientation);
       }
-
-      if (orientation === 0) {
-        if (connectedSide === node.y) {
-          this.repStr = node.toString(false) + this.repStr;
-        } else {
-          this.repStr = node.toString(true) + this.repStr;
-        }
-      } else {
-        if (connectedSide === node.x) {
-          this.repStr = this.repStr + node.toString(false);
-        } else {
-          this.repStr = this.repStr + node.toString(true);
-        }
-      }
+      this.addToRep(node, orientation, connectedSide);
       ++this.length;
+    }
+  }
+
+  addToRep(node, orientation, connectedSide) {
+    if (orientation === 0) {
+      if (connectedSide === node.y) {
+        this.repStr = node.toString(false) + this.repStr;
+      } else {
+        this.repStr = node.toString(true) + this.repStr;
+      }
+    } else {
+      if (connectedSide === node.x) {
+        this.repStr = this.repStr + node.toString(false);
+      } else {
+        this.repStr = this.repStr + node.toString(true);
+      }
     }
   }
 

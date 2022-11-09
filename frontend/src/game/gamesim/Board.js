@@ -22,10 +22,10 @@ export default class Board {
     return this.dominoLine.toString();
   }
 
-  play(move, endCounts) {
-    console.log(`Board.play(${move}, ${endCounts})`);
+  play(move) {
+    console.log(`Board.play(${move})`);
     console.log(this.toString());
-    this.dominoLine.play(move, endCounts);
+    this.dominoLine.play(move);
     console.log(this.toString());
   }
 

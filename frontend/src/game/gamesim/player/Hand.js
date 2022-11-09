@@ -93,6 +93,11 @@ export default class Hand {
     }
   }
 
+  clear() {
+    console.log(`Hand.clear()`);
+    this._dominoes.length = 0;
+  }
+
   toString() {
     return this.dominoes.toString();
   }

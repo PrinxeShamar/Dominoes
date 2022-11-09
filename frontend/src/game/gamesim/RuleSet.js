@@ -81,16 +81,6 @@ export default class RuleSet {
     throw new Error("Method Not Implemented");
   }
 
-  /**
-   * The plays a move on the board, updating
-   * the board's data depending on the rules
-   * @param {Board} board
-   * @param {Move} move
-   */
-  play(board, move) {
-    throw new Error("Method Not Implemented");
-  }
-
   matchStop(players) {
     throw new Error("Method Not Implemented");
   }
