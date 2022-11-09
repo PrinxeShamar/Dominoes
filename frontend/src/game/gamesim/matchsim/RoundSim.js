@@ -11,6 +11,10 @@ export default class RoundSim {
     this.winner = null;
   }
 
+  get observers() {
+    return [...this.players];
+  }
+
   start() {
     console.log(`RoundSim.start()`);
     while (!this.ruleSet.matchStop(this.players)) {
@@ -20,6 +24,9 @@ export default class RoundSim {
       this.winner = this.ruleSet.roundWinner(this.players);
       this.ruleSet.addPoints(this.winner, this.players);
       this.next();
+      for (let observer of this.observers) {
+        observer.updateBoard(this.board);
+      }
     }
   }
 
