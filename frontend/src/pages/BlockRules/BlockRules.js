@@ -2,7 +2,7 @@ export default function BlockRules() {
   return (
     <div>
       <h1>Block Rules</h1>
-      Setup: Shuffle the dominoes. Each player draws the same amount of
+      <p>Setup: Shuffle the dominoes. Each player draws the same amount of
       dominoes. The remaining dominoes are in the “boneyard”. For block
       dominoes, the boneyard will remain unused for the rest of the round. Block
       is usually played with 4 players each drawing 7 dominoes, so there would
@@ -29,7 +29,7 @@ export default function BlockRules() {
       where the score in each individual round (or hand) is added to the score
       in the previous rounds. When one player's total score exceeds a
       pre-established "winning score" (100, for example), the game is over and
-      the winner is declared.
+      the winner is declared.</p>
     </div>
   );
 }

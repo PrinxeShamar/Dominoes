@@ -2,7 +2,7 @@ export default function DrawRules() {
   return (
     <div>
       <h1>Draw Rules</h1>
-      Setup: Shuffle the dominoes. Each player draws the same amount of
+      <p>Setup: Shuffle the dominoes. Each player draws the same amount of
       dominoes. The remaining dominoes are in the “boneyard”. Gameplay: If this
       is the first round, the player with the highest double (usually double 6)
       places that double as the first domino. In the event that no player has a
@@ -28,7 +28,7 @@ export default function DrawRules() {
       number of rounds, where the score in each individual round (or hand) is
       added to the score in the previous rounds. When one player's total score
       exceeds a pre-established "winning score" (100, for example), the game is
-      over and the winner is declared.
+      over and the winner is declared.</p>
     </div>
   );
 }

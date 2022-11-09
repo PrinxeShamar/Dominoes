@@ -60,13 +60,25 @@ export default function Homepage() {
       <h1>Dominoes</h1>
       <div>
         <h2>Choose Game Mode:</h2>
-        <Link to="/draw">Draw</Link>
-        <Link to="/block">Block</Link>
+        <div id="choice">
+          <Link to="/draw">
+            <button>Draw</button>
+          </Link>
+          <Link to="/block">
+            <button>Block</button>
+          </Link>
+        </div>
       </div>
       <div>
         <h2>Rules:</h2>
-        <Link to="/rules/draw">Draw</Link>
-        <Link to="/rules/block">Block</Link>
+        <div id="choice">
+          <Link to="/rules/draw">
+            <button>Draw</button>
+          </Link>
+          <Link to="/rules/block">
+            <button>Block</button>
+          </Link>
+        </div>
       </div>
     </div>
   );
