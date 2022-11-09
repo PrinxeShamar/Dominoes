@@ -15,9 +15,16 @@ export default class MatchSim {
     return this.ruleSet.matchWinner(this.players);
   }
 
+  get observers() {
+    return [...this.players];
+  }
+
   start() {
     // Matches don't increment themselves
     console.log("MatchSim.start()");
+    for (let observer of this.observers) {
+      observer.resetScore(this.players.length);
+    }
     ++this.matchNum;
     this.roundSim.start();
     this.next();

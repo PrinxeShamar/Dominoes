@@ -104,8 +104,12 @@ export default class Player {
     }
   }
 
-  updateVisual(instr) {
-    this.visual.updateVisual(instr);
+  updatePlayerScore(idNum, total) {
+    this.visual.updatePlayerScore(idNum, total);
+  }
+
+  resetScore(playerCount) {
+    this.visual.score = new Array(playerCount).fill(0);
   }
 
   playerActed(idNum, action) {
