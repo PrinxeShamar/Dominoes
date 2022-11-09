@@ -6,78 +6,151 @@ import logo from "../../images/logo/logo.png"
 const socket = io("http://localhost:4500");
 console.log("START TEST");
 
-let tmpMap = null;
-let tmpGame = null;
-let players = null;
-let userIn = null;
-let userBool = null;
-let score = null;
-while (userIn == null) {
-  userIn = prompt(
-    `Choose (0-2):\n0: Bot Demo\n1: Pass & Play\n2: Skip To Website`
-  );
-  switch (userIn) {
-    case "0":
-      tmpMap = new Map();
-      tmpGame = new GameSim("draw", tmpMap);
-      console.log("----");
-      console.log(tmpGame);
-      tmpGame.fillSeats(["human", "cpu", "cpu", "cpu"]);
-      tmpGame.start();
-      players = tmpGame.players;
-      console.log(players);
-      console.log(players[0].points);
-      console.log(players[1].points);
-      console.log(players[2].points);
-      console.log(players[3].points);
-      console.log(tmpGame.winnerList);
-      console.log(tmpGame.winnerList[0].playerId);
-      console.log("DONE WITH DEMO 0");
-      userBool = true;
-      score = new Array(players.length);
-      for (let i = 0; i < players.length; i++) {
-        score[i] = players[0].points;
-      }
-      while (userBool) {
-        userBool = window.confirm(
-          `Player ${tmpGame.winnerList[0].playerId} wins!\nHit 'cancel' to stop`
-        );
-      }
-      break;
-    case "1":
-      tmpMap = new Map();
-      tmpGame = new GameSim("draw", tmpMap);
-      console.log("----");
-      console.log(tmpGame);
-      tmpGame.fillSeats(["human", "cpu", "human", "cpu"]);
-      tmpGame.start();
-      players = tmpGame.players;
-      console.log(players);
-      console.log(players[0].points);
-      console.log(players[1].points);
-      console.log(players[2].points);
-      console.log(players[3].points);
-      console.log(tmpGame.winnerList);
-      console.log(tmpGame.winnerList[0].playerId);
-      console.log("DONE WITH DEMO 1");
-      userBool = true;
-      score = new Array(players.length);
-      for (let i = 0; i < players.length; i++) {
-        score[i] = players[0].points;
-      }
-      while (userBool) {
-        userBool = window.confirm(
-          `Player ${tmpGame.winnerList[0].playerId} wins!\nHit 'cancel' to stop`
-        );
-      }
-      break;
-    case "2":
-      break;
-    default:
-      userIn = null;
-  }
-}
+
+
 export default function Homepage() {
+
+  function demo1(){
+    let tmpMap = null;
+    let tmpGame = null;
+    let players = null;
+    let userIn = null;
+    let userBool = null;
+    let score = null;
+    
+    tmpMap = new Map();
+    tmpGame = new GameSim("draw", tmpMap);
+    console.log("----");
+    console.log(tmpGame);
+    tmpGame.fillSeats(["human", "cpu", "cpu", "cpu"]);
+    tmpGame.start();
+    players = tmpGame.players;
+    console.log(players);
+    console.log(players[0].points);
+    console.log(players[1].points);
+    console.log(players[2].points);
+    console.log(players[3].points);
+    console.log(tmpGame.winnerList);
+    console.log(tmpGame.winnerList[0].playerId);
+    console.log("DONE WITH DEMO 0");
+    userBool = true;
+    score = new Array(players.length);
+    for (let i = 0; i < players.length; i++) {
+      score[i] = players[0].points;
+    }
+    while (userBool) {
+      userBool = window.confirm(
+        `Player ${tmpGame.winnerList[0].playerId} wins!\nHit 'cancel' to stop`
+      );
+    }
+
+  }
+
+  function demo2(){
+    let tmpMap = null;
+    let tmpGame = null;
+    let players = null;
+    let userIn = null;
+    let userBool = null;
+    let score = null;
+    
+    tmpMap = new Map();
+    tmpGame = new GameSim("block", tmpMap);
+    console.log("----");
+    console.log(tmpGame);
+    tmpGame.fillSeats(["human", "cpu", "cpu", "cpu"]);
+    tmpGame.start();
+    players = tmpGame.players;
+    console.log(players);
+    console.log(players[0].points);
+    console.log(players[1].points);
+    console.log(players[2].points);
+    console.log(players[3].points);
+    console.log(tmpGame.winnerList);
+    console.log(tmpGame.winnerList[0].playerId);
+    console.log("DONE WITH DEMO 0");
+    userBool = true;
+    score = new Array(players.length);
+    for (let i = 0; i < players.length; i++) {
+      score[i] = players[0].points;
+    }
+    while (userBool) {
+      userBool = window.confirm(
+        `Player ${tmpGame.winnerList[0].playerId} wins!\nHit 'cancel' to stop`
+      );
+    }
+  }
+
+  function demo3(){
+    let tmpMap = null;
+    let tmpGame = null;
+    let players = null;
+    let userIn = null;
+    let userBool = null;
+    let score = null;
+    
+    tmpMap = new Map();
+    tmpGame = new GameSim("draw", tmpMap);
+    console.log("----");
+    console.log(tmpGame);
+    tmpGame.fillSeats(["human", "cpu", "human", "cpu"]);
+    tmpGame.start();
+    players = tmpGame.players;
+    console.log(players);
+    console.log(players[0].points);
+    console.log(players[1].points);
+    console.log(players[2].points);
+    console.log(players[3].points);
+    console.log(tmpGame.winnerList);
+    console.log(tmpGame.winnerList[0].playerId);
+    console.log("DONE WITH DEMO 1");
+    userBool = true;
+    score = new Array(players.length);
+    for (let i = 0; i < players.length; i++) {
+      score[i] = players[0].points;
+    }
+    while (userBool) {
+      userBool = window.confirm(
+        `Player ${tmpGame.winnerList[0].playerId} wins!\nHit 'cancel' to stop`
+      );
+    }
+  }
+
+  function demo4(){
+    let tmpMap = null;
+    let tmpGame = null;
+    let players = null;
+    let userIn = null;
+    let userBool = null;
+    let score = null;
+    
+    tmpMap = new Map();
+    tmpGame = new GameSim("block", tmpMap);
+    console.log("----");
+    console.log(tmpGame);
+    tmpGame.fillSeats(["human", "cpu", "human", "cpu"]);
+    tmpGame.start();
+    players = tmpGame.players;
+    console.log(players);
+    console.log(players[0].points);
+    console.log(players[1].points);
+    console.log(players[2].points);
+    console.log(players[3].points);
+    console.log(tmpGame.winnerList);
+    console.log(tmpGame.winnerList[0].playerId);
+    console.log("DONE WITH DEMO 1");
+    userBool = true;
+    score = new Array(players.length);
+    for (let i = 0; i < players.length; i++) {
+      score[i] = players[0].points;
+    }
+    while (userBool) {
+      userBool = window.confirm(
+        `Player ${tmpGame.winnerList[0].playerId} wins!\nHit 'cancel' to stop`
+      );
+    }
+  }
+
   return (
     <div>
       <Link to="/" id="logo">
@@ -85,13 +158,24 @@ export default function Homepage() {
       </Link>
       <h1>Dominoes</h1>
       <div>
-        <h2>Choose Game Mode:</h2>
+        <h2>Play vs Computer:</h2>
         <div id="choice">
           <Link to="/draw">
-            <button>Draw</button>
+            <button onClick={demo1}>Draw</button>
           </Link>
           <Link to="/block">
-            <button>Block</button>
+            <button onClick={demo2}>Block</button>
+          </Link>
+        </div>
+      </div>
+      <div>
+        <h2>Pass and Play:</h2>
+        <div id="choice">
+          <Link to="/draw">
+            <button onClick={demo3}>Draw</button>
+          </Link>
+          <Link to="/block">
+            <button onClick={demo4}>Block</button>
           </Link>
         </div>
       </div>
