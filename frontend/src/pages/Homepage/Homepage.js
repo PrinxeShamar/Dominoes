@@ -1,22 +1,56 @@
-import { Link } from "react-router-dom";
-import io from "socket.io-client";
+import {Component} from "react";
+import {withRouter, privateComponent} from "../../components/PropsWrapper/PropsWrapper";
+import {Link} from "react-router-dom";
 
-const socket = io("http://localhost:4500");
+class Homepage extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      username: "",
+    }
+  }
 
-export default function Homepage() {
-  return (
-    <div>
-      <h1>Dominoes</h1>
+  componentDidMount() {
+    this.getUserData();
+  }
+
+  async getUserData() {
+    let httpResponse = await fetch("http://localhost:4500/api/me/", {
+      method: "GET",
+    });
+    let response = await httpResponse.json();
+    if (response.result === "success") {
+      this.setState({
+        username: response.data.username,
+      })
+    }
+  }
+
+  logout = async () => {
+    await fetch("http://localhost:4500/api/auth/logout", {
+      method: "POST",
+    });
+    localStorage.removeItem("dominosLoggedIn");
+    this.props.router.navigate("/");
+  }
+
+  render() {
+    return (
       <div>
-        <h2>Choose Game Mode:</h2>
-        <Link to="/draw">Draw</Link>
-        <Link to="/block">Block</Link>
+        <h1>Dominoes</h1>
+        <h3>Welcome {this.state.username}</h3>
+        <button onClick={this.logout}>
+          Logout
+        </button>
+        <div>
+          <h2>Choose Game Mode:</h2>
+          <Link to="/games/block">
+            <button>Block</button>
+          </Link>
+        </div>
       </div>
-      <div>
-        <h2>Rules:</h2>
-        <Link to="/rules/draw">Draw</Link>
-        <Link to="/rules/block">Block</Link>
-      </div>
-    </div>
-  );
+    );
+  }
 }
+
+export default privateComponent(withRouter(Homepage));

@@ -1,10 +1,18 @@
-function onConnection(io, socket) {
-  console.log(socket);
-}
+const {socketSessionMiddleware} = require("../modules/sessions");
+const gameNamespace = require("./namespaces/game")
+const Game = require("../models/game");
 
-function main(io) {
+async function main(io) {
+  io.use(socketSessionMiddleware)
+
+  const games = await Game.find({});
+  for (const game of games) {
+    gameNamespace(io.of(`/games/${game.name}`), game);
+  }
+
   io.on("connection", (socket) => {
-    onConnection(io, socket);
+    console.log("Connection To Main");
+    console.log(socket.request.session.userId);
   });
 }
 

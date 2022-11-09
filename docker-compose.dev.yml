@@ -36,6 +36,24 @@ services:
     networks:
       - backend
 
+  db:
+    image: "mongo:4"
+    restart: unless-stopped
+    volumes:
+      - mongodata:/data/db
+      - mongoconfig:/data/configdb
+    ports:
+      - "27019:27017"
+    networks:
+      - backend
+
+volumes:
+  mongoconfig:
+    external: false
+
+  mongodata:
+    external: false
+
 networks:
   backend:
   frontend:
