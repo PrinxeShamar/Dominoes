@@ -9,6 +9,8 @@ let tmpMap = null;
 let tmpGame = null;
 let players = null;
 let userIn = null;
+let userBool = null;
+let score = null;
 while (userIn == null) {
   userIn = prompt(
     `Choose (0-2):\n0: Bot Demo\n1: Pass & Play\n2: Skip To Website`
@@ -30,8 +32,8 @@ while (userIn == null) {
       console.log(tmpGame.winnerList);
       console.log(tmpGame.winnerList[0].playerId);
       console.log("DONE WITH DEMO 0");
-      let userBool = true;
-      let score = new Array(players.length);
+      userBool = true;
+      score = new Array(players.length);
       for (let i = 0; i < players.length; i++) {
         score[i] = players[0].points;
       }
@@ -57,6 +59,16 @@ while (userIn == null) {
       console.log(tmpGame.winnerList);
       console.log(tmpGame.winnerList[0].playerId);
       console.log("DONE WITH DEMO 1");
+      userBool = true;
+      score = new Array(players.length);
+      for (let i = 0; i < players.length; i++) {
+        score[i] = players[0].points;
+      }
+      while (userBool) {
+        userBool = window.confirm(
+          `Player ${tmpGame.winnerList[0].playerId} wins!\nHit 'cancel' to stop`
+        );
+      }
       break;
     case "2":
       break;
