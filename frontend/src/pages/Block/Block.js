@@ -16,6 +16,10 @@ class Block extends Component {
     this.socketInit();
   }
 
+  componentWillUnmount() {
+    this.state.socket.disconnect();
+  }
+
   socketInit() {
     const socket = io("http://localhost:4500/games/block");
     socket.emit("lobby:get", (response) => {
