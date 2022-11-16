@@ -26,6 +26,7 @@ export default class Board {
     return this.dominoLine.toString();
   }
 
+  // Alter the board state based on a move
   play(move) {
     console.log(`Board.play(${move})`);
     console.log(this.toString());
@@ -33,6 +34,7 @@ export default class Board {
     console.log(this.toString());
   }
 
+  //Return a random domino from the boneyard and delete it
   pop() {
     console.log(`Board.pop()`);
     return this.boneyard.pop();

@@ -15,6 +15,7 @@ export default class RoundSim {
     return [...this.players];
   }
 
+  // Start the turns of this round
   start() {
     console.log(`RoundSim.start()`);
     while (!this.ruleSet.matchStop(this.players)) {
@@ -31,6 +32,7 @@ export default class RoundSim {
     }
   }
 
+  // Increment this round to the next round of the same match
   next() {
     console.log(`RoundSim.next()`);
     this.turnSim = new TurnSim(

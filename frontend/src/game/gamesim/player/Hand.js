@@ -47,6 +47,7 @@ export default class Hand {
     this._dominoes = [...dominoes];
   }
 
+  // Add a domino to the hand
   add(domino) {
     console.log(`Hand.add(${domino})`);
     if (domino == null) {
@@ -55,11 +56,13 @@ export default class Hand {
     this._dominoes.push(domino);
   }
 
+  // Add a domino from some obj using pop()
   drawFrom(dominoes) {
     console.log(`Hand.drawFrom(${dominoes})`);
     this.add(dominoes.pop());
   }
 
+  // Delete a domino
   remove(domino) {
     console.log(`Hand.remove(${domino})`);
     console.log(`${this._dominoes}`);
@@ -71,11 +74,13 @@ export default class Hand {
     console.log(`${this._dominoes}`);
   }
 
+  // Delete and return a domino using pop()
   pop() {
     console.log(`Hand.pop()`);
     return this.dominoes.pop();
   }
 
+  // Check if this hand is lighter than another
   lighterThan(other) {
     console.log(`Hand.lighterThan(${other})`);
     if (this.length === 0) {
@@ -93,6 +98,7 @@ export default class Hand {
     }
   }
 
+  // Clear the array of dominoes by setting the length
   clear() {
     console.log(`Hand.clear()`);
     this._dominoes.length = 0;

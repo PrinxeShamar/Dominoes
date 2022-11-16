@@ -63,6 +63,7 @@ export default class Domino {
     }
   }
 
+  // Check if this domino is lighter than another
   lighterThan(other) {
     if (this.weigth === other.weight) {
       let otherSides = other.sides;

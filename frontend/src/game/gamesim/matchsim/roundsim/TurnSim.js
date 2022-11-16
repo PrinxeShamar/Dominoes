@@ -35,6 +35,7 @@ export default class TurnSim {
     this.ruleSet.setup(this.board, this.players);
   }
 
+  // Starts the process of the turns of this round
   start(lastWinner) {
     // This is the first turn of a new round
     console.log(`TurnSim.start(${lastWinner})`);
@@ -96,6 +97,7 @@ export default class TurnSim {
     //assume the last turn of the round was just played
   }
 
+  // Increment this turn to the next turn of this round
   next() {
     console.log(`TurnSim.next()`);
     this.playing = this.ruleSet.nextPlayer(this.playing, this.players);

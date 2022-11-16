@@ -34,8 +34,8 @@ export default class DominoLine {
     this._orient = [...orient];
   }
 
+  // Alter the active domino line using the given move
   play(move) {
-    //throw new Error("STOP");
     console.log(`DominoLine.play(${move})`);
     let endCounts = move.endCounts;
     if (this.length === 0) {
@@ -94,6 +94,9 @@ export default class DominoLine {
     }
   }
 
+  // Based on a node, orientation, and connectedSide, the
+  // representation of the board is updated (currently a string).
+  // NOTE: This will need to be changed to an image representation
   addToRep(node, orientation, connectedSide) {
     console.log(
       `DominoLine.addToRep(${node}, ${orientation}, ${connectedSide})`
@@ -113,6 +116,7 @@ export default class DominoLine {
     }
   }
 
+  // Delete an edge
   remove(endId) {
     this.nodes.splice(endId, 1);
     this._ends.splice(endId, 1);

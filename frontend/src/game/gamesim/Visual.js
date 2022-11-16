@@ -90,6 +90,9 @@ export default class Visual {
     this._score[idNum] = total;
   }
 
+  // This method is here for consistency. Passing by itself changes nothing
+  // The player that is currently going will get updated in TurnSim
+  // based on the RuleSet
   playerPassed(idNum, pass) {
     console.log(`Visual.playerPassed(${idNum}, ${pass})`);
     // Nothing to save

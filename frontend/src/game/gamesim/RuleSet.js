@@ -72,7 +72,7 @@ export default class RuleSet {
   }
 
   /**
-   * This returns a set of legal moves, which may
+   * This returns a set of legal actions, which CANNOT
    * be empty.
    * @param {Board} board
    * @param {Player} player

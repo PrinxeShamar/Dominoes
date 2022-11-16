@@ -19,6 +19,7 @@ export default class MatchSim {
     return [...this.players];
   }
 
+  // Start the rounds that simulate this match
   start() {
     // Matches don't increment themselves
     console.log("MatchSim.start()");
@@ -30,6 +31,7 @@ export default class MatchSim {
     this.next();
   }
 
+  // Increment this match to the next match of the same game
   next() {
     console.log(`MatchSim.next()`);
     this.roundSim = new RoundSim(

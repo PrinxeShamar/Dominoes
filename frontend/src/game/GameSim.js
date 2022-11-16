@@ -72,6 +72,7 @@ export default class GameSim {
     }
   }
 
+  //Starts the next match of a gamesim
   start() {
     console.log("GameSim.start()");
     this.matchSim.start();
@@ -81,6 +82,7 @@ export default class GameSim {
     console.log("MatchOver");
   }
 
+  //Swap the RuleSet to be used in the lobby
   changeRules(ruleName, customRules) {
     console.log(`GameSim.changeRules(${ruleName}, ${customRules})`);
     this.ruleSet = GameSim.mapRule(ruleName, customRules);
@@ -98,6 +100,7 @@ export default class GameSim {
     );
   }
 
+  //Creates and returns a list of player objects based on a list of strings
   fillSeats(strArr) {
     console.log(`fillSeats(${strArr})`);
     if (strArr.length !== this.ruleSet.playerCount) {

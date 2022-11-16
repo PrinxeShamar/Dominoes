@@ -17,14 +17,17 @@ export default class DominoSet {
     return this.dominoList;
   }
 
+  // Calculates triangular numbers (ex: triNum(5) = 5+4+3+2+1 = 15)
   static triNum(x) {
     return Math.floor((x * (x + 1)) / 2);
   }
 
+  // Return the size of the set of dominoes based on the range of digits
   static makeSetSize(start, end) {
     return DominoSet.triNum(end + 1) - DominoSet.triNum(start);
   }
 
+  // Fill with new instances of dominoes determined by the start and end
   generateSet() {
     console.log(`DominoSet.generateSet()`);
     let index = 0;
