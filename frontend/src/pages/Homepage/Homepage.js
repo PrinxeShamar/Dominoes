@@ -1,23 +1,20 @@
 import { Link } from "react-router-dom";
 import io from "socket.io-client";
 import GameSim from "../../game/GameSim";
-import logo from "../../images/logo/logo.png"
+import logo from "../../images/logo/logo.png";
 
 const socket = io("http://localhost:4500");
 console.log("START TEST");
 
-
-
 export default function Homepage() {
-
-  function demo1(){
+  function demo1() {
     let tmpMap = null;
     let tmpGame = null;
     let players = null;
     let userIn = null;
     let userBool = null;
     let score = null;
-    
+
     tmpMap = new Map();
     tmpGame = new GameSim("draw", tmpMap);
     console.log("----");
@@ -43,17 +40,16 @@ export default function Homepage() {
         `Player ${tmpGame.winnerList[0].playerId} wins!\nHit 'cancel' to stop`
       );
     }
-
   }
 
-  function demo2(){
+  function demo2() {
     let tmpMap = null;
     let tmpGame = null;
     let players = null;
     let userIn = null;
     let userBool = null;
     let score = null;
-    
+
     tmpMap = new Map();
     tmpGame = new GameSim("block", tmpMap);
     console.log("----");
@@ -81,14 +77,14 @@ export default function Homepage() {
     }
   }
 
-  function demo3(){
+  function demo3() {
     let tmpMap = null;
     let tmpGame = null;
     let players = null;
     let userIn = null;
     let userBool = null;
     let score = null;
-    
+
     tmpMap = new Map();
     tmpGame = new GameSim("draw", tmpMap);
     console.log("----");
@@ -116,14 +112,14 @@ export default function Homepage() {
     }
   }
 
-  function demo4(){
+  function demo4() {
     let tmpMap = null;
     let tmpGame = null;
     let players = null;
     let userIn = null;
     let userBool = null;
     let score = null;
-    
+
     tmpMap = new Map();
     tmpGame = new GameSim("block", tmpMap);
     console.log("----");

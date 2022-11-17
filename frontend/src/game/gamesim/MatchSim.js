@@ -41,4 +41,9 @@ export default class MatchSim {
       this.players
     );
   }
+
+  playerActs(playerId, action) {
+    console.log(`MatchSim.playerActs(${playerId}, ${action})`);
+    this.roundSim.playerActs(playerId, action);
+  }
 }

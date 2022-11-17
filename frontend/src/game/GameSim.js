@@ -121,4 +121,9 @@ export default class GameSim {
     }
     return this._players;
   }
+
+  playerActs(playerId, action) {
+    console.log(`GameSim.playerActs(${playerId}, ${action})`);
+    this.matchSim.playerActs(playerId, action);
+  }
 }

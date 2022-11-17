@@ -44,4 +44,9 @@ export default class RoundSim {
     this.turnNum = 0;
     this.board.reset();
   }
+
+  playerActs(playerId, action) {
+    console.log(`RoundSim.playerActs(${playerId}, ${action})`);
+    this.turnSim.playerActs(playerId, action);
+  }
 }

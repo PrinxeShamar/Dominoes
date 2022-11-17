@@ -105,4 +105,8 @@ export default class TurnSim {
       observer.updatePlayingId(this.playing.playerId);
     }
   }
+
+  playerActs(playerId, action) {
+    console.log(`TurnSim.playerActs(${playerId}, ${action})`);
+  }
 }
