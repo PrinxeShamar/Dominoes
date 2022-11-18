@@ -2,6 +2,8 @@ import { Link } from "react-router-dom";
 import io from "socket.io-client";
 import GameSim from "../../game/GameSim";
 import logo from "../../images/logo/logo.png"
+import ModeMenu from "../../components/ModeMenu"
+
 
 const socket = io("http://localhost:4500");
 console.log("START TEST");
