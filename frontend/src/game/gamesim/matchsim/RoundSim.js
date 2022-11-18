@@ -43,10 +43,15 @@ export default class RoundSim {
     );
     this.turnNum = 0;
     this.board.reset();
+    for (let observer of this.observers) {
+      observer.updateBoard(this.board);
+    }
   }
 
   playerActs(playerId, action) {
     console.log(`RoundSim.playerActs(${playerId}, ${action})`);
-    this.turnSim.playerActs(playerId, action);
+    if (!this.turnSim.playerActs(playerId, action)) {
+      this.next();
+    }
   }
 }

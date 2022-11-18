@@ -18,7 +18,8 @@ export default class TurnSim {
     this.dominoSet = dominoSet;
     this.board = board;
     this.players = players;
-    this.playing = 0;
+    this.playing = null;
+    this.legalActions = null;
     this.passes = 0;
   }
 
@@ -51,50 +52,14 @@ export default class TurnSim {
     for (let observer of this.observers) {
       observer.updatePlayingId(this.playing.playerId);
     }
-    let moves = firstOp[1];
+
+    this.legalActions = firstOp[1];
 
     console.log(this.playing);
 
-    console.log(moves.toString());
+    console.log(this.legalActions.toString());
 
     console.log(this.board.lineStr);
-    //Game Event?
-    let move = this.playing.pickMove(moves);
-    //Player Event
-    this.playing.actionToBoard(move, this.board);
-    for (let observer of this.observers) {
-      observer.playerActed(this.playing.playerId, move);
-      observer.updateBoard(this.board);
-    }
-    while (!this.ruleSet.roundStop(this.players, this.passes)) {
-      console.log("Continue TurnSim");
-      move = null;
-      //Game Event
-      this.next();
-
-      //Assumes Drawing must mean the same player plays
-      while (move == null || move.constructor === Draw) {
-        moves = this.ruleSet.legalActions(this.board, this.playing);
-        //Player Event
-        move = this.playing.pickMove(moves);
-        this.playing.actionToBoard(move, this.board);
-        for (let observer of this.observers) {
-          observer.playerActed(this.playing.playerId, move);
-          observer.updateBoard(this.board);
-        }
-      }
-
-      console.log(`BOARD STATE\n${this.board.lineStr}`);
-
-      if (move.constructor === Pass) {
-        console.log("PASS");
-        ++this.passes;
-      } else {
-        this.passes = 0;
-      }
-    }
-
-    //assume the last turn of the round was just played
   }
 
   // Increment this turn to the next turn of this round
@@ -108,5 +73,27 @@ export default class TurnSim {
 
   playerActs(playerId, action) {
     console.log(`TurnSim.playerActs(${playerId}, ${action})`);
+    //Game Event?
+    //Player Event
+    this.playing.actionToBoard(action, this.board);
+    for (let observer of this.observers) {
+      observer.playerActed(this.playing.playerId, action);
+      observer.updateBoard(this.board);
+    }
+    if (this.legalActions.constructor === Pass) {
+      console.log("PASS");
+      ++this.passes;
+    } else {
+      this.passes = 0;
+    }
+    if (!this.ruleSet.roundStop(this.players, this.passes)) {
+      action = null;
+      //Game Event
+      this.next();
+      this.legalActions = this.ruleSet.legalActions(this.board, this.playing);
+      console.log(`BOARD STATE\n${this.board.lineStr}`);
+      return true;
+    }
+    return false;
   }
 }
