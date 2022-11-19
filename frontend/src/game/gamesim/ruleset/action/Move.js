@@ -20,14 +20,11 @@ export default class Move extends Action {
     let lr = "";
     if (this._orient === 0) {
       lr = "left";
-    }
-    if (this._orient === 1) {
+    } else if (this._orient === 1) {
       lr = "right";
-    }
-    if (this.orient === 2) {
+    } else if (this.orient === 2) {
       lr = "up";
-    }
-    if (this.orient === 3) {
+    } else if (this.orient === 3) {
       lr = "down";
     } else {
       console.log("This better be an empty board");
