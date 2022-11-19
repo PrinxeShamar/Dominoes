@@ -18,7 +18,7 @@ export default class Move extends Action {
 
   get leftRight() {
     let lr = "";
-    if (this._orient === 1) {
+    if (this._orient === 0) {
       lr = "left";
     }
     if (this._orient === 1) {
