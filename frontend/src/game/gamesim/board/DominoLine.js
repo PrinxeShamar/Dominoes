@@ -59,6 +59,8 @@ export default class DominoLine {
       this.repStr = `${node.toString()}`;
       ++this.length;
     } else {
+      //Edited for the sake of beta, must change for
+      //3+ ended games
       let domino = move.domino;
       let endId = move.endId;
       let connectedSide = move.connectedSide;
@@ -72,23 +74,8 @@ export default class DominoLine {
       if (move.orient !== orientation) {
         throw new Error("Sanity Check Failure: RuleSet sent bad orientation");
       }
-
-      // Delete the end this was connected to
-      this.remove(endId);
-
-      // Add extra ends of 0 side
-      let empty = node.empty;
-      for (let i = 0; i < empty[0]; i++) {
-        this.nodes.push(node);
-        this._ends.push(node.x);
-        this._orient.push(orientation);
-      }
-      // Do the same for the 1 side
-      for (let i = 0; i < empty[1]; i++) {
-        this.nodes.push(node);
-        this._ends.push(node.y);
-        this._orient.push(orientation);
-      }
+      //Replace old index
+      this.replace(0, node, endId, orientation);
       this.addToRep(node, orientation, connectedSide);
       ++this.length;
     }
@@ -121,6 +108,29 @@ export default class DominoLine {
     this.nodes.splice(endId, 1);
     this._ends.splice(endId, 1);
     this._orient.splice(endId, 1);
+  }
+
+  replace(index, node, endId, orientation) {
+    // Delete the end this was connected to
+    this.remove(endId);
+
+    // Add extra ends of 0 side
+    let empty = node.empty;
+    this.nodes[index] = node;
+    this._ends[index] = node.x;
+    this._orient[index] = orientation;
+    for (let i = 1; i < empty[0]; i++) {
+      this.nodes.push(node);
+      this._ends.push(node.x);
+      this._orient.push(orientation);
+    }
+    // Do the same for the 1 side
+    for (let i = 1; i < empty[1]; i++) {
+      this.nodes.push(node);
+      this._ends.push(node.y);
+      this._orient.push(orientation);
+    }
+    ++this.length;
   }
 
   toString() {
