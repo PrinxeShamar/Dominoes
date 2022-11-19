@@ -59,6 +59,8 @@ export default class DominoLine {
       this.repStr = `${node.toString()}`;
       ++this.length;
     } else {
+      //Edited for the sake of beta, must change for
+      //3+ ended games
       let domino = move.domino;
       let endId = move.endId;
       let connectedSide = move.connectedSide;
@@ -70,28 +72,18 @@ export default class DominoLine {
       // Adjust nodes and ends accordingly
       let orientation = this._orient[endId];
       if (move.orient !== orientation) {
-        throw new Error("Sanity Check Failure: RuleSet sent bad orientation");
+        throw new Error(
+          "Sanity Check Failure: RuleSet sent bad orientation or we started changing directions"
+        );
       }
-
-      // Delete the end this was connected to
-      this.remove(endId);
-
-      // Add extra ends of 0 side
-      let empty = node.empty;
-      for (let i = 0; i < empty[0]; i++) {
-        this.nodes.push(node);
-        this._ends.push(node.x);
-        this._orient.push(orientation);
-      }
-      // Do the same for the 1 side
-      for (let i = 0; i < empty[1]; i++) {
-        this.nodes.push(node);
-        this._ends.push(node.y);
-        this._orient.push(orientation);
-      }
+      //Replace old index
+      this.replace(endId, node, orientation, domino.otherSide(connectedSide));
       this.addToRep(node, orientation, connectedSide);
       ++this.length;
     }
+    console.log(this.nodes);
+    console.log(this._ends);
+    console.log(this._orient);
   }
 
   // Based on a node, orientation, and connectedSide, the
@@ -121,6 +113,26 @@ export default class DominoLine {
     this.nodes.splice(endId, 1);
     this._ends.splice(endId, 1);
     this._orient.splice(endId, 1);
+  }
+
+  replace(endId, node, orientation, otherSide) {
+    this.nodes[endId] = node;
+    this._ends[endId] = otherSide;
+    this._orient[endId] = orientation;
+    // Implementation for more ends is not implemented yet
+    /**
+    for (let i = 1; i < empty[0]; i++) {
+      this.nodes.push(node);
+      this._ends.push(node.x);
+      this._orient.push(orientation);
+    }
+    // Do the same for the 1 side
+    for (let i = 1; i < empty[1]; i++) {
+      this.nodes.push(node);
+      this._ends.push(node.y);
+      this._orient.push(orientation);
+    }
+    */
   }
 
   toString() {

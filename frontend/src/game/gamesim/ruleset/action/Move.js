@@ -3,17 +3,31 @@ import Action from "../Action";
 export default class Move extends Action {
   constructor(domino, endId, orient, connectedSide, endCounts) {
     super();
+    console.log(
+      `Move(${domino}, ${endId}, ${orient}, ${connectedSide}, ${endCounts})`
+    );
     this.domino = domino;
     this.endId = endId;
     this.orient = orient;
     this.connectedSide = connectedSide;
     this.endCounts = endCounts;
+    if (endId !== orient) {
+      throw new Error("Doesn't make sense (yet)!");
+    }
   }
 
   get leftRight() {
-    let lr = "left";
-    if (this._orient >= 1) {
+    let lr = "";
+    if (this._orient === 0) {
+      lr = "left";
+    } else if (this._orient === 1) {
       lr = "right";
+    } else if (this.orient === 2) {
+      lr = "up";
+    } else if (this.orient === 3) {
+      lr = "down";
+    } else {
+      console.log("This better be an empty board");
     }
     return lr;
   }
