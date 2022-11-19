@@ -8,12 +8,23 @@ export default class Move extends Action {
     this.orient = orient;
     this.connectedSide = connectedSide;
     this.endCounts = endCounts;
+    if (endId !== orient) {
+      throw new Error("Doesn't make sense (yet)!");
+    }
   }
 
   get leftRight() {
     let lr = "left";
-    if (this._orient >= 1) {
+    if (this._orient === 1) {
       lr = "right";
+    }
+    if (this.orient === 2) {
+      lr = "up";
+    }
+    if (this.orient === 3) {
+      lr = "down";
+    } else {
+      console.log("This better be an empty board");
     }
     return lr;
   }
