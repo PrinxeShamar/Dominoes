@@ -3,6 +3,9 @@ import Action from "../Action";
 export default class Move extends Action {
   constructor(domino, endId, orient, connectedSide, endCounts) {
     super();
+    console.log(
+      `Move(${domino}, ${endId}, ${orient}, ${connectedSide}, ${endCounts})`
+    );
     this.domino = domino;
     this.endId = endId;
     this.orient = orient;
@@ -14,7 +17,10 @@ export default class Move extends Action {
   }
 
   get leftRight() {
-    let lr = "left";
+    let lr = "";
+    if (this._orient === 1) {
+      lr = "left";
+    }
     if (this._orient === 1) {
       lr = "right";
     }
