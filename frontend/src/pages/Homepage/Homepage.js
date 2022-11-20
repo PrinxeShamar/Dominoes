@@ -21,7 +21,9 @@ export default function Homepage() {
     console.log(tmpGame);
     tmpGame.fillSeats(["human", "cpu", "cpu", "cpu"]);
     tmpGame.start();
-    while (tmpGame.running) {}
+    while (tmpGame.running) {
+      tmpGame.playerActs(tmpGame.playing.playerId, 0);
+    }
     console.log(players);
     console.log(players[0].points);
     console.log(players[1].points);

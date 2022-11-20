@@ -18,6 +18,10 @@ export default class Player {
     this.visual = visual;
   }
 
+  get autoPlays() {
+    throw new Error("Method not implemented");
+  }
+
   get length() {
     return this._hand.length;
   }
@@ -179,7 +183,7 @@ export default class Player {
     this.visual.playingId = playingId;
   }
 
-  // Have the player pick am action from some selection
+  // Have the player pick am action from some selection (moves is a misleading term)
   pickMove(moves) {
     throw new Error("Method Not Implemented");
   }

@@ -77,14 +77,14 @@ export default class TurnSim {
 
   playerActs(playerId, action) {
     console.log(`TurnSim.playerActs(${playerId}, ${action})`);
+    //testing
+    action = this.legalActions[action];
     if (playerId !== this._playing.playerId) {
       return false;
     }
     //Game Event?
     //Player Event
-    if (
-      !this.ruleSet.legalActions(this.board, this._playing).includes(action)
-    ) {
+    if (!this.legalActions.includes(action)) {
       return false;
     }
     this.playing.actionToBoard(action, this.board);
@@ -92,21 +92,30 @@ export default class TurnSim {
       observer.playerActed(this.playing.playerId, action);
       observer.updateBoard(this.board);
     }
-    if (this.legalActions.constructor === Pass) {
+    if (action.constructor === Pass) {
       console.log("PASS");
       ++this.passes;
     } else {
       this.passes = 0;
     }
     if (!this.ruleSet.roundStop(this.players, this.passes)) {
-      action = null;
       //Game Event
       this.next();
       this.legalActions = this.ruleSet.legalActions(this.board, this.playing);
       console.log(`BOARD STATE\n${this.board.lineStr}`);
+      if (this.playing.autoPlays === true) {
+        return this.playerActs(this.playing, action);
+      }
       return true;
     }
     this.playing = null;
     return false;
+  }
+
+  autoAct() {
+    this.playerActs(
+      this.playing.playerId,
+      this.playing.pickMove(this.board, this.legalActions)
+    );
   }
 }

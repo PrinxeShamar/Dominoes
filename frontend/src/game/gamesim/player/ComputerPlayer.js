@@ -1,6 +1,10 @@
 import Player from "../Player";
 
 export default class ComputerPlayer extends Player {
+  get autoPlays() {
+    return true;
+  }
+
   pickMove(moves) {
     //Completely random (currently)
     console.log(`ComputerPlayer.pickMove(${moves})`);
@@ -9,8 +13,8 @@ export default class ComputerPlayer extends Player {
       console.log("NO MOVES, PASS!!!");
       return ans;
     }
-    ans = moves[Math.floor(Math.random() * moves.length)];
-    ans = moves[0];
+    //ans = moves[Math.floor(Math.random() * moves.length)];
+    //ans = moves[0];
     ans = moves[moves.length - 1];
     return ans;
   }

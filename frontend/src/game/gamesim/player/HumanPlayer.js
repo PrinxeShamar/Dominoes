@@ -1,6 +1,10 @@
 import Player from "../Player";
 
 export default class HumanPlayer extends Player {
+  get autoPlays() {
+    return false;
+  }
+
   pickMove(moves) {
     console.log(`HumanPlayer.pickMove(${moves})`);
     if (moves.length === 0) {
