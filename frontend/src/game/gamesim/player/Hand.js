@@ -3,6 +3,12 @@ export default class Hand {
     this.dominoes = new Array(0);
   }
 
+  get strList() {
+    return this._dominoes.map((x) => {
+      return x.toString();
+    });
+  }
+
   get highestDouble() {
     let highest = null;
     for (let domino of this._dominoes) {
