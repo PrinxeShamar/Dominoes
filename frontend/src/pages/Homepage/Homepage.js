@@ -9,6 +9,8 @@ console.log("START TEST");
 
 export default function Homepage() {
   function demo1() {
+    window.confirm("Open TestFlowChanges Branch");
+    /**
     let tmpMap = null;
     let tmpGame = null;
     let players = null;
@@ -37,9 +39,12 @@ export default function Homepage() {
         `Player ${tmpGame.winnerList[0].playerId} wins!\nHit 'cancel' to stop`
       );
     }
+    */
   }
 
   function demo2() {
+    window.confirm("Open TestFlowChanges Branch");
+    /**
     let tmpMap = null;
     let tmpGame = null;
     let players = null;
@@ -72,9 +77,12 @@ export default function Homepage() {
         `Player ${tmpGame.winnerList[0].playerId} wins!\nHit 'cancel' to stop`
       );
     }
+    */
   }
 
   function demo3() {
+    window.confirm("Open TestFlowChanges Branch");
+    /**
     let tmpMap = null;
     let tmpGame = null;
     let players = null;
@@ -107,9 +115,12 @@ export default function Homepage() {
         `Player ${tmpGame.winnerList[0].playerId} wins!\nHit 'cancel' to stop`
       );
     }
+    */
   }
 
   function demo4() {
+    window.confirm("Open TestFlowChanges Branch");
+    /**
     let tmpMap = null;
     let tmpGame = null;
     let players = null;
@@ -142,6 +153,7 @@ export default function Homepage() {
         `Player ${tmpGame.winnerList[0].playerId} wins!\nHit 'cancel' to stop`
       );
     }
+    */
   }
 
   return (
