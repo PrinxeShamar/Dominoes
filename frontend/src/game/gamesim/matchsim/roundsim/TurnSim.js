@@ -72,10 +72,6 @@ export default class TurnSim {
     //console.log(`Legal Actions: ${this.legalActions.toString()}`);
 
     //console.log(this.board.lineStr);
-    if (this.playing.autoPlays === true) {
-      console.log("The First Player Happened To Be Automatic");
-      this.autoAct();
-    }
     console.log("COMPLETED TURN START");
   }
 
@@ -119,27 +115,19 @@ export default class TurnSim {
       this.next(action);
       this.legalActions = this.ruleSet.legalActions(this.board, this.playing);
       console.log(`BOARD STATE\n${this.board.lineStr}`);
-      if (this.playing.autoPlays === true) {
-        return this.autoAct();
+      for (let i = 0; i < this.players.length; i++) {
+        console.log(this.players[i].points);
       }
       return true;
     }
     let winner = this.ruleSet.roundWinner(this.players);
+    console.log(winner.points);
     this.ruleSet.addPoints(winner, this.players);
+    console.log(winner.points);
     for (let observer of this.observers) {
       observer.updatePlayerScore(winner, winner.points);
     }
     this.playing = null;
     return false;
-  }
-
-  autoAct() {
-    console.log(`TurnSim.autoAct()`);
-    return this.playerActs(
-      this.playing.playerId,
-      //testing
-      0
-      //this.playing.pickMove(this.legalActions)
-    );
   }
 }

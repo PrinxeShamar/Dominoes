@@ -23,6 +23,10 @@ export default class GameSim {
     this.winnerList = [];
   }
 
+  get legalActions() {
+    return [...this.matchSim.legalActions];
+  }
+
   get playing() {
     return this.matchSim.playing;
   }
@@ -94,6 +98,13 @@ export default class GameSim {
   start() {
     console.log("GameSim.start()");
     this.matchSim.start();
+    if (this.running && this.playing != null && this.playing.autoPlays) {
+      if (this.ruleSet.matchStop(this.players)) {
+        throw new Error("STOPPED LATE");
+      }
+      console.log(`BOT LOOP`);
+      this.autoAct();
+    }
   }
 
   //Swap the RuleSet to be used in the lobby
@@ -141,5 +152,13 @@ export default class GameSim {
     if (!this.matchSim.playerActs(playerId, action)) {
       this._winnerList.push(this.matchSim.winner);
     }
+  }
+
+  autoAct() {
+    console.log(`GameSim.autoAct()`);
+    return this.playerActs(
+      this.playing.playerId,
+      this.playing.pickMove(this.legalActions)
+    );
   }
 }

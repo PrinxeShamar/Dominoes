@@ -10,6 +10,10 @@ export default class MatchSim {
     this.matchNum = 0;
   }
 
+  get legalActions() {
+    return [...this.roundSim.legalActions];
+  }
+
   get playing() {
     return this.roundSim.playing;
   }
@@ -59,13 +63,5 @@ export default class MatchSim {
   playerActs(playerId, action) {
     console.log(`MatchSim.playerActs(${playerId}, ${action})`);
     return this.roundSim.playerActs(playerId, action);
-  }
-
-  autoAct() {
-    console.log(`MatchSim.autoAct()`);
-    return this.playerActs(
-      this.playing.playerId,
-      this.playing.pickMove(this.legalActions)
-    );
   }
 }

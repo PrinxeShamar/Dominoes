@@ -19,7 +19,7 @@ export default function Homepage() {
     tmpGame = new GameSim("draw", tmpMap);
     console.log("----");
     console.log(tmpGame);
-    tmpGame.fillSeats(["human", "human", "human", "human"]);
+    tmpGame.fillSeats(["cpu", "cpu", "cpu", "cpu"]);
     tmpGame.start();
     console.log("We Passed Start!");
     console.log(tmpGame.running);

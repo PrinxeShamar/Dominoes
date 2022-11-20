@@ -11,6 +11,10 @@ export default class RoundSim {
     this.winner = null;
   }
 
+  get legalActions() {
+    return [...this.turnSim.legalActions];
+  }
+
   get playing() {
     return this.turnSim.playing;
   }
@@ -67,14 +71,7 @@ export default class RoundSim {
         return false;
       }
     }
-    return true;
-  }
 
-  autoAct() {
-    console.log(`RoundSim.autoAct()`);
-    return this.playerActs(
-      this.playing.playerId,
-      this.playing.pickMove(this.legalActions)
-    );
+    return true;
   }
 }
