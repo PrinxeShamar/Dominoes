@@ -18,6 +18,13 @@ export default class Player {
     this.visual = visual;
   }
 
+  get json() {
+    return {
+      hand: this._hand.strList,
+      vision: this.visual.json,
+    };
+  }
+
   get autoPlays() {
     throw new Error("Method not implemented");
   }
