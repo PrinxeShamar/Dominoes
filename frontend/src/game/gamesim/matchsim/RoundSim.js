@@ -11,6 +11,10 @@ export default class RoundSim {
     this.winner = null;
   }
 
+  get playing() {
+    return this.turnSim.playing;
+  }
+
   get running() {
     return this.turnSim.running;
   }
@@ -53,17 +57,15 @@ export default class RoundSim {
   playerActs(playerId, action) {
     console.log(`RoundSim.playerActs(${playerId}, ${action})`);
     if (!this.turnSim.playerActs(playerId, action)) {
-      this.next();
-      this.turnSim.start(this.winner);
-    }
-    if (this.ruleSet.matchStop(this.players)) {
-      this.winner = this.ruleSet.roundWinner(this.players);
-      this.ruleSet.addPoints(this.winner, this.players);
-      for (let observer of this.observers) {
-        observer.updatePlayerScore(this.winner.playerId, this.winner.points);
-        observer.updateBoard(this.board);
+      //Round ended
+      //Check if you want another
+      if (!this.ruleSet.matchStop(this.players)) {
+        this.next();
+        this.start();
+        return true;
+      } else {
+        return false;
       }
-      return false;
     }
     return true;
   }

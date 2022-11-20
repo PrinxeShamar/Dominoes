@@ -10,6 +10,10 @@ export default class MatchSim {
     this.matchNum = 0;
   }
 
+  get playing() {
+    return this.roundSim.playing;
+  }
+
   get running() {
     return this.roundSim.running;
   }
@@ -54,9 +58,7 @@ export default class MatchSim {
 
   playerActs(playerId, action) {
     console.log(`MatchSim.playerActs(${playerId}, ${action})`);
-    if (!this.roundSim.playerActs(playerId, action)) {
-      return false;
-    }
+    return this.roundSim.playerActs(playerId, action);
   }
 
   autoAct() {

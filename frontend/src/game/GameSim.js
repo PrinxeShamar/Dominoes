@@ -23,6 +23,10 @@ export default class GameSim {
     this.winnerList = [];
   }
 
+  get playing() {
+    return this.matchSim.playing;
+  }
+
   get observers() {
     let tmp = [];
     for (let i = 0; i < this.players.length; i++) {

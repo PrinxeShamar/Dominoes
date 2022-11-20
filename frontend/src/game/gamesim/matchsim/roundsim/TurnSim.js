@@ -124,6 +124,9 @@ export default class TurnSim {
       }
       return true;
     }
+    for (let observer of this.observers) {
+      observer.updatePlayerTotal(this.playing.playerId, this.playing.points);
+    }
     this.playing = null;
     return false;
   }
