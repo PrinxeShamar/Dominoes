@@ -87,7 +87,7 @@ export default class TurnSim {
   //Returns false IFF there's no next turn
   playerActs(playerId, action) {
     //testing
-    action = this.legalActions[action];
+    //action = this.legalActions[action];
     console.log(`TurnSim.playerActs(${playerId}, ${action})`);
 
     if (playerId !== this.playing.playerId) {
