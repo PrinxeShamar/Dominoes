@@ -12,7 +12,6 @@ function importAll(r) {
 
 const images = importAll(require.context('../../images/dominoes/white/', false, /\.(png|jpe?g|svg)$/));
 
-
 class Domino extends Component {
   constructor(props) {
     super(props);

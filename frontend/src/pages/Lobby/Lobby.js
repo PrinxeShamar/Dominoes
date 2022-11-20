@@ -64,6 +64,7 @@ class Lobby extends Component {
     const socket = io("http://localhost:4500/games/block");
     socket.emit("lobby:join", this.state.id, (jsonResponse) => {
       let response = JSON.parse(jsonResponse);
+      console.log(response);
       if (response.result === "success") {
         this.setState({
           lobby: response.data,
@@ -74,9 +75,18 @@ class Lobby extends Component {
     });
 
     socket.on("lobby:update", (lobbyData) => {
+      console.log(lobbyData);
       this.setState({
         lobby: lobbyData,
       });
+    });
+
+    socket.on("lobby:player:joined", (playerData) => {
+      console.log(playerData)
+    });
+
+    socket.on("lobby:player:left", (playerData) => {
+      console.log(playerData)
     });
 
     this.setState({
@@ -110,7 +120,9 @@ class Lobby extends Component {
       return;
     }
     if (this.state.selectedSide === side) {
-      this.state.socket.emit("lobby:play", this.state.selectedDomino, this.state.selectedSide);
+      this.state.socket.emit("lobby:play", this.state.id, this.state.selectedDomino, this.state.selectedSide, () => {
+        console.log("HEY")
+      });
     } else {
       this.setState({
         selectedSide: side,
@@ -177,14 +189,15 @@ class Lobby extends Component {
                   </div>
                   <div style={{display: "flex"}}>
                     {player.hand.map((domino) => (
-                      <Domino
-                        key={domino}
-                        selected={
-                          player.isMe && domino === this.state.selectedDomino
-                        }
-                        value={domino}
-                        onClick={() => this.selectDomino(domino)}
-                      />
+                      <>
+                        {player.isMe ? <Domino key={domino}
+                                               selected={domino === this.state.selectedDomino}
+                                               value={domino}
+                                               onClick={() => this.selectDomino(domino)}/>
+                          : <Domino key={domino}
+                                    selected={false}
+                                    value={domino}/>}
+                      </>
                     ))}
                   </div>
                 </div>

@@ -1,0 +1,49 @@
+version: "3"
+services:
+  proxy:
+    image: "nginx:latest"
+    restart: unless-stopped
+    volumes:
+      - ./proxy/conf.d:/etc/nginx/conf.d
+    ports:
+      - "80:80"
+      - "443:443"
+    networks:
+      - frontend
+      - backend
+
+  frontend:
+    build:
+      context: frontend
+      dockerfile: "Dockerfile"
+    restart: unless-stopped
+    networks:
+      - frontend
+
+  backend:
+    build:
+      context: backend
+      dockerfile: "Dockerfile"
+    restart: unless-stopped
+    networks:
+      - backend
+
+  db:
+    image: "mongo:4"
+    restart: unless-stopped
+    volumes:
+      - mongodata:/data/db
+      - mongoconfig:/data/configdb
+    networks:
+      - backend
+
+volumes:
+  mongoconfig:
+    external: false
+
+  mongodata:
+    external: false
+
+networks:
+  backend:
+  frontend:
