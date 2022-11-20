@@ -27,6 +27,17 @@ export default class Visual {
     this.playingId = -1;
   }
 
+  get json() {
+    return {
+      playerId: this.playerId,
+      boardRep: this.boardRep,
+      handSizes: this.handSizes,
+      boneyardSize: this.boneyardSize,
+      score: this.score,
+      playingId: -1,
+    };
+  }
+
   get boardRep() {
     return this._boardRep;
   }
