@@ -127,6 +127,9 @@ export default class TurnSim {
     for (let observer of this.observers) {
       observer.updatePlayerScore(winner, winner.points);
     }
+    //console.log(JSON.stringify(winner));
+    console.log(winner.json);
+    console.log(winner.visual.json);
     this.playing = null;
     return false;
   }
