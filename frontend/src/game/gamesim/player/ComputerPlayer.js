@@ -10,12 +10,12 @@ export default class ComputerPlayer extends Player {
     console.log(`ComputerPlayer.pickMove(${moves})`);
     let ans = null;
     if (moves.length === 0) {
-      console.log("NO MOVES, PASS!!!");
-      return ans;
+      throw new Error("There's Nothing To Pick");
     }
     //ans = moves[Math.floor(Math.random() * moves.length)];
     //ans = moves[0];
     ans = moves[moves.length - 1];
+    console.log(`${ans} is my move`);
     return ans;
   }
 }

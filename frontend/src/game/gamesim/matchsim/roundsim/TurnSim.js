@@ -32,18 +32,25 @@ export default class TurnSim {
   }
 
   get observers() {
-    return [...this.players];
+    let tmp = [];
+    for (let i = 0; i < this.players.length; i++) {
+      if (this.players[i] != null) {
+        tmp.push(this.players[i]);
+      }
+    }
+    return tmp;
   }
 
   setup() {
-    console.log(`RoundSim.setup()`);
+    console.log(`TurnSim.setup()`);
     this.ruleSet.setup(this.board, this.players);
   }
 
   // Starts the process of the turns of this round
   start(lastWinner) {
     // This is the first turn of a new round
-    console.log(`TurnSim.start(${lastWinner})`);
+    //console.log(`TurnSim.start(${lastWinner})`);
+    console.log("Starting The First Turn");
     // While there's a problem getting a first player,
     // keep resetting
     let firstOp = null;
@@ -59,34 +66,42 @@ export default class TurnSim {
 
     this.legalActions = firstOp[1];
 
-    console.log(this.playing);
+    //console.log(this.playing);
 
-    console.log(this.legalActions.toString());
+    //console.log(`Legal Actions: ${this.legalActions.toString()}`);
 
-    console.log(this.board.lineStr);
+    //console.log(this.board.lineStr);
+    if (this.playing.autoPlays === true) {
+      console.log("The First Player Happened To Be Automatic");
+      this.autoAct();
+    }
   }
 
   // Increment this turn to the next turn of this round
-  next() {
+  next(action) {
     console.log(`TurnSim.next()`);
-    this.playing = this.ruleSet.nextPlayer(this.playing, this.players);
+    this.playing = this.ruleSet.nextPlayer(this.playing, this.players, action);
     for (let observer of this.observers) {
       observer.updatePlayingId(this.playing.playerId);
     }
   }
 
+  //Returns false IFF there's no next turn
   playerActs(playerId, action) {
-    console.log(`TurnSim.playerActs(${playerId}, ${action})`);
     //testing
     action = this.legalActions[action];
-    if (playerId !== this._playing.playerId) {
+    console.log(`TurnSim.playerActs(${playerId}, ${action})`);
+
+    if (playerId !== this.playing.playerId) {
+      console.log("The Wrong Player Tried To Act");
       return false;
     }
-    //Game Event?
-    //Player Event
     if (!this.legalActions.includes(action)) {
+      console.log("The Action Wasn't Valid");
+      console.log(`${action} Isn't In ${this.legalActions}`);
       return false;
     }
+    console.log(`Player ${playerId} Will Attempt To ${action}`);
     this.playing.actionToBoard(action, this.board);
     for (let observer of this.observers) {
       observer.playerActed(this.playing.playerId, action);
@@ -99,12 +114,11 @@ export default class TurnSim {
       this.passes = 0;
     }
     if (!this.ruleSet.roundStop(this.players, this.passes)) {
-      //Game Event
-      this.next();
+      this.next(action);
       this.legalActions = this.ruleSet.legalActions(this.board, this.playing);
       console.log(`BOARD STATE\n${this.board.lineStr}`);
       if (this.playing.autoPlays === true) {
-        return this.playerActs(this.playing, action);
+        return this.autoAct();
       }
       return true;
     }
@@ -113,9 +127,12 @@ export default class TurnSim {
   }
 
   autoAct() {
-    this.playerActs(
+    console.log(`TurnSim.autoAct()`);
+    return this.playerActs(
       this.playing.playerId,
-      this.playing.pickMove(this.board, this.legalActions)
+      //testing
+      0
+      //this.playing.pickMove(this.legalActions)
     );
   }
 }

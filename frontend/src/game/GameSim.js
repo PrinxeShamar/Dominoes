@@ -23,8 +23,18 @@ export default class GameSim {
     this.winnerList = [];
   }
 
+  get observers() {
+    let tmp = [];
+    for (let i = 0; i < this.players.length; i++) {
+      if (this.players[i] != null) {
+        tmp.push(this.players[i]);
+      }
+    }
+    return tmp;
+  }
+
   get running() {
-    return this._matchSim.running;
+    return this.matchSim.running;
   }
 
   get lineStr() {
@@ -80,10 +90,10 @@ export default class GameSim {
   start() {
     console.log("GameSim.start()");
     this.matchSim.start();
-    console.log(this.matchSim);
-    console.log(this.matchSim.winner);
-    this._winnerList.push(this.matchSim.winner);
-    console.log("MatchOver");
+    //console.log(this.matchSim);
+    //console.log(this.matchSim.winner);
+    //this._winnerList.push(this.matchSim.winner);
+    //console.log("MatchOver");
   }
 
   //Swap the RuleSet to be used in the lobby
@@ -128,6 +138,8 @@ export default class GameSim {
 
   playerActs(playerId, action) {
     console.log(`GameSim.playerActs(${playerId}, ${action})`);
-    this.matchSim.playerActs(playerId, action);
+    if (!this.matchSim.playerActs(playerId, action)) {
+      this._winnerList.push(this.matchSim.winner);
+    }
   }
 }

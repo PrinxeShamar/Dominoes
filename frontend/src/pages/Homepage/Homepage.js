@@ -21,14 +21,10 @@ export default function Homepage() {
     console.log(tmpGame);
     tmpGame.fillSeats(["human", "cpu", "cpu", "cpu"]);
     tmpGame.start();
+    console.log("We Passed Start!");
     while (tmpGame.running) {
       tmpGame.playerActs(tmpGame.playing.playerId, 0);
     }
-    console.log(players);
-    console.log(players[0].points);
-    console.log(players[1].points);
-    console.log(players[2].points);
-    console.log(players[3].points);
     console.log(tmpGame.winnerList);
     console.log(tmpGame.winnerList[0].playerId);
     console.log("DONE WITH DEMO 0");

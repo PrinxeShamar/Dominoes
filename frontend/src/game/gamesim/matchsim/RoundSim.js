@@ -12,28 +12,25 @@ export default class RoundSim {
   }
 
   get running() {
-    return this._turnSim.running;
+    return this.turnSim.running;
   }
 
   get observers() {
-    return [...this.players];
+    let tmp = [];
+    for (let i = 0; i < this.players.length; i++) {
+      if (this.players[i] != null) {
+        tmp.push(this.players[i]);
+      }
+    }
+    return tmp;
   }
 
   // Start the turns of this round
   start() {
-    console.log(`RoundSim.start()`);
-    while (!this.ruleSet.matchStop(this.players)) {
-      console.log("Continue RoundSim");
-      ++this.roundNum;
-      this.turnSim.start(this.winner);
-      this.winner = this.ruleSet.roundWinner(this.players);
-      this.ruleSet.addPoints(this.winner, this.players);
-      this.next();
-      for (let observer of this.observers) {
-        observer.updatePlayerScore(this.winner.playerId, this.winner.points);
-        observer.updateBoard(this.board);
-      }
-    }
+    //console.log(`RoundSim.start()`);
+    ++this.roundNum;
+    console.log(`Starting Round #${this.roundNum}`);
+    this.turnSim.start(this.winner);
   }
 
   // Increment this round to the next round of the same match
@@ -47,6 +44,7 @@ export default class RoundSim {
     );
     this.turnNum = 0;
     this.board.reset();
+    //console.log(this.board, this.observers);
     for (let observer of this.observers) {
       observer.updateBoard(this.board);
     }
@@ -56,6 +54,25 @@ export default class RoundSim {
     console.log(`RoundSim.playerActs(${playerId}, ${action})`);
     if (!this.turnSim.playerActs(playerId, action)) {
       this.next();
+      ++this.roundNum;
     }
+    if (this.ruleSet.matchStop(this.players)) {
+      this.winner = this.ruleSet.roundWinner(this.players);
+      this.ruleSet.addPoints(this.winner, this.players);
+      for (let observer of this.observers) {
+        observer.updatePlayerScore(this.winner.playerId, this.winner.points);
+        observer.updateBoard(this.board);
+      }
+      return false;
+    }
+    return true;
+  }
+
+  autoAct() {
+    console.log(`RoundSim.autoAct()`);
+    return this.playerActs(
+      this.playing.playerId,
+      this.playing.pickMove(this.legalActions)
+    );
   }
 }

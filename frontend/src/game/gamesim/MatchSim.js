@@ -11,7 +11,7 @@ export default class MatchSim {
   }
 
   get running() {
-    return this._roundSim.running;
+    return this.roundSim.running;
   }
 
   get winner() {
@@ -20,19 +20,25 @@ export default class MatchSim {
   }
 
   get observers() {
-    return [...this.players];
+    let tmp = [];
+    for (let i = 0; i < this.players.length; i++) {
+      if (this.players[i] != null) {
+        tmp.push(this.players[i]);
+      }
+    }
+    return tmp;
   }
 
   // Start the rounds that simulate this match
   start() {
     // Matches don't increment themselves
-    console.log("MatchSim.start()");
+    //console.log("MatchSim.start()");
     for (let observer of this.observers) {
       observer.resetScore(this.players.length);
     }
     ++this.matchNum;
+    console.log(`Starting Match #${this.matchNum}`);
     this.roundSim.start();
-    this.next();
   }
 
   // Increment this match to the next match of the same game
@@ -48,6 +54,16 @@ export default class MatchSim {
 
   playerActs(playerId, action) {
     console.log(`MatchSim.playerActs(${playerId}, ${action})`);
-    this.roundSim.playerActs(playerId, action);
+    if (!this.roundSim.playerActs(playerId, action)) {
+      return false;
+    }
+  }
+
+  autoAct() {
+    console.log(`MatchSim.autoAct()`);
+    return this.playerActs(
+      this.playing.playerId,
+      this.playing.pickMove(this.legalActions)
+    );
   }
 }

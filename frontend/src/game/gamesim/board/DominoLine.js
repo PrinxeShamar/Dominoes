@@ -58,6 +58,7 @@ export default class DominoLine {
       this._orient = [0, 1];
       this.repStr = `${node.toString()}`;
       ++this.length;
+      console.log(this.length, this.nodes, this.ends, this.orient, this.repStr);
     } else {
       //Edited for the sake of beta, must change for
       //3+ ended games

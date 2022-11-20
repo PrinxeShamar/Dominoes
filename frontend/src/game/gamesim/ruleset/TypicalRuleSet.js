@@ -1,5 +1,7 @@
 import RuleSet from "../RuleSet";
 import Move from "./action/Move";
+import Draw from "./action/Draw";
+import Pass from "./action/Pass";
 
 export default class TypicalRuleSet extends RuleSet {
   defPlayerCount() {
@@ -121,7 +123,7 @@ export default class TypicalRuleSet extends RuleSet {
       // Play the highest double
       let tmpmove = new Move(highest, -1, -1, -1, [null, null]);
       console.log(`${tmpmove.toString()}`);
-      console.log(`Action Type: ${tmpmove.constructor}`);
+      //console.log(`Action Type: ${tmpmove.constructor}`);
       moves.push(tmpmove);
       tmpmove.endCounts = this.endCounts(tmpmove);
     } else {
@@ -129,7 +131,7 @@ export default class TypicalRuleSet extends RuleSet {
       // already know who goes first. All
       // moves are available
       for (let domino of player.hand.dominoes) {
-        let tmpmove = new Move(domino, -1, -1, -1, [null, null]);
+        let tmpmove = new Move(domino, -1, -1, -1, [1, 1]);
         moves.push(tmpmove);
         tmpmove.endCounts = this.endCounts(tmpmove);
       }
@@ -138,6 +140,7 @@ export default class TypicalRuleSet extends RuleSet {
   }
 
   roundStop(players, passes) {
+    console.log(`TypicalRuleSet.roundStop(${players}, ${passes})`);
     if (passes >= players.length) {
       return true;
     }
@@ -149,7 +152,10 @@ export default class TypicalRuleSet extends RuleSet {
     return false;
   }
 
-  nextPlayer(playing, players) {
+  nextPlayer(playing, players, action) {
+    if (action.constructor === Draw) {
+      return playing;
+    }
     let index = playing.playerId;
     ++index;
     if (index >= players.length) {

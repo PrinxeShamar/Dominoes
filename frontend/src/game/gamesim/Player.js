@@ -103,6 +103,7 @@ export default class Player {
 
   // Player performs a given action on the given board
   actionToBoard(action, board) {
+    console.log(`Player.actionToBoard(${action}, ${board})`);
     switch (action.constructor) {
       case Move:
         this.play(action, board);
