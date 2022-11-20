@@ -90,10 +90,6 @@ export default class GameSim {
   start() {
     console.log("GameSim.start()");
     this.matchSim.start();
-    //console.log(this.matchSim);
-    //console.log(this.matchSim.winner);
-    //this._winnerList.push(this.matchSim.winner);
-    //console.log("MatchOver");
   }
 
   //Swap the RuleSet to be used in the lobby

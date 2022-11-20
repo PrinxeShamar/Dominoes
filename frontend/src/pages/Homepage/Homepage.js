@@ -19,10 +19,12 @@ export default function Homepage() {
     tmpGame = new GameSim("draw", tmpMap);
     console.log("----");
     console.log(tmpGame);
-    tmpGame.fillSeats(["human", "cpu", "cpu", "cpu"]);
+    tmpGame.fillSeats(["human", "human", "human", "human"]);
     tmpGame.start();
     console.log("We Passed Start!");
+    console.log(tmpGame.running);
     while (tmpGame.running) {
+      console.log("The game is running");
       tmpGame.playerActs(tmpGame.playing.playerId, 0);
     }
     console.log(tmpGame.winnerList);

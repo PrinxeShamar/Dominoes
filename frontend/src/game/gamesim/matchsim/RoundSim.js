@@ -42,7 +42,7 @@ export default class RoundSim {
       this.board,
       this.players
     );
-    this.turnNum = 0;
+    ++this.roundNum;
     this.board.reset();
     //console.log(this.board, this.observers);
     for (let observer of this.observers) {
@@ -54,7 +54,7 @@ export default class RoundSim {
     console.log(`RoundSim.playerActs(${playerId}, ${action})`);
     if (!this.turnSim.playerActs(playerId, action)) {
       this.next();
-      ++this.roundNum;
+      this.turnSim.start(this.winner);
     }
     if (this.ruleSet.matchStop(this.players)) {
       this.winner = this.ruleSet.roundWinner(this.players);

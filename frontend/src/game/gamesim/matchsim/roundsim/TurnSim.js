@@ -24,7 +24,7 @@ export default class TurnSim {
   }
 
   get running() {
-    return this._playing != null;
+    return this.playing != null;
   }
 
   get winning() {
@@ -43,6 +43,7 @@ export default class TurnSim {
 
   setup() {
     console.log(`TurnSim.setup()`);
+    console.log(this.players);
     this.ruleSet.setup(this.board, this.players);
   }
 
@@ -75,6 +76,7 @@ export default class TurnSim {
       console.log("The First Player Happened To Be Automatic");
       this.autoAct();
     }
+    console.log("COMPLETED TURN START");
   }
 
   // Increment this turn to the next turn of this round
