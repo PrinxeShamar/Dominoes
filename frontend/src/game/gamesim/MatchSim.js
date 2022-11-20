@@ -10,6 +10,10 @@ export default class MatchSim {
     this.matchNum = 0;
   }
 
+  get running() {
+    return this._roundSim.running;
+  }
+
   get winner() {
     console.log("MatchSim.winner");
     return this.ruleSet.matchWinner(this.players);

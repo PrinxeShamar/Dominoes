@@ -23,6 +23,10 @@ export default class TurnSim {
     this.passes = 0;
   }
 
+  get running() {
+    return this._playing != null;
+  }
+
   get winning() {
     return this.ruleSet.winning(this.players);
   }
@@ -73,8 +77,16 @@ export default class TurnSim {
 
   playerActs(playerId, action) {
     console.log(`TurnSim.playerActs(${playerId}, ${action})`);
+    if (playerId !== this._playing.playerId) {
+      return false;
+    }
     //Game Event?
     //Player Event
+    if (
+      !this.ruleSet.legalActions(this.board, this._playing).includes(action)
+    ) {
+      return false;
+    }
     this.playing.actionToBoard(action, this.board);
     for (let observer of this.observers) {
       observer.playerActed(this.playing.playerId, action);
@@ -94,6 +106,7 @@ export default class TurnSim {
       console.log(`BOARD STATE\n${this.board.lineStr}`);
       return true;
     }
+    this.playing = null;
     return false;
   }
 }

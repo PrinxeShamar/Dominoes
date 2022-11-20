@@ -11,6 +11,10 @@ export default class RoundSim {
     this.winner = null;
   }
 
+  get running() {
+    return this._turnSim.running;
+  }
+
   get observers() {
     return [...this.players];
   }

@@ -23,6 +23,10 @@ export default class GameSim {
     this.winnerList = [];
   }
 
+  get running() {
+    return this._matchSim.running;
+  }
+
   get lineStr() {
     return this.board.lineStr;
   }
