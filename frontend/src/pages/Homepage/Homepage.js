@@ -31,10 +31,6 @@ export default function Homepage() {
     console.log(tmpGame.winnerList[0].playerId);
     console.log("DONE WITH DEMO 0");
     userBool = true;
-    score = new Array(players.length);
-    for (let i = 0; i < players.length; i++) {
-      score[i] = players[0].points;
-    }
     while (userBool) {
       userBool = window.confirm(
         `Player ${tmpGame.winnerList[0].playerId} wins!\nHit 'cancel' to stop`

@@ -124,8 +124,10 @@ export default class TurnSim {
       }
       return true;
     }
+    let winner = this.ruleSet.roundWinner(this.players);
+    this.ruleSet.addPoints(winner, this.players);
     for (let observer of this.observers) {
-      observer.updatePlayerTotal(this.playing.playerId, this.playing.points);
+      observer.updatePlayerScore(winner, winner.points);
     }
     this.playing = null;
     return false;
