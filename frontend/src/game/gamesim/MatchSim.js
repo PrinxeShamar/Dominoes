@@ -10,6 +10,14 @@ export default class MatchSim {
     this.matchNum = 0;
   }
 
+  get states() {
+    let tmp = [];
+    for (let observer of this.observers) {
+      tmp.push(observer.json);
+    }
+    return tmp;
+  }
+
   get legalActions() {
     return [...this.roundSim.legalActions];
   }

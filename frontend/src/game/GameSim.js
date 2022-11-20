@@ -23,6 +23,10 @@ export default class GameSim {
     this.winnerList = [];
   }
 
+  get states() {
+    return this.matchSim.states;
+  }
+
   get legalActions() {
     return [...this.matchSim.legalActions];
   }
