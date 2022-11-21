@@ -75,18 +75,17 @@ class Lobby extends Component {
     });
 
     socket.on("lobby:update", (lobbyData) => {
-      console.log(lobbyData);
       this.setState({
         lobby: lobbyData,
       });
     });
 
     socket.on("lobby:player:joined", (playerData) => {
-      console.log(playerData)
+      console.log(playerData);
     });
 
     socket.on("lobby:player:left", (playerData) => {
-      console.log(playerData)
+      console.log(playerData);
     });
 
     this.setState({
@@ -143,6 +142,13 @@ class Lobby extends Component {
     this.state.socket.emit("lobby:start", this.state.id);
   }
 
+  passPlay = () => {
+    this.state.socket.emit("lobby:play", this.state.id, "--", "--", () => {
+      console.log("HEY")
+    });
+  }
+
+
   render() {
     if (this.state.lobby) {
       if (this.state.lobby.started) {
@@ -187,7 +193,7 @@ class Lobby extends Component {
                   >
                     Player {index + 1} - {player.username}
                   </div>
-                  <div style={{display: "flex"}}>
+                  <div style={{display: "flex", alignItems: "center"}}>
                     {player.hand.map((domino) => (
                       <>
                         {player.isMe ? <Domino key={domino}
@@ -199,6 +205,11 @@ class Lobby extends Component {
                                     value={domino}/>}
                       </>
                     ))}
+                    {player.isMe &&
+                      <button onClick={this.passPlay} style={{width: "100px", height: "100px"}}>
+                        Pass
+                      </button>
+                    }
                   </div>
                 </div>
               ))}

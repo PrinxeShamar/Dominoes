@@ -14,6 +14,8 @@ const lobbySchema = new mongoose.Schema({
   creator: mongoose.ObjectId,
   game: mongoose.ObjectId,
   started: Boolean,
+  ended: Boolean,
+  winner: mongoose.ObjectId,
 });
 
 const Lobby = mongoose.model("Lobby", lobbySchema);

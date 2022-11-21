@@ -32,6 +32,7 @@ function main(io, game) {
         creator: socket.request.session.userId,
         game: game._id,
         started: false,
+        ended: false,
       });
       await lobby.save();
       io.to("lobbies").emit("lobby:created", {
@@ -126,45 +127,51 @@ function main(io, game) {
         return response(httpCodes.Forbidden());
       }
 
-      let isCurrentPlayer = lobby.currentPlayer.toString() === socket.request.session.userId.toString();
+      let isCurrentPlayer = lobby.currentPlayer.toString() === userId.toString();
       if (!isCurrentPlayer) {
         return response(httpCodes.BadRequest());
       }
 
+      let isPassPlay = domino === "--";
+
       let newBoard = [...lobby.board]
-      if (side === "L") {
-        let side = newBoard[0][0];
-        if (domino[0] === side) {
-          newBoard.unshift(`${domino[1]}${domino[0]}`);
-        } else if (domino[1] === side) {
-          newBoard.unshift(domino);
+      if (!isPassPlay) {
+        if (side === "L") {
+          let side = newBoard[0][0];
+          if (domino[0] === side) {
+            newBoard.unshift(`${domino[1]}${domino[0]}`);
+          } else if (domino[1] === side) {
+            newBoard.unshift(domino);
+          } else {
+            return response(httpCodes.BadRequest())
+          }
+        } else if (side === "R") {
+          let side = newBoard[newBoard.length - 1][1];
+          if (domino[0] === side) {
+            newBoard.push(domino);
+          } else if (domino[1] === side) {
+            newBoard.push(`${domino[1]}${domino[0]}`);
+          } else {
+            return response(httpCodes.BadRequest())
+          }
         } else {
           return response(httpCodes.BadRequest())
         }
-      } else if (side === "R") {
-        let side = newBoard[newBoard.length - 1][1];
-        if (domino[0] === side) {
-          newBoard.push(domino);
-        } else if (domino[1] === side) {
-          newBoard.push(`${domino[1]}${domino[0]}`);
-        } else {
-          return response(httpCodes.BadRequest())
-        }
-      } else {
-        return response(httpCodes.BadRequest())
       }
 
       let currentPlayerIndex = 0;
       for (let playerIndex = 0; playerIndex < lobby.players.length; playerIndex++) {
         let player = lobby.players[playerIndex];
         if (player.id.toString() === lobby.currentPlayer.toString()) {
-          let dominoIndex = player.hand.findIndex((playerDomino) => {
-            return playerDomino === domino;
-          })
-          if (dominoIndex >= 0) {
-            player.hand.splice(dominoIndex, 1);
-          } else {
-            return response(httpCodes.BadRequest());
+          if (!isPassPlay) {
+            let dominoIndex = player.hand.findIndex((playerDomino) => {
+              return playerDomino === domino;
+            })
+            if (dominoIndex >= 0) {
+              player.hand.splice(dominoIndex, 1);
+            } else {
+              return response(httpCodes.BadRequest());
+            }
           }
           currentPlayerIndex = playerIndex;
           break;
@@ -184,8 +191,8 @@ function main(io, game) {
       for (let i = 0; i < lobby.players.length; i++) {
         let index = (i + currentPlayerIndex) % lobby.players.length;
         let player = lobby.players[index];
-        if (!lobby.players[index].isBot) {
-          lobby.currentPlayer = player.id;
+        lobby.currentPlayer = player.id;
+        if (!player.isBot) {
           break;
         }
         for (let domino of player.hand) {
@@ -194,7 +201,7 @@ function main(io, game) {
           if (domino[0] === leftSide || domino[1] === leftSide) {
             play(lobby, player.id, domino, "L");
             break;
-          } else if (domino[0] === rightSide || domino[0] === rightSide) {
+          } else if (domino[0] === rightSide || domino[1] === rightSide) {
             play(lobby, player.id, domino, "R");
             break;
           }
@@ -231,13 +238,11 @@ function main(io, game) {
 
       for (let i = 0; i < 4; i++) {
         let player = lobby.joinedPlayers[i] || {id: new mongoose.Types.ObjectId(), isBot: true};
-        if (!player.isBot) {
-          lobby.players.push({
-            id: player.id,
-            hand: hands[i],
-            isBot: player.isBot || false,
-          });
-        }
+        lobby.players.push({
+          id: player.id,
+          hand: hands[i],
+          isBot: player.isBot || false,
+        });
       }
 
       let doubleSixPlayer = 0;
@@ -254,7 +259,7 @@ function main(io, game) {
       lobby.board.push("66");
       lobby.currentPlayer = lobby.players[(doubleSixPlayer + 1) % lobby.players.length].id;
 
-      // runBots(lobby);
+      runBots(lobby);
 
       await lobby.save();
 
@@ -281,21 +286,16 @@ function main(io, game) {
         return response(httpCodes.BadRequest());
       }
 
-      // console.log(JSON.stringify(lobby, null, 4));
-
       let res = play(lobby, socket.request.session.userId, domino, side);
       if (res.result !== "success") {
         return response(res);
       }
 
-      // runBots(lobby);
+      runBots(lobby);
 
       await lobby.save();
 
-      // console.log(JSON.stringify(lobby, null, 4));
-
       let roomSockets = io.adapter.rooms.get(`lobby:${lobbyId}`);
-      console.log(roomSockets);
       for (let roomSocketId of roomSockets) {
         let roomSocket = io.sockets.get(roomSocketId);
         let lobbyData = getLobbyData(
