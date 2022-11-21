@@ -1,0 +1,73 @@
+h1 {
+    font-family: Verdana, sans-serif;
+    font-size: 120px;
+    text-align: center;
+    color: white;
+}
+
+h2 {
+    font-family: Verdana, sans-serif;
+    font-size: 96px;
+    text-align: center;
+    color: white;
+}
+
+h3 {
+    font-family: Verdana, sans-serif;
+    font-size: 48px;
+    text-align: center;
+    color: white;
+}
+
+p {
+    font-family: Verdana, sans-serif;
+    color: white;
+    margin: 50px 100px;
+    text-indent: 40px;
+    text-align: justify;
+    font-size: 24px;
+}
+
+body {
+    background-color: rgb(36,36,36);
+}
+
+#center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+#logo {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+}
+
+#small_button {
+    font-size: 48px;
+    margin: 10px 10px;
+    background-color: white;
+    border-radius: 10px;
+    border-color: white;
+    font-family: Verdana, sans-serif;
+    cursor: pointer;
+}
+
+#big_button {
+    font-size: 96px;
+    margin: 10px 10px;
+    padding-left: 100px;
+    padding-right: 100px;
+    background-color: white;
+    border-radius: 10px;
+    border-color: white;
+    font-family: Verdana, sans-serif;
+    cursor: pointer;
+}
+
+input {
+    font-size: 24px;
+    margin: 10px 10px;
+}

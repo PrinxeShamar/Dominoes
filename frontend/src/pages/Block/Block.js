@@ -1,6 +1,8 @@
 import {Component} from "react";
 import {privateComponent, withRouter} from "../../components/PropsWrapper/PropsWrapper";
 import io from "socket.io-client";
+import {Link} from "react-router-dom";
+import logo from "../../images/logo/logo.png"
 
 class Block extends Component {
 
@@ -50,13 +52,19 @@ class Block extends Component {
   render() {
     return (
       <div>
+        <Link to="/" id="logo">
+          <img src={logo} />
+        </Link>
+        <h1>Dominoes</h1>
         <h1>Block</h1>
-        <button onClick={this.createNewLobby}>
-          Create new lobby
-        </button>
+        <div id='center'>
+          <button id='big_button' onClick={this.createNewLobby}>
+            Create new lobby
+          </button>
+        </div>
         {this.state.lobbies.map((lobby) => (
-          <div key={lobby.id}>
-            <button onClick={() => this.props.router.navigate(`/games/block/${lobby.id}`)}>
+          <div id='center' key={lobby.id}>
+            <button id='small_button' onClick={() => this.props.router.navigate(`/games/block/${lobby.id}`)}>
               {lobby.id}
             </button>
           </div>

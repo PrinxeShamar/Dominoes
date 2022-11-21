@@ -1,6 +1,7 @@
 import {Component} from "react";
 import {withRouter, privateComponent} from "../../components/PropsWrapper/PropsWrapper";
 import {Link} from "react-router-dom";
+import logo from "../../images/logo/logo.png"
 
 class Homepage extends Component {
   constructor(props) {
@@ -37,16 +38,27 @@ class Homepage extends Component {
   render() {
     return (
       <div>
+        <Link to="/" id="logo">
+          <img src={logo} />
+        </Link>
         <h1>Dominoes</h1>
         <h3>Welcome {this.state.username}</h3>
-        <button onClick={this.logout}>
-          Logout
-        </button>
+        <div id='center'>
+          <button id='small_button' onClick={this.logout}>
+            Logout
+          </button>
+        </div>
         <div>
-          <h2>Choose Game Mode:</h2>
-          <Link to="/games/block">
-            <button>Block</button>
-          </Link>
+          <div id='center'>
+            <Link to="/games/block">
+              <button id='big_button'>Play vs Friends</button>
+            </Link>
+          </div>
+          <div id='center'>
+            <Link to="/games/block">
+              <button id='big_button'>Play vs Computer</button>
+            </Link>
+          </div>
         </div>
       </div>
     );
