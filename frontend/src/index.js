@@ -34,6 +34,14 @@ const router = createBrowserRouter([
     path: "/games/block/:lobbyId",
     element: <Lobby private={true}/>,
   },
+  {
+    path: "/games/block/rules",
+    element: <BlockRules/>,
+  },
+  {
+    path: "/games/draw/rules",
+    element: <DrawRules/>,
+  },
 ]);
 
 ReactDOM.createRoot(document.getElementById("root")).render(

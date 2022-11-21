@@ -43,9 +43,18 @@ class Homepage extends Component {
           Logout
         </button>
         <div>
-          <h2>Choose Game Mode:</h2>
+          <h2>Choose Game Mode </h2>
           <Link to="/games/block">
             <button>Block</button>
+          </Link>
+        </div>
+        <div>
+          <h2>Game Rules</h2>
+          <Link to="/games/block/rules">
+            <button>Block</button>
+          </Link>
+          <Link to="/games/draw/rules">
+            <button>Draw</button>
           </Link>
         </div>
       </div>
