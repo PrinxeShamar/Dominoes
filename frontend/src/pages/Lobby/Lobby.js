@@ -5,6 +5,7 @@ import {
 } from "../../components/PropsWrapper/PropsWrapper";
 import io from "socket.io-client";
 import Domino from "../../components/Domino/Domino";
+import "./Lobby.css"
 
 const TEST_LOBBY = {
   id: "9233",
@@ -120,7 +121,11 @@ class Lobby extends Component {
     }
     if (this.state.selectedSide === side) {
       this.state.socket.emit("lobby:play", this.state.id, this.state.selectedDomino, this.state.selectedSide, () => {
-        console.log("HEY")
+
+      });
+      this.setState({
+        selectedDomino: "",
+        selectedSide: "",
       });
     } else {
       this.setState({
@@ -153,11 +158,10 @@ class Lobby extends Component {
     if (this.state.lobby) {
       if (this.state.lobby.started) {
         return (
-          <div>
-            <h1>{this.state.lobby.id}</h1>
-            <div>
-              <h2>Board</h2>
-              <div style={{display: "flex"}}>
+          <div className={"gameStarted"}>
+            <div class={"detailsContainer"}>
+              <div>Board</div>
+              <div style={{display: "flex"}} className={"dominoBoard"}>
                 {this.getCurrentPlayer().isMe && (
                   <Domino
                     value={this.state.selectedDomino}
@@ -179,61 +183,69 @@ class Lobby extends Component {
                 )}
               </div>
             </div>
-            <div>
-              <h2>Players</h2>
-              {this.state.lobby.players.map((player, index) => (
-                <div key={player.id}>
-                  <div
-                    style={{
-                      color:
-                        player.id === this.state.lobby.currentPlayer
-                          ? "blue"
-                          : "black",
-                    }}
-                  >
-                    Player {index + 1} - {player.username}
+            <div class={"detailsContainer"}>
+              <div>Players</div>
+              <div className={"playersHands"}>
+                {this.state.lobby.players.map((player, index) => (
+                  <div key={player.id} className={"playerHandContainer"}>
+                    <div className={"playerName"}>
+                      Player {index + 1} - {player.id} {player.id.toString() === this.state.lobby.currentPlayer.toString() ? "- Current Player" : ""}
+                    </div>
+                    <div style={{display: "flex", alignItems: "center"}} className={"playerHand"}>
+                      {player.hand.map((domino) => (
+                        <>
+                          {player.isMe ? <Domino key={domino}
+                                                 selected={domino === this.state.selectedDomino}
+                                                 value={domino}
+                                                 onClick={() => this.selectDomino(domino)}/>
+                            : <Domino key={domino}
+                                      selected={false}
+                                      value={domino}/>}
+                        </>
+                      ))}
+                      {player.isMe &&
+                        <button onClick={this.passPlay} style={{width: "100px", height: "100px"}}>
+                          Pass
+                        </button>
+                      }
+                    </div>
                   </div>
-                  <div style={{display: "flex", alignItems: "center"}}>
-                    {player.hand.map((domino) => (
-                      <>
-                        {player.isMe ? <Domino key={domino}
-                                               selected={domino === this.state.selectedDomino}
-                                               value={domino}
-                                               onClick={() => this.selectDomino(domino)}/>
-                          : <Domino key={domino}
-                                    selected={false}
-                                    value={domino}/>}
-                      </>
-                    ))}
-                    {player.isMe &&
-                      <button onClick={this.passPlay} style={{width: "100px", height: "100px"}}>
-                        Pass
-                      </button>
-                    }
-                  </div>
-                </div>
-              ))}
+                ))}
+              </div>
             </div>
           </div>
         );
       } else {
         return (
-          <div>
-            <div>
-              <h1>{this.state.lobby.id}</h1>
-              {this.isUserLobbyCreator() &&
-                <button onClick={this.startLobby}>
-                  Start
-                </button>
-              }
+          <div className={"gameMain"}>
+            <div className={"gameDetails"}>
+              <div className={"gameTitle"}>{this.state.lobby.id}</div>
+              <div className={"gameButtons"}>
+                {this.isUserLobbyCreator() && <div className={"gameButton"} onClick={this.startLobby}>Start</div>}
+                <div className={"gameButton"}>Share</div>
+                <div className={"gameButton"}>Leave</div>
+              </div>
             </div>
-            <div>
-              <h2>Joined Players</h2>
-              {this.state.lobby.joinedPlayers.map((player, index) => (
-                <div>
-                  Player {index + 1} - {player.username}
-                </div>
-              ))}
+            <div className={"gameLobbies"}>
+              <div className={"lobbiesText"}>Players</div>
+              <div className={"lobbies"}>
+                {this.state.lobby.joinedPlayers.map((player, index) => (
+                  <div key={player.id} className={"lobby"}>
+                    <div className={"lobbyDetails"}>
+                      <div className={"lobbyName"}>{player.id}</div>
+                      {player.id.toString() === this.state.lobby.creator.toString() &&
+                        <div className={"playerCount"}>Creator</div>}
+                    </div>
+                    <div className={"lobbyButtons"}>
+                      {this.isUserLobbyCreator() && !player.isMe &&
+                        <div className={"lobbyButton"}>
+                          Kick
+                        </div>
+                      }
+                    </div>
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
         );

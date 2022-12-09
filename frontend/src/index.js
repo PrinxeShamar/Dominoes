@@ -12,36 +12,57 @@ import Login from "./pages/Login/Login";
 import Signup from "./pages/Signup/Signup";
 import LandingPage from "./pages/LandingPage/LandingPage";
 import Lobby from "./pages/Lobby/Lobby";
+import Main from "./pages/Main/Main";
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <LandingPage/>,
+    element: <Main/>,
+    children: [
+      {
+        path: "/",
+        element: <LandingPage/>,
+      },
+      {
+        path: "/login",
+        element: <Login private={false}/>,
+      },
+      {
+        path: "/signup",
+        element: <Signup private={false}/>,
+      },
+      {
+        path: "/games/block",
+        element: <Block private={true}/>,
+      },
+      {
+        path: "/games/block/:lobbyId",
+        element: <Lobby private={true}/>,
+      },
+      {
+        path: "/games/block/rules",
+        element: <BlockRules/>,
+      },
+    ],
   },
-  {
-    path: "/login",
-    element: <Login private={false}/>,
-  },
-  {
-    path: "/signup",
-    element: <Signup private={false}/>,
-  },
-  {
-    path: "/games/block",
-    element: <Block private={true}/>,
-  },
-  {
-    path: "/games/block/:lobbyId",
-    element: <Lobby private={true}/>,
-  },
-  {
-    path: "/games/block/rules",
-    element: <BlockRules/>,
-  },
-  {
-    path: "/games/draw/rules",
-    element: <DrawRules/>,
-  },
+  // {
+  //   path: "/login",
+  //   element: <Login private={false}/>,
+  // },
+  // {
+  //   path: "/signup",
+  //   element: <Signup private={false}/>,
+  // },
+
+  // {
+  //   path: "/games/block/:lobbyId",
+  //   element: <Lobby private={true}/>,
+  // },
+  //
+  // {
+  //   path: "/games/draw/rules",
+  //   element: <DrawRules/>,
+  // },
 ]);
 
 ReactDOM.createRoot(document.getElementById("root")).render(

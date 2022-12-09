@@ -1,6 +1,7 @@
 import {Component} from "react";
 import {withRouter, privateComponent} from "../../components/PropsWrapper/PropsWrapper";
 import {Link} from "react-router-dom";
+import "./Homepage.css"
 
 class Homepage extends Component {
   constructor(props) {
@@ -37,25 +38,14 @@ class Homepage extends Component {
   render() {
     return (
       <div>
-        <h1>Dominoes</h1>
-        <h3>Welcome {this.state.username}</h3>
-        <button onClick={this.logout}>
-          Logout
-        </button>
-        <div>
-          <h2>Choose Game Mode </h2>
-          <Link to="/games/block">
-            <button>Block</button>
-          </Link>
-        </div>
-        <div>
-          <h2>Game Rules</h2>
-          <Link to="/games/block/rules">
-            <button>Block</button>
-          </Link>
-          <Link to="/games/draw/rules">
-            <button>Draw</button>
-          </Link>
+        <div className={"welcomeText"}>Welcome {this.state.username}</div>
+        <div className={"buttons"}>
+          <button onClick={() => this.props.router.navigate("/games/block")} className={"button"}>
+            Block
+          </button>
+          <button onClick={() => this.props.router.navigate("/games/draw")} className={"button"}>
+            Draw
+          </button>
         </div>
       </div>
     );

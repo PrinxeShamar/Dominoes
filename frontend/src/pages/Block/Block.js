@@ -1,6 +1,7 @@
 import {Component} from "react";
 import {privateComponent, withRouter} from "../../components/PropsWrapper/PropsWrapper";
 import io from "socket.io-client";
+import "./Block.css"
 
 class Block extends Component {
 
@@ -49,18 +50,33 @@ class Block extends Component {
 
   render() {
     return (
-      <div>
-        <h1>Block</h1>
-        <button onClick={this.createNewLobby}>
-          Create new lobby
-        </button>
-        {this.state.lobbies.map((lobby) => (
-          <div key={lobby.id}>
-            <button onClick={() => this.props.router.navigate(`/games/block/${lobby.id}`)}>
-              {lobby.id}
-            </button>
+      <div className={"gameMain"}>
+        <div className={"gameDetails"}>
+          <div className={"gameTitle"}>Block</div>
+          <div className={"gameButtons"}>
+            <div className={"gameButton"}>Play</div>
+            <div className={"gameButton"} onClick={this.createNewLobby}>Create</div>
+            <div className={"gameButton"} onClick={() => this.props.router.navigate("/games/block/rules")}>Rules</div>
           </div>
-        ))}
+        </div>
+        <div className={"gameLobbies"}>
+          <div className={"lobbiesText"}>Lobbies</div>
+          <div className={"lobbies"}>
+            {this.state.lobbies.map((lobby) => (
+              <div key={lobby.id} className={"lobby"}>
+                <div className={"lobbyDetails"}>
+                  <div className={"lobbyName"}>{lobby.id}</div>
+                  <div className={"playerCount"}>Players 1/4</div>
+                </div>
+                <div className={"lobbyButtons"}>
+                  <div className={"lobbyButton"} onClick={() => this.props.router.navigate(`/games/block/${lobby.id}`)}>
+                    Join
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
       </div>
     );
   }

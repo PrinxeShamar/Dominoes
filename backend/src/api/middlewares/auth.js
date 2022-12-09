@@ -15,4 +15,5 @@ function isLoggedIn(bool) {
   }
 }
 
+
 module.exports = {isLoggedIn};

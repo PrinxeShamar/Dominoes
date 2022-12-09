@@ -1,0 +1,14 @@
+.login {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 500px;
+}
+
+.subButton {
+    color: white;
+    font-size: 15px;
+    font-family: 'Quicksand', sans-serif;
+    font-weight: 700;
+    width: 100%;
+}

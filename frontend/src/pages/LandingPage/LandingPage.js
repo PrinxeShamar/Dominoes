@@ -1,6 +1,7 @@
 import {Component} from "react";
 import Homepage from "../Homepage/Homepage";
 import {withRouter} from "../../components/PropsWrapper/PropsWrapper";
+import "./LandingPage.css";
 
 class LandingPage extends Component {
   constructor(props) {
@@ -13,11 +14,11 @@ class LandingPage extends Component {
       return <Homepage private={true}/>
     } else {
       return (
-        <div>
-          <button onClick={() => this.props.router.navigate("/login")}>
+        <div className={"buttons"}>
+          <button onClick={() => this.props.router.navigate("/login")} className={"button"}>
             Login
           </button>
-          <button onClick={() => this.props.router.navigate("/signup")}>
+          <button onClick={() => this.props.router.navigate("/signup")} className={"button"}>
             Signup
           </button>
         </div>

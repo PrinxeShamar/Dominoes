@@ -1,5 +1,9 @@
 import {Component} from "react";
 import {privateComponent, withRouter} from "../../components/PropsWrapper/PropsWrapper";
+import Input from "../../components/Input/Input";
+import Button from "../../components/Button/Button";
+import "./Signup.css";
+import {Link} from "react-router-dom";
 
 class Signup extends Component {
   constructor(props) {
@@ -47,28 +51,33 @@ class Signup extends Component {
 
   render() {
     return (
-      <div>
-        <input
-          placeholder="Username"
-          name="username"
-          value={this.state.username}
-          onChange={this.input}
-        />
-        <input
-          placeholder="Password"
-          name="password"
-          type="password"
-          value={this.state.password}
-          onChange={this.input}
-        />
-        <input
-          placeholder="Repeat Password"
-          name="repeatPassword"
-          type="password"
-          value={this.state.repeatPassword}
-          onChange={this.input}
-        />
-        <button onClick={this.submit}>Signup</button>
+      <div className={"signupMain"}>
+        <div className={"signup"}>
+          <Input name="username"
+                 title={"Username"}
+                 value={this.state.username}
+                 onChange={this.input}
+                 type="text"/>
+          <Input
+            name="password"
+            title={"Password"}
+            value={this.state.password}
+            type="password"
+            onChange={this.input}
+          />
+          <Input
+            name="repeatPassword"
+            title={"Repeat Password"}
+            value={this.state.repeatPassword}
+            type="password"
+            onChange={this.input}
+          />
+          <Button onClick={this.submit} text={"Signup"}/>
+          <Link to="/login">
+            <div className={"subButton"}>Already have an account?
+            </div>
+          </Link>
+        </div>
       </div>
     );
   }

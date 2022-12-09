@@ -1,4 +1,5 @@
 import {Component} from "react";
+import "./Domino.css";
 
 function importAll(r) {
   let names = r.keys();
@@ -47,11 +48,11 @@ class Domino extends Component {
 
   render() {
     return (
-      <button style={{backgroundColor: this.props.selected ? "grey" : "white", margin: 5, padding: 10,}}
-              onClick={this.props.onClick}>
+      <div className={this.props.selected ? "domino selected" : "domino"}
+           onClick={this.props.onClick}>
         <img src={images[`./${this.state.value}.png`]} width={100}
              style={{transform: `rotate(${this.state.rotation}deg)`}}/>
-      </button>
+      </div>
     )
   }
 }

@@ -1,0 +1,19 @@
+.buttons {
+    display: flex;
+    gap: 10px;
+}
+
+.button {
+    width: 150px;
+    height: 150px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-size: 25px;
+    font-family: 'Quicksand', sans-serif;
+    background-color: #836AE7;
+    border-radius: 5px;
+    border-style: none;
+    font-weight: 700;
+}

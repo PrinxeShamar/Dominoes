@@ -1,0 +1,142 @@
+.gameButton {
+    width: 100px;
+    background: #836AE7;
+    color: white;
+    font-size: 20px;
+    font-family: 'Quicksand', sans-serif;
+    font-weight: 700;
+    border-radius: 5px;
+    border-style: none;
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.gameDetails {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    color: white;
+    font-size: 25px;
+    font-family: 'Quicksand', sans-serif;
+    font-weight: 700;
+}
+
+.gameButtons {
+    display: flex;
+    gap: 10px;
+}
+
+.lobbiesText {
+    color: white;
+    font-size: 25px;
+    font-family: 'Quicksand', sans-serif;
+    font-weight: 700;
+    margin-bottom: 10px;
+}
+
+.gameMain {
+    display: flex;
+    gap: 20px;
+    flex-direction: column;
+    color: white;
+    font-size: 25px;
+    font-family: 'Quicksand', sans-serif;
+    font-weight: 700;
+}
+
+.lobbies {
+    background: #836AE7;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    border-radius: 5px;
+    border-style: none;
+}
+
+.lobby {
+    padding: 10px;
+    background-color: #313131;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    border-radius: 5px;
+    border-style: none;
+}
+
+.lobbyButton {
+    height: 50px;
+    width: 100px;
+    background-color: #836AE7;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 5px;
+    border-style: none;
+}
+
+.lobbyDetails {
+    font-size: 20px;
+    flex: 1;
+    gap: 5px;
+    display: flex;
+    flex-direction: column;
+}
+
+.lobbyButtons {
+    display: flex;
+    justify-content: right;
+    flex: 1;
+}
+
+.playerCount {
+    font-weight: 600;
+    font-size: 18px;
+}
+
+.gameStarted {
+    color: white;
+    font-size: 25px;
+    font-family: 'Quicksand', sans-serif;
+    font-weight: 700;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.dominoBoard {
+    background-color: #836AE7;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.playerHand {
+    background-color: #836AE7;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.playersHands {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.detailsContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+
+.playerHandContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.playerName {
+    font-weight: 500;
+}

@@ -1,5 +1,10 @@
 import {Component} from "react";
 import {withRouter, privateComponent} from "../../components/PropsWrapper/PropsWrapper";
+import Input from "../../components/Input/Input";
+
+import "./Login.css";
+import Button from "../../components/Button/Button";
+import {Link} from "react-router-dom";
 
 class Login extends Component {
   constructor(props) {
@@ -39,21 +44,26 @@ class Login extends Component {
 
   render() {
     return (
-      <div>
-        <input
-          placeholder="Username"
-          name="username"
-          value={this.state.username}
-          onChange={this.input}
-        />
-        <input
-          placeholder="Password"
-          name="password"
-          value={this.state.password}
-          type="password"
-          onChange={this.input}
-        />
-        <button onClick={this.submit}>Login</button>
+      <div className={"loginMain"}>
+        <div className={"login"}>
+          <Input name="username"
+                 title={"Username"}
+                 value={this.state.username}
+                 onChange={this.input}
+                 type="text"/>
+          <Input
+            name="password"
+            title={"Password"}
+            value={this.state.password}
+            type="password"
+            onChange={this.input}
+          />
+          <Button onClick={this.submit} text={"Login"}/>
+          <Link to="/signup">
+            <div className={"subButton"}>Don't have an account?
+            </div>
+          </Link>
+        </div>
       </div>
     );
   }

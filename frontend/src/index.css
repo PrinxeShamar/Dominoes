@@ -1,0 +1,15 @@
+body {
+    margin: 0px;
+    padding: 0px;
+    background-color: #313131;
+    height: 100%;
+}
+
+html {
+    margin: 0;
+    height: 100%;
+}
+
+#root {
+    height: 100%
+}
