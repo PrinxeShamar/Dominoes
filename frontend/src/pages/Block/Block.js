@@ -45,6 +45,7 @@ class Block extends Component {
   }
 
   createNewLobby = () => {
+    console.log("Here")
     this.state.socket.emit("lobby:create");
   }
 
