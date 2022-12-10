@@ -6,10 +6,9 @@ async function main(io) {
   console.log("SOCKET SERVER LAUNCHED")
   io.use(socketSessionMiddleware)
 
-  const games = await Game.find({});
-  for (const game of games) {
-    gameNamespace(io.of(`/games/${game.name}`), game);
-  }
+  gameNamespace(io.of(`/games/block`), {
+    name: "block",
+  });
 
   io.on("connection", (socket) => {
     console.log("Connection To Main");

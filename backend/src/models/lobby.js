@@ -12,7 +12,7 @@ const lobbySchema = new mongoose.Schema({
   }],
   currentPlayer: mongoose.ObjectId,
   creator: mongoose.ObjectId,
-  game: mongoose.ObjectId,
+  game: String,
   started: Boolean,
   ended: Boolean,
   winner: mongoose.ObjectId,

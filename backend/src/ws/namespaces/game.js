@@ -16,7 +16,7 @@ function main(io, game) {
     socket.on("lobby:get", async (response) => {
       socket.join("lobbies");
       let lobbies = await Lobby.find({
-        game: game._id,
+        game: game.name,
         started: false,
       });
       let lobbiesData = lobbies.map((lobby) => {
@@ -30,7 +30,7 @@ function main(io, game) {
     socket.on("lobby:create", async () => {
       let lobby = new Lobby({
         creator: socket.request.session.userId,
-        game: game._id,
+        game: game.name,
         started: false,
         ended: false,
       });
