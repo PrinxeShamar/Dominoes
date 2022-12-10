@@ -3,6 +3,7 @@ const gameNamespace = require("./namespaces/game")
 const Game = require("../models/game");
 
 async function main(io) {
+  console.log("SOCKET SERVER LAUNCHED")
   io.use(socketSessionMiddleware)
 
   const games = await Game.find({});
