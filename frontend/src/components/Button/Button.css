@@ -1,0 +1,13 @@
+.buttonMain {
+    background: #836AE7;
+    color: white;
+    font-size: 20px;
+    font-family: 'Quicksand', sans-serif;
+    font-weight: 700;
+    border-radius: 20px;
+    border-radius: 5px;
+    border-style: none;
+    padding-left: 10px;
+    padding-top: 25px;
+    padding-bottom: 25px;
+}

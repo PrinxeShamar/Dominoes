@@ -1,0 +1,33 @@
+.inputTitle {
+    color: white;
+    font-size: 20px;
+    font-family: 'Quicksand', sans-serif;
+    font-weight: 700;
+}
+
+.inputHolder {
+    width: 100%;
+    background-color: #836AE7;
+    display: flex;
+    padding: 5px;
+    border-radius: 5px;
+    border-style: none;
+}
+
+.input {
+    width: 100%;
+    background: transparent;
+    border: none;
+    outline: none;
+    color: white;
+    font-size: 20px;
+    font-family: 'Quicksand', sans-serif;
+    font-weight: 500;
+}
+
+.inputMain {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    width: 100%;
+}

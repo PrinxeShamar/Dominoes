@@ -8,8 +8,11 @@ var app = require("../api/app");
 var debug = require("debug")("backend:server");
 var http = require("http");
 
+const mongoose = require("mongoose");
 const socketApp = require("../ws/app");
 const { Server } = require("socket.io");
+const MongoStore = require("connect-mongo");
+const expressSession = require("express-session");
 
 /**
  * Get port from environment and store in Express.
@@ -17,6 +20,12 @@ const { Server } = require("socket.io");
 
 var port = normalizePort(process.env.PORT || "3001");
 app.set("port", port);
+
+/**
+ * Setup Mongo
+ */
+
+mongoose.connect('mongodb://db/dominos');
 
 /**
  * Create HTTP server.

@@ -6,7 +6,8 @@ services:
     volumes:
       - ./proxy/conf.d:/etc/nginx/conf.d
     ports:
-      - "4500:80"
+      - "80:80"
+      - "443:443"
     networks:
       - frontend
       - backend
@@ -14,27 +15,34 @@ services:
   frontend:
     build:
       context: frontend
-      dockerfile: "Dockerfile.dev"
-    stdin_open: true
-    environment:
-      - CHOKIDAR_USEPOLLING=true
-      - WDS_SOCKET_PORT=4500
+      dockerfile: "Dockerfile"
     restart: unless-stopped
-    volumes:
-      - "./frontend/src:/usr/src/app/src"
-      - "./frontend/public:/usr/src/app/public"
     networks:
       - frontend
 
   backend:
     build:
       context: backend
-      dockerfile: "Dockerfile.dev"
+      dockerfile: "Dockerfile"
     restart: unless-stopped
-    volumes:
-      - "./backend/src:/usr/src/app/src"
     networks:
       - backend
+
+  db:
+    image: "mongo:4"
+    restart: unless-stopped
+    volumes:
+      - mongodata:/data/db
+      - mongoconfig:/data/configdb
+    networks:
+      - backend
+
+volumes:
+  mongoconfig:
+    external: false
+
+  mongodata:
+    external: false
 
 networks:
   backend:

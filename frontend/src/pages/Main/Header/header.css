@@ -1,0 +1,11 @@
+.headerBackground {
+    background-color: #836AE7;
+    padding: 10px;
+}
+
+.headerTitle {
+    color: white;
+    font-size: 25px;
+    font-family: 'Quicksand', sans-serif;
+    font-weight: 700;
+}
